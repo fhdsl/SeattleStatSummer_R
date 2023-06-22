@@ -25,31 +25,22 @@ knitr::opts_chunk$set(warning = FALSE, message = FALSE)
 ## Overview
 ***
 
-**Welcome to Introduction to R for Public Health Researchers!**  
+**Welcome to theSeattleStatSummer Introduction to R!**  
 
-This course is for students who have little to no familiarity with the R programming language and want to learn more about how to use R to import, wrangle, visualize, and analyze data.
+This course is for students who have little to no familiarity with the R programming language and want to learn more about how to use R to import, wrangle, and visualize data.
 
-The course will provide students with **“hands-on” training** for analyzing data with the R programming language for statistical computing, a popular open-source solution for data analysis and visualization.  
+The course will provide students with **“hands-on” experience* working with data using the R programming language for statistical computing, a popular open-source solution for data analysis and visualization.  
 
 ### Instructors
 
 `r config::get("instructors")`
 
-### Teaching Assistant
-
-`r config::get("ta")`
 
 <br>
 
 ## Class
 ***
 
-* `r config::get("course_dates")` 1:30PM-4:50PM on Zoom  - `r config::get("holiday")`
-* Zoom link will be emailed prior to the first class.
-* [Installation Instructions](https://jhudatascience.org/intro_to_r/modules/Setup/R_and_RStudio_installation.html) - This is **required** before the course, but we can help you on the first day (or before) if you have trouble.
-* Slack Workspace invitation will be sent directly via email.
-* [CoursePlus Website](`r config::get("courseplus_web")`)
-* [Syllabus](syllabus.html)
 * [Materials + Schedule](materials_schedule.html)
 * [Resources](resources.html)
 
@@ -59,8 +50,8 @@ The course will provide students with **“hands-on” training** for analyzing 
 ## Find an Error!?
 ***
 
-Feel free to submit typos/errors/etc via the GitHub repository associated with the class: 
-https://github.com/jhudsl/intro_to_r
+Feel free to submit typos/errors/etc via the GitHub repository associated with the workshop: 
+https://github.com/fhdsl/SeattleStatSummer_Intro_to_R
 
 This page was last updated on `r Sys.Date()`.
 
