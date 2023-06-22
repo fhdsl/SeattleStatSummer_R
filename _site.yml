@@ -1,10 +1,8 @@
-name: Introduction to R for Public Health Researchers
+name: SeattleStatSummer Introduction to R
 output_dir: '.'
 navbar:
   title: Intro to R
   left:
-  - text: Syllabus
-    href: syllabus.html
   - text: Materials + Schedule
     href: materials_schedule.html
   - text: Resources
