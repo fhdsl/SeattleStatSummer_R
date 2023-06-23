@@ -12,8 +12,8 @@ navbar:
 
 
 output:
-  html_document:
-    theme: cosmo
+  prettydoc::html_pretty:
+    theme: hpstr
     lib_dir: site_libs
     self_contained: no
     highlight: textmate

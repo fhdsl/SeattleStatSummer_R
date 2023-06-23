@@ -12,6 +12,7 @@ library(pander)
 library(kableExtra)
 library(tidyverse)
 library(config)
+library(prettydoc)
 
 knitr::opts_chunk$set(warning = FALSE, message = FALSE)
 ```
@@ -38,7 +39,7 @@ The course will provide students with **“hands-on” experience* working with 
 
 <br>
 
-## Class
+## Workshop
 ***
 
 * [Materials + Schedule](materials_schedule.html)
@@ -55,4 +56,4 @@ https://github.com/fhdsl/SeattleStatSummer_Intro_to_R
 
 This page was last updated on `r Sys.Date()`.
 
-<p style="text-align:center;"><a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://live.staticflickr.com/4557/26350808799_6f9c8bcaa2_b.jpg" height="150"/> </a> </p><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
+<p style="text-align:center;"><a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://live.staticflickr.com/4557/26350808799_6f9c8bcaa2_b.jpg" height="150"/ width = "150"> </a> </p><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
