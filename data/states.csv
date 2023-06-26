@@ -1,0 +1,53 @@
+entity,state_abb,state_area_sq_miles,state_division,state_region,population,births_in_2021,fertility_rate_per_1000,cesarean_percent,life_expect,cancer_rate_per_100000,cancer_mortality,Administered_Dose1_Pop_Pct,Series_Complete_Pop_Pct
+Alabama,AL,51609,East South Central,South,4903185,58054,59.5,35.1,73.2,160.2,10429,64.8,53
+Alaska,AK,589757,Pacific,West,731545,9367,64.9,24.2,76.6,156,1093,72.8,64.9
+Arizona,AZ,113909,Mountain,West,7278717,77916,55.5,28.7,76.3,134.7,12813,77.1,65.8
+Arkansas,AR,53104,West South Central,South,3017804,35965,61.7,34.3,73.8,168.2,6516,69.6,56.7
+California,CA,158693,Pacific,West,39512223,420608,52.8,30.8,79,132.4,59503,84.3,74.4
+Colorado,CO,104247,Mountain,West,5758736,62949,52.5,27.3,78.3,126.5,8058,83.3,73.2
+Connecticut,CT,5009,New England,Northeast,3565287,35670,52.1,35.4,78.4,133.5,6526,95,82.8
+Delaware,DE,2057,South Atlantic,South,973764,10482,56.5,31.9,76.7,153.2,2178,87.7,72.9
+Florida,FL,58560,South Atlantic,South,21477737,216260,54.9,35.8,77.5,141.6,46937,82.1,69.2
+Georgia,GA,58876,South Atlantic,South,10617423,124073,55.9,35.1,75.6,151.5,18136,68.1,57.1
+Hawaii,HI,6450,Pacific,West,1415872,15620,59.2,27.7,80.7,125.4,2562,91.1,81.3
+Idaho,ID,83557,Mountain,West,1787065,22427,60.7,24.1,78.4,140.4,3130,63.7,56.3
+Illinois,IL,56400,East North Central,North Central,12671821,132189,53,31.2,76.8,150,23609,78.9,71
+Indiana,IN,36291,East North Central,North Central,6732219,79946,60.2,30.4,75,169.7,13983,64.2,57.6
+Iowa,IA,56290,West North Central,North Central,3155070,36835,60.8,29.7,77.5,150.9,6258,70.4,64.2
+Kansas,KS,82264,West North Central,North Central,2913314,34705,61,29.6,76.4,150.8,5455,75.9,65
+Kentucky,KY,40395,East South Central,South,4467673,52214,60.8,34.7,73.5,181.1,10250,68.6,59.4
+Louisiana,LA,48523,West South Central,South,4648794,57437,62.7,37.1,73.1,163.9,9246,62.7,54.9
+Maine,ME,33215,New England,Northeast,1344212,12006,49.9,30.9,77.8,161.3,3385,95,83
+Maryland,MD,10577,South Atlantic,South,6045680,68285,56.4,34.3,76.8,139.2,10545,91.3,79.4
+Massachusetts,MA,8257,New England,Northeast,6892503,69137,49,31.8,79,137.4,12461,95,83.8
+Michigan,MI,58216,East North Central,North Central,9986857,104980,55.4,33.2,76,160.1,21211,69.3,62.2
+Minnesota,MN,84068,West North Central,North Central,5639632,64425,58.6,28.9,79.1,143.2,10178,78.5,71.9
+Mississippi,MS,47716,East South Central,South,2976149,35156,60.7,38.5,71.9,181.8,6617,61.5,53.6
+Missouri,MO,69686,West North Central,North Central,6137428,69453,58.4,30.2,75.1,164.2,13153,69.1,58.8
+Montana,MT,147138,Mountain,West,1068778,11231,54.8,27.8,76.8,142.2,2157,68,59
+Nebraska,NE,77227,West North Central,North Central,1934408,24609,64.4,28.6,77.7,150.9,3578,73.1,66
+Nevada,NV,110540,Mountain,West,3080156,33686,54.8,32.9,76.3,143.2,5318,77.3,63.5
+New Hampshire,NH,9304,New England,Northeast,1359711,12625,49.9,32.7,79,145.7,2831,87.5,71.5
+New Jersey,NJ,7836,Middle Atlantic,Northeast,8882190,101497,58,32.5,77.5,130.6,15481,94.3,78.8
+New Mexico,NM,121666,Mountain,West,2096829,21391,52.9,27.3,74.5,137.3,3822,93.8,74.9
+New York,NY,49576,Middle Atlantic,Northeast,19453561,210742,54.1,34.1,77.7,125.3,32601,94.1,80.5
+North Carolina,NC,52586,South Atlantic,South,10488084,120466,58.1,30.3,76.1,153.6,20229,91.6,66.8
+North Dakota,ND,70665,West North Central,North Central,762062,10112,66.7,26.3,76.9,137.8,1278,69.1,58.4
+Ohio,OH,41222,East North Central,North Central,11689100,129791,57.9,31.5,75.3,163,25077,65.5,60.3
+Oklahoma,OK,69919,West South Central,South,3956971,48410,61.5,32.5,74.1,175.1,8368,74.3,60.2
+Oregon,OR,96981,Pacific,West,4217737,40914,48.9,29.1,78.8,155.2,8596,81.2,72.1
+Pennsylvania,PA,45333,Middle Atlantic,Northeast,12801989,132622,54.7,30.8,76.8,152.9,27664,90.1,72.9
+Rhode Island,RI,1214,New England,Northeast,1059361,10464,48.3,33.6,78.2,142,2115,95,87.4
+South Carolina,SC,31055,South Atlantic,South,5148714,57185,57.5,33.5,74.8,155.2,10593,70.7,59.7
+South Dakota,SD,77047,West North Central,North Central,884659,11369,68.6,24.6,76.7,154.8,1739,83.4,66
+Tennessee,TN,42244,East South Central,South,6829174,81717,59.8,32.4,73.8,166.3,14481,64.3,56.2
+Texas,TX,267339,West South Central,South,28995881,373594,60.7,34.8,76.5,143.3,42552,76,63
+Utah,UT,84916,Mountain,West,3205958,46712,63.6,23.4,78.6,121,3492,75,66.5
+Vermont,VT,9609,New England,Northeast,623989,5384,44.9,27.2,78.8,154,1446,95,85.3
+Virginia,VA,40815,South Atlantic,South,8535519,95825,56.1,32.5,77.6,150.5,15724,90.6,76.3
+Washington,WA,68192,Pacific,West,7614893,83911,54.2,29,79.2,149.3,13547,84.9,75.7
+West Virginia,WV,24181,South Atlantic,South,1792147,17198,54.7,34,72.8,184.7,4820,67.3,59.6
+Wisconsin,WI,56154,East North Central,North Central,5822434,61781,55.7,27.3,77.7,147.2,11336,74.9,68
+Wyoming,WY,97914,Mountain,West,578759,6237,57.5,26.7,76.3,156.7,1151,60.7,52.9
+District of Columbia,DC,68,South Atlantic,South,705749,8660,48.7,NA,NA,NA,NA,95,85.3
+Puerto Rico,PR,3515,NA,NA,3193694,19304,30.8,NA,NA,NA,NA,95,86.7
