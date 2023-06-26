@@ -25,7 +25,7 @@ library(jhur)
 - `head()` and `tail()` can also help you inspect an object
 - `readr`has helpful functions like `read_csv()` that can help you import data into R like so: 
 `df_example_readr <- read_csv(file = "documents/data_analysis/data_file.csv")`
-
+- Need to assign the output of the function to keep the result!
 
 📃[Cheatsheet](https://jhudatascience.org/intro_to_r/modules/cheatsheets/Day-2.pdf)
 
@@ -71,18 +71,13 @@ library(tidyverse) # loads dplyr and other packages!
 Here we use one of the datasets that comes with base R called `mtcars`. We can take a look at the top of it by using the `head()` function.
 
 ```{r}
-head(mtcars) # looking at the top of the mtcars data
+head(mtcars) # looking at the top 6 rows of the mtcars data
 mtcars_og <- mtcars
 ```
 
-## Checking the data `dim()`
-
-The `dim()`, `nrow()`, and `ncol()` functions are good options to check the dimensions of your data before moving forward.
-
+## To see the bottom of the data use `tail()`
 ```{r}
-dim(mtcars) # rows, columns
-nrow(mtcars) # number of rows
-ncol(mtcars) # number of columns
+tail(mtcars) # looking at the bottom 6 rows of the mtcars data
 ```
 
 ## Checking the data: `glimpse()`
@@ -92,16 +87,6 @@ In addition to `head()` and `tail()`, the `glimpse()`function of the `dplyr` pac
 ```{r}
 glimpse(mtcars)
 ```
-
-
-## Keep in mind...
-
-Need to assign the output of the function to keep the result!
-
-
-
-
-
 
 
 ## Renaming Columns of a data frame or tibble
@@ -119,8 +104,8 @@ For example, let's rename mpg to MPG. Notice the new name is listed **first**!
 </div>
 
 ```{r}
-mtcars <- rename(mtcars, MPG = mpg)
-head(mtcars)
+mtcars_rename <- rename(mtcars, MPG = mpg)
+head(mtcars_rename)
 ```
 
 
@@ -131,11 +116,11 @@ When you can, avoid spaces, special punctuation, or numbers in column names, as 
 See https://jhudatascience.org/intro_to_r/quotes_vs_backticks.html for more guidance.
 
 ```{r, eval = FALSE}
-mtcars <- rename(mtcars, MPG! = MPG) # this will cause an error
+mtcars_rename <- rename(mtcars_rename, MPG! = MPG) # this will cause an error
 ```
 
 ```{r}
-mtcars_rename <-rename(mtcars, `MPG!` = MPG) # this will work
+mtcars_rename <-rename(mtcars_rename, `MPG!` = MPG) # this will work
 head(mtcars_rename, 2)
 ```
 
@@ -187,21 +172,9 @@ mtcars_rename <-rename(mtcars, “MPG!” = MPG) # this will cause an error!
 mtcars_rename <-rename(mtcars, "MPG!" = MPG) # this will work!
 ```
 
+## Let's stick with lowercase
 
 
-## Renaming all columns of a data frame: dplyr {.codesmall}
-
-To rename all columns you use the `rename_with()`. In this case we will use `toupper()` to make all letters upper case. Could also use `tolower()` function.
-
-```{r}
-mtcars_upper <- rename_with(mtcars, toupper)
-head(mtcars_upper, 3)
-```
-
-```{r}
-mtcars <- rename_with(mtcars, tolower)
-head(mtcars, 3)
-```
 
 ## Summary
 
@@ -234,7 +207,7 @@ pull(mtcars, carb)
 
 The `select` command from `dplyr` allows you to subset (still a `tibble`!)
 ```{r}
-select(mtcars, mpg)
+select(mtcars, carb)
 ```
 
 ## Select multiple columns
@@ -243,18 +216,18 @@ We can use `select` to select for multiple columns.
 
 ```{r}
 
-select(mtcars, mpg, gear)
+select(mtcars, carb, gear)
 ```
 
 ## Subset columns of a data frame: dplyr
 
 Note that if you want the values (not a `tibble`), use `pull` - as it pulls out the data:
 ```{r}
-pull(mtcars, mpg)
+pull(mtcars, gear)
 
 # pull with select works too!
 
-pull(select(mtcars, mpg))
+pull(select(mtcars, gear))
 ```
 
 ## Select columns of a data frame: dplyr
