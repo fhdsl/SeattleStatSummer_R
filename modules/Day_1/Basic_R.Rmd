@@ -280,12 +280,127 @@ str(y)
 
 This tells you that `x` is a numeric vector and tells you the length.
 
+# Let's add more!
+
+## TERM: Package
+
+```{r, out.width = "30%", echo = FALSE}
+knitr::include_graphics("images/book.png")
+```
+
+**Package** - a package in R is a bundle or "package" of code (and or possibly data) that can be loaded together for easy repeated use or for **sharing** with others.
+
+Packages are analogous to a software application like Microsoft Word on your computer. Your operating system allows you to use it, just like having R installed (and other required packages) allows you to use packages.
+
+Most of the packages we will use will come from [CRAN](https://cran.r-project.org/).
+
+## Installation vs. Loading
+
+Packages must be both installed and loaded.
+
+Installation -- Must be done **once** for each installation of R. 
+
+Loading -- Must be done every time you open R/RStudio.
+
+## Installation vs. Loading
+
+```{r, fig.alt="Install packages menu in RStudio", out.width = "20%", echo = FALSE, fig.align='center'}
+knitr::include_graphics("images/install_packages.png")
+```
+
+## Installing Packages: Dropdown Menu
+
+You can install packages from CRAN using the tool menu in RStudio:
+
+tools > Install Packages
+
+```{r, fig.alt="Install packages menu in RStudio", out.width = "20%", echo = FALSE, fig.align='center'}
+knitr::include_graphics("images/install_packages1.png")
+```
+
+Type in the package name to install.
+
+```{r, fig.alt="The 'readr' package has been typed into the dropdown menu", out.width = "30%", echo = FALSE, fig.align='center'}
+knitr::include_graphics("images/install_packages2.png")
+```
+
+## Installing Packages: Using Code
+
+We use a function called `install.packages()` for CRAN packages.
+
+Here is an example where we "install" the `tidyverse` package:
+
+```{r, eval = FALSE}
+install.packages("tidyverse")
+```
+
+The package name is enclosed in quotation marks.
+
+## Loading packages
+
+After installing packages, you will need to "load" them into memory so that you can use them.
+
+This must be done **every time** you start R.
+
+We use a function called `library` to load packages.
+
+Here is an example where we "load" the `tidyverse` package. This is an important package of many objects for dealing with data!
+
+```{r, eval = FALSE}
+library(tidyverse)
+```
+
+Quotation marks are optional.
+
+# Getting Help
+
+## Getting help from the preview 
+
+When you type in a function name, a pop up will preview documentation to help you. It also helps you remember the name of the function if you don't remember all of it!
+
+```{r, fig.alt="preview a function", out.width = "80%", echo = FALSE, fig.align='center'}
+knitr::include_graphics("images/preview1.png")
+```
+
+```{r, fig.alt="preview a function", out.width = "80%", echo = FALSE, fig.align='center'}
+knitr::include_graphics("images/preview2.png")
+```
+
+## Get help with the help pane
+
+```{r, fig.alt="help_pane", out.width = "90%", echo = FALSE, fig.align='center'}
+knitr::include_graphics("images/help_pane.png")
+```
+
+## Getting Help with `?`
+
+If you know the name of a package or function: 
+
+Type `?package_name` or `?function_name` in the console to get information about packages and functions.
+
+For example: `?readr` or `?read_csv`.
+
+```{r, fig.alt="getting help", out.width = "90%", echo = FALSE, fig.align='center'}
+knitr::include_graphics("images/gettinghelp.png")
+```
+
+## Double Question Mark
+
+If you haven't loaded a package yet into R than you may get a response that there is no documentation.
+
+Typing in `??package_name` can show you packages that you haven't loaded yet.
+
+```{r, fig.alt="help_pane", out.width = "90%", echo = FALSE, fig.align='center'}
+knitr::include_graphics("images/double_question.png")
+```
+
 ## Summary
 
 - R functions as a calculator
 - Use `<-` to save (assign) values to objects
-- **Functions** (like verbs) perform specific tasks in R and are found within packages.
+- **Functions** (like verbs) perform specific tasks in R and are found within packages
 - Use `c()` to **combine** vectors
 - `length()`, `class()`, and `str()` tell you information about an object
 - Install packages with `install.packages()`
 - Load packages with `library()`
+- Get help with `?` or help pane
