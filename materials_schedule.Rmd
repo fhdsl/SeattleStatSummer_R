@@ -4,11 +4,6 @@ output:
   html_document
 ---
 
-
-
-##  Schedule + Materials
-***
-
 ```{r, results='asis', echo = FALSE, message=FALSE, warning = FALSE}
 # The str_replace_all creates an absolute url to linked documents since there are word and pdf rendered versions of the syllabus
 source("scripts/utils.R")
@@ -22,31 +17,3 @@ pander::pandoc.table(
   style = "rmarkdown"
 )
 ```
-
-### Module Details
-
-
-Day 1
-
-- Introduction 
-- RStudio
-- Basic R
-
-
-
-Day 2
-
-- Data Input
-
-
-Day 3
-
-- Subsetting Data
-- Recoding and manipulating Data
-
-
-Day 4
-
-- Visualizing Data
-
-

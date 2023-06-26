@@ -137,22 +137,7 @@ jobs:
     strategy:
       matrix:
         modulenames: 
-          - Intro
-          - RStudio
-          - Reproducibility
-          - Basic_R
-          - Data_Input
-          - Subsetting_Data_in_R
-          - Data_Summarization
-          - Data_Classes
-          - Data_Cleaning
-          - Manipulating_Data_in_R
-          - Esquisse_Data_Visualization
-          - Data_Visualization
-          - Factors
-          - Statistics
-          - Data_Output
-          - Functions
+          - Day_1
           
     steps:
       - name: Checkout files
