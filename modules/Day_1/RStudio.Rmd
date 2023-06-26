@@ -11,10 +11,6 @@ library(knitr)
 opts_chunk$set(comment = "")
 ```
 
-## Help! Office hours
-
-Office hours will always be held at the _same Zoom link_.
-
 ## Working with R -- RStudio
 
 RStudio is an Integrated Development Environment (IDE) for R
@@ -30,10 +26,6 @@ RStudio is an Integrated Development Environment (IDE) for R
 knitr::include_graphics("https://d33wubrfki0l68.cloudfront.net/62bcc8535a06077094ca3c29c383e37ad7334311/a263f/assets/img/logo.svg")
 ```
 
-<sub>[[source](https://www.rstudio.com/)]</sub>
-
-RStudio used to be the name of a company that is now called [Posit](https://posit.co/).
-
 ## RStudio
 
 Easier working with R
@@ -47,8 +39,6 @@ More information
 -   Plot history, zooming, and flexible image and file export
 -   Integrated R help and documentation
 
-
-
 ## RStudio
 
 First it is important to be familiar with the layout. When you first open RStudio, you will see 3 panes.
@@ -56,9 +46,6 @@ First it is important to be familiar with the layout. When you first open RStudi
 ```{r, fig.align='center', out.width="70%", echo = FALSE, fig.alt= "When RStudio is first opened you will see 3 panes"}
 knitr::include_graphics("images/three_panes.png")
 ```
-
-
-
 
 ## RStudio Layout
 
