@@ -12,12 +12,10 @@ library(pander)
 library(kableExtra)
 library(tidyverse)
 library(config)
-library(prettydoc)
 
 knitr::opts_chunk$set(warning = FALSE, message = FALSE)
 ```
 
-<a href="https://hutchdatascience.org/"><img alt = "FHDaSL" align="right" src="https://hutchdatascience.org/AI_for_software/assets/big-dasl-stacked.png" style="width:30%"/></a>
 <br>
 <br>
 
@@ -26,11 +24,11 @@ knitr::opts_chunk$set(warning = FALSE, message = FALSE)
 ## Overview
 ***
 
-**Welcome to theSeattleStatSummer Introduction to R Workshop!**  
+**Welcome to the SeattleStatSummer Introduction to R Workshop!**  
 
 This workshop is for students in the [SeattleStatSummer](https://www.fredhutch.org/en/education-training/teachers-students/high-school-undergraduate-students/seattlestatsummer.html) program. 
 
-The workshop will provide students with **“hands-on” experience* working with data using the R programming language for statistical computing, a popular open-source solution for data analysis and visualization.  
+The workshop will provide students with **“hands-on” experience** working with data using the R programming language for statistical computing, a popular open-source solution for data analysis and visualization.  
 
 Students will learn how to use R to import, wrangle, and visualize data.
 
@@ -41,7 +39,7 @@ Students will learn how to use R to import, wrangle, and visualize data.
 
 <br>
 
-## workshop
+## Workshop
 ***
 
 * [Materials + Schedule](materials_schedule.html)
@@ -57,5 +55,7 @@ Feel free to submit typos/errors/etc via the GitHub repository associated with t
 https://github.com/fhdsl/SeattleStatSummer_Intro_to_R
 
 This page was last updated on `r Sys.Date()`.
+
+<a href="https://hutchdatascience.org/"><img alt = "FHDaSL" align="center" src="https://hutchdatascience.org/AI_for_software/assets/big-dasl-stacked.png" style="width:25%"/></a>
 
 <p style="text-align:center;"><a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://live.staticflickr.com/4557/26350808799_6f9c8bcaa2_b.jpg" height="150"/ width = "150"> </a> </p><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.

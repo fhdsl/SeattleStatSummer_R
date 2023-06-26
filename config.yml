@@ -10,7 +10,7 @@ default:
   courseplus_dropboxes: "https://courseplus.jhu.edu/core/index.cfm/go/db:main/coID/20767/"
   courseplus_surveys: "https://courseplus.jhu.edu/core/index.cfm/go/survey2:admin.home/coID/20767/#!/"
   ta: "Rupshikha Sen (rsen6 at jhmi.edu)"
-  instructors: "[Carrie Wright](https://carriewright11.github.io/) (cwrigh60 at jhu.edu) and [Ava Hoffman](https://www.avahoffman.com/) (ava.hoffman at jhu.edu)"
+  instructors: "[Carrie Wright](https://carriewright11.github.io/) (cwright2 at fredhutch.org) and [Ava Hoffman](https://www.avahoffman.com/) (ahoffma2 at fredhutch.org)"
   r_dl_mac_m1: "https://cloud.r-project.org/bin/macosx/big-sur-arm64/base/R-4.3.0-arm64.pkg"
   r_dl_mac_intel: "https://cloud.r-project.org/bin/macosx/big-sur-x86_64/base/R-4.3.0-x86_64.pkg"
   r_dl_windows: "https://cloud.r-project.org/bin/windows/base/R-4.3.0-win.exe"

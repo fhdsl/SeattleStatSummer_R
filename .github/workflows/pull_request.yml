@@ -309,10 +309,6 @@ jobs:
         id: site
         run: Rscript -e "rmarkdown::render_site()"
 
-       # Render module details for syllabus
-      - name: Render module details for syllabus
-        run: Rscript "scripts/render_module_details_for_syllabus.R"
-
        # Render all module files
       - name: Render html of modules
         run: Rscript "scripts/render_modules.R"
@@ -398,22 +394,7 @@ jobs:
     strategy:
       matrix:
         modulenames: 
-          - Intro
-          - RStudio
-          - Reproducibility
-          - Basic_R
-          - Data_Input
-          - Subsetting_Data_in_R
-          - Data_Summarization
-          - Data_Classes
-          - Data_Cleaning
-          - Manipulating_Data_in_R
-          - Esquisse_Data_Visualization
-          - Data_Visualization
-          - Factors
-          - Statistics
-          - Data_Output
-          - Functions
+          - Day_1
         
     steps:
       - name: Checkout files
