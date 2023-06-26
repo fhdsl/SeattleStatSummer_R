@@ -41,7 +41,7 @@ Students will learn how to use R to import, wrangle, and visualize data.
 
 <br>
 
-## workshop
+## Workshop
 ***
 
 * [Materials + Schedule](materials_schedule.html)
