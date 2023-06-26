@@ -97,10 +97,6 @@ jobs:
         id: site
         run: Rscript -e "rmarkdown::render_site()" 
         
-       # Render module details for syllabus
-      - name: Render module details for syllabus
-        run: Rscript "scripts/render_module_details_for_syllabus.R"
-        
        # Render all module files
       - name: Render html of modules
         run: Rscript "scripts/render_modules.R"
