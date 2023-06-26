@@ -305,7 +305,7 @@ Loading -- Must be done every time you open R/RStudio.
 ## Installation vs. Loading
 
 ```{r, fig.alt="Install packages menu in RStudio", out.width = "20%", echo = FALSE, fig.align='center'}
-knitr::include_graphics("images/install_packages.png")
+knitr::include_graphics("images/install_packages.jpg")
 ```
 
 ## Installing Packages: Dropdown Menu
