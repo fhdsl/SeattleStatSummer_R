@@ -12,7 +12,6 @@ library(pander)
 library(kableExtra)
 library(tidyverse)
 library(config)
-library(prettydoc)
 
 knitr::opts_chunk$set(warning = FALSE, message = FALSE)
 ```

@@ -74,7 +74,7 @@ knitr::include_graphics("images/Pane1_for_writing.png")
 
 ## Pane 2 - where objects will be
 
-We will start seeing this tomorrow!
+More on this in a moment!
 
 ```{r, fig.align='center', out.width="60%", echo = FALSE, fig.alt= "We we see objects"}
 knitr::include_graphics("images/pane2.png")
@@ -183,6 +183,21 @@ For data analyses, R Markdown files are generally superior because they allow yo
 ```{r, out.width = "90%", echo = FALSE}
 knitr::include_graphics("images/rstudio_environment.png")
 ```
+
+## TERM: Object
+
+```{r, out.width = "30%", echo = FALSE}
+knitr::include_graphics("images/book.png")
+```
+
+_object_: an object is something that can be worked with or on in R - can be lots of different things! You can think of objects as **nouns** in R.
+
+- a matrix of numbers
+- a plot
+- a function
+- data
+
+... many more
 
 ## Workspace/Environment
 
