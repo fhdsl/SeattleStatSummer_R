@@ -26,11 +26,11 @@ knitr::opts_chunk$set(warning = FALSE, message = FALSE)
 ## Overview
 ***
 
-**Welcome to theSeattleStatSummer Introduction to R Workshop!**  
+**Welcome to the SeattleStatSummer Introduction to R Workshop!**  
 
 This workshop is for students in the [SeattleStatSummer](https://www.fredhutch.org/en/education-training/teachers-students/high-school-undergraduate-students/seattlestatsummer.html) program. 
 
-The workshop will provide students with **“hands-on” experience* working with data using the R programming language for statistical computing, a popular open-source solution for data analysis and visualization.  
+The workshop will provide students with **“hands-on” experience** working with data using the R programming language for statistical computing, a popular open-source solution for data analysis and visualization.  
 
 Students will learn how to use R to import, wrangle, and visualize data.
 

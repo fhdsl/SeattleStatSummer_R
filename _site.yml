@@ -12,8 +12,8 @@ navbar:
 
 
 output:
-  prettydoc::html_pretty:
-    theme: hpstr
+  html_document:
+    theme: spacelab
     lib_dir: site_libs
     self_contained: no
     highlight: textmate
