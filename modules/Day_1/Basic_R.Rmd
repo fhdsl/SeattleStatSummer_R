@@ -108,7 +108,7 @@ But what can we do with objects... ?
 
 ## TERM: Function
 
-```{r, out.width = "30%", echo = FALSE}
+```{r, out.width = "10%", echo = FALSE}
 knitr::include_graphics("images/book.png")
 ```
 
@@ -284,7 +284,7 @@ This tells you that `x` is a numeric vector and tells you the length.
 
 ## TERM: Package
 
-```{r, out.width = "30%", echo = FALSE}
+```{r, out.width = "10%", echo = FALSE}
 knitr::include_graphics("images/book.png")
 ```
 
@@ -301,12 +301,6 @@ Packages must be both installed and loaded.
 Installation -- Must be done **once** for each installation of R. 
 
 Loading -- Must be done every time you open R/RStudio.
-
-## Installation vs. Loading
-
-```{r, fig.alt="Install packages menu in RStudio", out.width = "20%", echo = FALSE, fig.align='center'}
-knitr::include_graphics("images/install_packages.jpg")
-```
 
 ## Installing Packages: Dropdown Menu
 
@@ -351,6 +345,12 @@ library(tidyverse)
 ```
 
 Quotation marks are optional.
+
+## Installation vs. Loading
+
+```{r, fig.alt="Install packages menu in RStudio", out.width = "80%", echo = FALSE, fig.align='center'}
+knitr::include_graphics("images/install_packages.jpg")
+```
 
 # Getting Help
 
@@ -404,3 +404,5 @@ knitr::include_graphics("images/double_question.png")
 - Install packages with `install.packages()`
 - Load packages with `library()`
 - Get help with `?` or help pane
+
+🏠 [Workshop Website](https://hutchdatascience.org/SeattleStatSummer_R/)

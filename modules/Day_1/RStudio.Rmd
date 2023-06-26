@@ -186,7 +186,7 @@ knitr::include_graphics("images/rstudio_environment.png")
 
 ## TERM: Object
 
-```{r, out.width = "30%", echo = FALSE}
+```{r, out.width = "10%", echo = FALSE}
 knitr::include_graphics("images/book.png")
 ```
 
@@ -218,7 +218,7 @@ _object_: an object is something that can be worked with or on in R - can be lot
 -   **Plots** - pictures and figures
 -   **Packages** - list of R packages that are loaded in memory
 
-# LAB: Let's take a look at R Studio ourselves!
+# Practice: Let's take a look at R Studio ourselves!
 
 ## R Markdown file
 
@@ -351,3 +351,5 @@ knitr::include_graphics("images/where_code.png")
 -  R code goes within what is called a chunk (the gray box with a green play button)
 -  Code chunks can be modified so that they show differently in reports
 -  **Objects** (like nouns) are data or variables.
+
+🏠 [Workshop Website](https://hutchdatascience.org/SeattleStatSummer_R/)
