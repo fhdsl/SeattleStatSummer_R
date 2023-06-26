@@ -37,7 +37,7 @@ PhD in Ecology
 Email: ahoffma2@fredhutch.org  Web: https://avahoffman.com
 
 ```{r, fig.alt="Ava's picture", out.width = "30%", echo = FALSE, fig.align='center'}
-knitr::include_graphics(here::here("modules", "Intro", "images", "ava.png"))
+knitr::include_graphics(here::here("modules", "Day_1", "images", "ava.png"))
 ```
 
 ## About Us
@@ -54,7 +54,7 @@ Email: cwright2@fredhutch.org  Web: https://carriewright11.github.io
 
 ```{r, fig.alt="Carrie's picture", out.width = "30%", echo = FALSE, fig.align='center'}
 # knitr::include_graphics("https://ca.slack-edge.com/T023TPZA8LF-U024F9G49S8-9861ddd543db-192")
-knitr::include_graphics(here::here("modules", "Intro", "images", "carrie.png"))
+knitr::include_graphics(here::here("modules", "Day_1", "images", "carrie.png"))
 ```
 
 ## The Learning Curve

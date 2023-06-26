@@ -155,7 +155,7 @@ Super useful "cheat sheet": <https://github.com/rstudio/cheatsheets/raw/master/r
 knitr::include_graphics("images/rstudio_sheet.png")
 ```
 
-## R Markdown files look different form scripts
+## R Markdown files look different from scripts
 
 It will look like this with text in it, unlike a script.
 
