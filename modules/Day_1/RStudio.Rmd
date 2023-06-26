@@ -192,7 +192,7 @@ knitr::include_graphics("images/book.png")
 
 _object_: an object is something that can be worked with or on in R - can be lots of different things! You can think of objects as **nouns** in R.
 
-- a matrix of numbers
+- a vector of numbers
 - a plot
 - a function
 - data
@@ -218,25 +218,7 @@ _object_: an object is something that can be worked with or on in R - can be lot
 -   **Plots** - pictures and figures
 -   **Packages** - list of R packages that are loaded in memory
 
-# Let's take a look at R Studio ourselves!
-
-## Lab: Starting with R and RMarkdown
-
-💻 [RStudio Lab](https://jhudatascience.org/intro_to_r/modules/RStudio/lab/RStudio_Lab.Rmd)
-
-To do this lab we need to:
-
-- Download the file at the link above by clicking on it or go to the [website](https://jhudatascience.org/intro_to_r/materials_schedule.html) schedule page
-- Find the downloaded file on your computer
-- Open the file in RStudio (double clicking the file name typically works)
-
-These videos can help if you aren't sure where your downloads are:
-
-If you have a PC: https://youtu.be/we6vwB7DsNU
-
-If you have a Mac: https://www.youtube.com/watch?v=Ao9e0cDzMrE
-
-You can find these on the resource page of the class website.
+# LAB: Let's take a look at R Studio ourselves!
 
 ## R Markdown file
 
@@ -249,7 +231,6 @@ R Markdown files (.Rmd) help generate reports that include your code and output.
 ## Create an R Markdown file
 
 Go to File → New File → R Markdown or click the green add file button.
-
 
 ```{r, out.width = "40%", echo = FALSE, fig.align='center'}
 knitr::include_graphics("images/RMarkdown.png")
@@ -284,17 +265,6 @@ knitr::include_graphics("images/chunk.png")
 knitr::include_graphics("images/output.png")
 ```
 
-## If you get annoyed by code previews in Markdown files:
-
-In RStudio
-Click the Edit tab -->  scroll down to Preferences... --> R Markdown
-
-Uncheck the following:
-
-```{r, fig.alt="knit", out.width = "100%", echo = FALSE, fig.align='center'}
-knitr::include_graphics("images/options.png")
-```
-
 ## Knit file to html
 
 Running all chunks - this will create a report from the R Markdown document!
@@ -303,8 +273,6 @@ Running all chunks - this will create a report from the R Markdown document!
 knitr::include_graphics("images/knit.png")
 ```
 
-
-
 ## Nice report!
 
 This generates a nice report that you can share with others who can open in any browser.
@@ -312,7 +280,6 @@ This generates a nice report that you can share with others who can open in any 
 ```{r, fig.alt="knit", out.width = "100%", echo = FALSE, fig.align='center'}
 knitr::include_graphics("images/report.png")
 ```
-
 
 ## Create Chunks
 
@@ -330,15 +297,6 @@ knitr::include_graphics("images/insert_chunk.png")
 knitr::include_graphics("images/select_R.png")
 ```
 
-## Create Chunks
-
- If you like keyboard shortcuts: 
- 
- - Windows & Linux use Ctrl+Alt+I
- - Mac use Command+Option+I
-
-I is for insert.
- 
 ## Run previous chunks button
 
 You can run all chunks above a specific chunk using this button:
@@ -370,16 +328,6 @@ Note that sometimes the error occurs earlier than RStudio thinks.
 knitr::include_graphics("images/errors.png")
 ```
 
-
-## Useful R Studio Shortcuts
-
--   `Ctrl + Enter` on Windows or `Command + Enter` on Mac in your script evaluates that line of code
-    -   It's like copying and pasting the code into the console for it to run.
--   `Ctrl+1` on Windows or `Command + 1` on Mac takes you to the script page 
--   `Ctrl+2` on Windows or `Command + 2` on Mac takes you to the console
--   <http://www.rstudio.com/ide/docs/using/keyboard_shortcuts>
-
-
 ## Recap of where code goes
 
 - you can test code in the console
@@ -394,51 +342,6 @@ knitr::include_graphics("images/where_code_console.png")
 knitr::include_graphics("images/where_code.png")
 ```
 
-
-## Getting help from the preview 
-
-When you type in a function name, a pop up will preview documentation to help you. It also helps you remember the name of the function if you don't remember all of it!
-
-```{r, fig.alt="preview a function", out.width = "80%", echo = FALSE, fig.align='center'}
-knitr::include_graphics("images/preview1.png")
-```
-
-```{r, fig.alt="preview a function", out.width = "80%", echo = FALSE, fig.align='center'}
-knitr::include_graphics("images/preview2.png")
-```
-
-
-## Get help with the help pane
-
-```{r, fig.alt="help_pane", out.width = "90%", echo = FALSE, fig.align='center'}
-knitr::include_graphics("images/help_pane.png")
-```
-
-## Getting Help with `?`
-
-If you know the name of a package or function: 
-
-Type `?package_name` or `?function_name` in the console to get information about packages and functions.
-
-For example: `?readr` or `?read_csv`.
-
-```{r, fig.alt="getting help", out.width = "90%", echo = FALSE, fig.align='center'}
-knitr::include_graphics("images/gettinghelp.png")
-```
-
-
-## Double Question Mark
-
-If you haven't loaded a package yet into R than you may get a response that there is no documentation.
-
-Typing in `??package_name` can show you packages that you haven't loaded yet.
-
-```{r, fig.alt="help_pane", out.width = "90%", echo = FALSE, fig.align='center'}
-knitr::include_graphics("images/double_question.png")
-```
-
-
-
 ## Summary
 
 -  RStudio makes working in R easier
@@ -447,14 +350,4 @@ knitr::include_graphics("images/double_question.png")
 -  R markdown documents are really helpful for lots of reasons!
 -  R code goes within what is called a chunk (the gray box with a green play button)
 -  Code chunks can be modified so that they show differently in reports
-
-🏠 [Class Website](https://jhudatascience.org/intro_to_r/)
-
-💻 [Lab](https://jhudatascience.org/intro_to_r/modules/RStudio/lab/RStudio_Lab.Rmd)
-
-```{r, fig.alt="The End", out.width = "25%", echo = FALSE, fig.align='center'}
-knitr::include_graphics(here::here("images/the-end-g23b994289_1280.jpg"))
-```
-
-Image by <a href="https://pixabay.com/users/geralt-9301/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=812226">Gerd Altmann</a> from <a href="https://pixabay.com//?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=812226">Pixabay</a>
-
+-  **Objects** (like nouns) are data or variables.
