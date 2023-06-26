@@ -226,6 +226,15 @@ name2 <- c("Ava", "Hoffman")
 name2
 ```
 
+## TERM: Argument
+
+```{r, out.width = "10%", echo = FALSE}
+knitr::include_graphics("images/book.png")
+```
+
+_argument_ - information you pass to a function, usually inside of parentheses. These tell the function how to work and what to work on, sort of like an **adverb**.
+
+
 ## Arguments inside R functions
 
 - The contents you give to an R function are called "arguments"
