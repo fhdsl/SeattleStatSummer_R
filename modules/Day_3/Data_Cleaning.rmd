@@ -130,6 +130,11 @@ airqual %>% drop_na()
 
 # Recoding Variables
 
+## changing data class
+
+```{r}
+
+```
 ## Example of Recoding
 
 ```{r}
