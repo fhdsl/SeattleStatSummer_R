@@ -22,16 +22,7 @@ pre { /* Code block - slightly smaller in this lecture */
 }
 </style>
 
-
-## Another Cheatsheet
-
-https://raw.githubusercontent.com/rstudio/cheatsheets/main/data-transformation.pdf
-
-```{r, fig.alt="A preview of the Data transformation cheatsheet produced by RStudio.", out.width = "80%", echo = FALSE, align = "center"}
-knitr::include_graphics("images/Manip_cheatsheet.png")
-```
-
-# Part 1: Numeric / continous data
+# Part 1: Numeric / continuous data
 
 ## Data Summarization
 
@@ -80,9 +71,7 @@ You can only do summarization on numeric or logical types. Not characters.
 ```{r error = TRUE}
 x <- c(1, 5, 7, 4, 2, 8)
 sum(x)
-y <- c(TRUE, FALSE, FALSE, TRUE) # FALSE == 0 and TRUE == 1
-sum(y)
-z <- c("TRUE", "FALSE", "FALSE", "TRUE")
+z <- c("hello", "goodbye")
 sum(z)
 ```
 
@@ -91,7 +80,11 @@ sum(z)
 
 First we will need to learn about something called the "pipe".
 
-The pipe is this operator in R: `%>%`. It tells R to "pipe" the dataset on the left into the next function.
+The pipe is this operator in R: 
+
+`%>%`
+
+It tells R to "pipe" the dataset on the left into the next function.
 
 
 ## Using the pipe `%>%`
