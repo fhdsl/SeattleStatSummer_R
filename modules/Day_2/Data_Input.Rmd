@@ -261,7 +261,7 @@ https://hutchdatascience.org/SeattleStatSummer_R/data/asthma.xlsx
 
 ## Looking at the code:
 
-```{r}
+```{r eval=FALSE}
 library(readxl)
 url <- "https://hutchdatascience.org/SeattleStatSummer_R/data/asthma.xlsx"
 destfile <- "asthma.xlsx"
