@@ -46,8 +46,6 @@ pre { /* Code block - slightly smaller in this lecture */
 * Part 1: reading in manually (point and click) (.csv)
 * Part 2: checking data & multiple file formats (.xlsx)
 
-We will cover Output a bit later!
-
 
 # Part 0: Setup - R Project
 
