@@ -138,38 +138,26 @@ airqual %>% drop_na()
 ## Example of Recoding
 
 ```{r}
-set.seed(124)
-data_diet <- tibble(Diet = rep(c("A", "B", "B"),
-                               times = 4), 
-                    Gender = c("Male", 
-                               "m",
-                               "Other",
-                               "F", 
-                               "Female",
-                               "M", 
-                               "f",
-                               "O", 
-                               "Man",
-                               "f",
-                               "F",
-                               "O"), 
-                    Weight_start = sample(100:250, size = 12),
-                    Weight_change = sample(-10:20, size = 12))
-
+library(catdata)
+?catdata::teratology2
+data(teratology2)
 ```
 
+```{r, fig.alt="The End", out.width = "50%", echo = FALSE, fig.align='center'}
+knitr::include_graphics(here::here("modules", "Day_3", "images", "rat_data.png"))
+```
 
 ## Say we have some data about samples in a diet study:
 
 ```{r}
-data_diet
+head(teratology2)
 ```
 
 ## Oh dear...
 
 This needs lots of recoding.
 
-```{r}
+```{r, eval = FALSE}
 data_diet %>%
   count(Gender)
 ```
@@ -212,7 +200,7 @@ data_diet %>%
 
 ## `recode()`
 
-```{r, eval = TRUE}
+```{r, eval = FALSE}
 
 data_diet %>% 
   mutate(Gender = recode(Gender, M = "Male", 
@@ -241,34 +229,8 @@ It is more flexible and powerful.
 Need quotes for conditions and new values!
 :::
 
-```{r}
-data_diet %>% 
-  mutate(Gender = case_when(Gender == "M" ~ "Male", 
-                            Gender == "m" ~ "Male", 
-                            Gender == "Man" ~ "Male",
-                            Gender == "O" ~ "Other",
-                            Gender == "f" ~ "Female",
-                            Gender == "F" ~ "Female"))  %>% 
-  count(Gender)
 
-```
 
-## What happened?{.codesmall}
-
-```{r}
-data_diet %>% 
-  mutate(Gender = case_when(Gender == "M" ~ "Male", 
-                            Gender == "m" ~ "Male", 
-                            Gender == "Man" ~ "Male",
-                            Gender == "O" ~ "Other",
-                            Gender == "f" ~ "Female",
-                            Gender == "F" ~ "Female"))
-```
-
-## Original data
-```{r}
-data_diet
-```
 
 ## `case_when()` drops unspecified values
 
@@ -289,31 +251,6 @@ Note that automatically values not reassigned explicitly by
 {value_for_not_meeting_condition} could be something new 
 or it can be the original values of the column
 
-## case_when with TRUE ~ original variable name
-
-```{r}
-data_diet %>% 
-  mutate(Gender = case_when(Gender == "M" ~ "Male", 
-                            Gender == "m" ~ "Male", 
-                            Gender == "Man" ~ "Male",
-                            Gender == "O" ~ "Other",
-                            Gender == "f" ~ "Female",
-                            Gender == "F" ~ "Female",
-                            TRUE ~ Gender))  %>% 
-  count(Gender)
-```
-
-
-## More complicated case_when()
-
-```{r}
-data_diet %>% 
-  mutate(Gender = case_when(
-    Gender %in% c("M", "male", "Man", "m", "Male") ~ "Male",
-    Gender %in% c("F", "Female", "f", "female") ~ "Female",
-    Gender %in% c("O", "Other") ~ "Other"))
-
-```
 
 
 
@@ -321,7 +258,7 @@ data_diet %>%
 
 `case_when` can do very sophisticated comparisons
 
-```{r}
+```{r, eval = FALSE}
 
 data_diet <- data_diet %>% 
       mutate(Effect = case_when(Weight_change > 0 ~ "Increase",
@@ -334,193 +271,11 @@ head(data_diet)
 
 ## Now it is easier to see what is happening
 
-```{r}
+```{r, eval = FALSE}
 data_diet %>% 
   count(Diet, Effect)
 ```
-## Taking a look at the data
 
-```{r, echo = FALSE}
-diet_effect <- data_diet %>% 
-  count(Diet, Effect)
-
-data_diet %>% 
-  count(Diet, Effect)%>%
-  ggplot(aes(x = Effect,y = n, fill = Diet)) + 
-  geom_col(position = position_dodge()) +
-  labs(y = "Individuals", 
-       title = "Effect of diet A & B on participants")
-
-
-```
-
-
-# Working with strings
-
-## Strings in R
-
--   R can do much more than find exact matches for a whole string!
-
-```{r, echo = FALSE, out.width="30%", fig.align = "center"}
-include_graphics("https://swag.rstudio.com/uploads/1/3/1/3/131335021/s815253891256106552_p45_i1_w935.png")
-```
-
-## The `stringr` package
-
-The `stringr` package:
-
--   Modifying or finding **part** or all of a character string
--   We will not cover `grep` or `gsub` - base R functions
-    -   are used on forums for answers
--   Almost all functions start with `str_*`
-
-## `stringr`
-
-`str_detect`, and `str_replace` search for matches to argument pattern
-within each element of a **character vector** (not data frame or tibble!).
-
--   `str_detect` - returns `TRUE` if `pattern` is found
--   `str_replace` - replaces `pattern` with `replacement`
-
-
-## `str_detect()`
-
-The `string` argument specifies what to check    
-The `pattern` argument specifies what to check for (case sensitive)  
-
-```{r}
-
-Effect <- pull(data_diet) %>% head(n = 6)
-Effect
-str_detect(string = Effect, pattern = "d")
-str_detect(string = Effect, pattern = "D")
-```
-
-## `str_replace()`
-
-The `string` argument specifies what to check    
-The `pattern` argument specifies what to check for    
-The `replacement` argument specifies what to replace the pattern with    
-```{r}
-str_replace(string = Effect, pattern = "D", replacement = "d")
-```
-
-## `st_replace()` only replaces the first instance of the pattern in each value 
-
-`str_replace_all()` can be used to replace all instances within each value
-
-```{r}
-str_replace(string = Effect, pattern = "e", replacement = "E")
-```
-
-```{r}
-str_replace_all(string = Effect, pattern = "e", replacement = "E")
-
-```
-
-
-## Subsetting part of a string
-
-`str_sub()` allows you to subset part of a string   
-The `string` argument specifies what strings to work with     
-The `start` argument specifies position of where to start    
-The `end` argument specifies position of where to end    
-
-```{r}
-str_sub(string = Effect, start = 1, end = 3)
-```
-
-## `filter` and `stringr` functions
-
-```{r}
-head(data_diet, n = 4)
-data_diet %>% 
-  filter(str_detect(string = Gender,
-                    pattern = "M"))
-```
-
-## OK back to our original problem
-```{r}
-count(data_diet, Gender)
-```
-
-## Recode was nice but what if miss something?
-
-```{r, eval = FALSE}
-
-data_diet %>% 
-  mutate(Gender = recode(Gender, M = "Male", 
-                                 m = "Male", 
-                               Man = "Male",
-                                 O = "Other",
-                                 f = "Female",
-                                 F = "Female")) %>%
-  count(Gender, Diet)
-```
-
-## `case_when()` was an improvement
-
-But we still might miss a strange value
-
-```{r, eval = FALSE}
-data_diet %>% 
-  mutate(Gender = case_when(
-    Gender %in% c("M", "male", "Man", "m", "Male") ~ "Male",
-    Gender %in% c("F", "Female", "f", "female") ~ "Female",
-    Gender %in% c("O", "Other") ~ "Other"))
-```
-
-## `case_when()` improved with `stringr`
-`^` indicates the beginning of a character string
-`$` indicates the end
-
-```{r}
-data_diet %>% 
-  mutate(Gender = case_when(
-    str_detect(string = Gender, pattern = "^m|^M") ~ "Male",
-    str_detect(string = Gender, pattern = "^f|^F") ~ "Female",
-    str_detect(string = Gender, pattern = "^o|^O") ~ "Other")) %>%
-  count(Gender)
-```
-
-This is a more robust solution! It will catch typos as long as first letter is correct.
-
-## That's better!
-
-```{r, echo = FALSE, fig.align='center', out.width= "30%"}
-knitr::include_graphics("https://media1.giphy.com/media/S9ZK4mmi3u3jdc5dek/200w.webp?cid=ecf05e47h7myga959jwvek6s9x1tkog135g7pxu8vvjz2yqb&rid=200w.webp&ct=g")
-```
-
-# Separating and uniting data
-
-## Uniting columns 
-
-The `unite()` function can help combine columns  
-The `col` argument specifies new column name    
-The `sep` argument specifies what separator to use when combining -default is "_"
-The `remove` argument specifies if you want to drop the old columns
-
-```{r}
-diet_comb <- data_diet %>% 
-  unite(Diet, Effect, col = "change", remove = TRUE)
-```
-
-```{r}
-diet_comb
-```
-
-## Separating columns based on a separator
-
-The `separate()` function from `tidyr` can split a column into multiple columns.   
-The `col` argument specifies what column to work with      
-The `into` argument specifies names of new columns   
-The `sep` argument specifies what to separate by
-
-```{r}
-diet_comb <- diet_comb %>% 
-  separate(col = change, into = c("Diet", "Change"), sep = "_" )
-diet_comb
-```
 
 
 ## Summary
