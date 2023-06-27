@@ -14,15 +14,15 @@ library(kableExtra)
 
 **Need to review?**
 
-- [Day 1 - RStudio & Reproducibility Cheatsheet](https://jhudatascience.org/intro_to_r/modules/cheatsheets/Day-1.pdf)
-- [Day 2 - Basic R & Data Input/Output Cheatsheet](https://jhudatascience.org/intro_to_r/modules/cheatsheets/Day-2.pdf)
-- [Day 3 - Data Subsetting  Cheatsheet](https://jhudatascience.org/intro_to_r/modules/cheatsheets/Day-3.pdf)
-- [Day 4 - Data Summarization & Data Classes Cheatsheet](https://jhudatascience.org/intro_to_r/modules/cheatsheets/Day-4.pdf)
-- [Day 5 - Data Cleaning Cheatsheet](https://jhudatascience.org/intro_to_r/modules/cheatsheets/Day-5.pdf)
-- [Day 6 - Data Manipulation & Data Visualization `esquisse` Cheatsheet](https://jhudatascience.org/intro_to_r/modules/cheatsheets/Day-6.pdf)
-- [Day 7 - Data Visualization `ggplot2` & Factors Cheatsheet](https://jhudatascience.org/intro_to_r/modules/cheatsheets/Day-7.pdf)
-- [Day 8 - Statistics Cheatsheet](https://jhudatascience.org/intro_to_r/modules/cheatsheets/Day-8.pdf)
-- [Day 9 - Functions Cheatsheet](https://jhudatascience.org/intro_to_r/modules/cheatsheets/Day-9.pdf)
+- [RStudio & Reproducibility Cheatsheet](https://jhudatascience.org/intro_to_r/modules/cheatsheets/Day-1.pdf)
+- [Basic R & Data Input/Output Cheatsheet](https://jhudatascience.org/intro_to_r/modules/cheatsheets/Day-2.pdf)
+- [Data Subsetting  Cheatsheet](https://jhudatascience.org/intro_to_r/modules/cheatsheets/Day-3.pdf)
+- [Data Summarization & Data Classes Cheatsheet](https://jhudatascience.org/intro_to_r/modules/cheatsheets/Day-4.pdf)
+- [Data Cleaning Cheatsheet](https://jhudatascience.org/intro_to_r/modules/cheatsheets/Day-5.pdf)
+- [Data Manipulation & Data Visualization `esquisse` Cheatsheet](https://jhudatascience.org/intro_to_r/modules/cheatsheets/Day-6.pdf)
+- [Data Visualization `ggplot2` & Factors Cheatsheet](https://jhudatascience.org/intro_to_r/modules/cheatsheets/Day-7.pdf)
+- [Statistics Cheatsheet](https://jhudatascience.org/intro_to_r/modules/cheatsheets/Day-8.pdf)
+- [Functions Cheatsheet](https://jhudatascience.org/intro_to_r/modules/cheatsheets/Day-9.pdf)
 
 If you need to check what packages are part of the `tidyverse`, you can do so at this [link](https://www.tidyverse.org/packages/).
 
@@ -69,16 +69,11 @@ RStudio shortcuts can be found [here](<http://www.rstudio.com/ide/docs/using/key
 - [Dataquest](https://www.dataquest.io/)  (general interactive resource)
 - [Quick R Guide]( http://statmethods.net/)  (nice free general resource)
 - [Building up a `ggplot2` figure](https://hopstat.wordpress.com/2016/02/18/how-i-build-up-a-ggplot2-figure/)  (guide to making plots)
-
-**Interested in more stats classes at JHU?**
-
-- [PH.140.621, PH.140.622, PH.140.623, PH.140.62 - Statistical Methods in Public Health I, II, III, and IV](https://e-catalogue.jhu.edu/course-descriptions/biostatistics/) - The class is mostly taught in STATA, but you can also join a group of students working in R. The class covers many topics in statistical analysis for public health data.
-- [PH.140.778 - Statistical Computing, Algorithm, and Software Development](https://www.jhsph.edu/courses/course/36737/2022/140.778.01/statistical-computing-algorithm-and-software-devel) - A more advanced course for working with data in R.
-    - Content for similar topics as this course can also be found on [Leanpub](https://leanpub.com/advstatcomp).
+- Content for similar topics as this workshop can also be found on this [Leanpub course](https://leanpub.com/advstatcomp).
 
 **Interested in Reproducibility?**
 
-Check out Candace's courses:
+Check out [Candace Savonen's](https://www.cansavvy.com/) courses:
 
 - [Introduction](https://jhudatascience.org/Reproducibility_in_Cancer_Informatics/)
 - [Advanced](https://jhudatascience.org/Adv_Reproducibility_in_Cancer_Informatics/)
@@ -98,7 +93,7 @@ Check out Candace's courses:
 - The [RStudio/Posit conference](https://posit.co/conference/) has lots of useful workshops! 
 <br>
 
-## Videos of Previous Online Lectures
+## Videos of Online Lectures for our [Johns Hopkins] course
 ***
 
 ### From Summer Institute 2022

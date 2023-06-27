@@ -128,8 +128,8 @@ jobs:
           git push origin main || echo "No changes to push"
 
 
-  render-pdf-lectures:
-    name: Render pdf lecture slides
+  render-day1-pdf-lectures:
+    name: Render Day 1 pdf lecture slides
     needs: render-main
     runs-on: ubuntu-latest
     container:
@@ -137,7 +137,9 @@ jobs:
     strategy:
       matrix:
         modulenames: 
-          - Day_1
+          - Intro
+          - RStudio
+          - Basic_R
           
     steps:
       - name: Checkout files
@@ -150,8 +152,8 @@ jobs:
       - name: Convert HTML to PDF
         uses: LukaszLapaj/html-to-pdf-action@master
         with:
-          htmlFile: ./modules/${{ matrix.modulenames }}/${{ matrix.modulenames }}.html
-          outputFile: ./modules/${{ matrix.modulenames }}/${{ matrix.modulenames }}.pdf
+          htmlFile: ./modules/Day_1/${{ matrix.modulenames }}.html
+          outputFile: ./modules/Day_1/${{ matrix.modulenames }}.pdf
 
 
       # Commit the rendered site files - html files and site_libs files
