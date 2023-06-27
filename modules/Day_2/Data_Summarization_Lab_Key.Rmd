@@ -1,0 +1,103 @@
+---
+title: "Data Summarization Lab Key"
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Data used
+
+Bike Lanes Dataset: BikeBaltimore is the Department of Transportation's bike program. 
+The data is from http://data.baltimorecity.gov/Transportation/Bike-Lanes/xzfj-gyms
+
+You can Download as a CSV in your current working directory.  Note its also available at: 	http://jhudatascience.org/intro_to_r/data/Bike_Lanes.csv 
+
+```{r, echo = TRUE, message=FALSE, error = FALSE}
+bike <- read_csv(file = "http://jhudatascience.org/intro_to_r/data/Bike_Lanes.csv")
+```
+
+
+1\. How many rows in the data set? You can use `count()`. Pipe the dataset into this function.
+
+```{r}
+bike %>% count()
+```
+
+
+2\. Inspect the dataset by clicking on the table button in your environment.
+
+
+3\. Summarize the data to get the `max` of the `length` column using the `summarize` function.
+
+```
+# General format 
+DATA %>% 
+    summarize(SUMMARY_COLUMN_NAME = OPERATOR(SOURCE_COLUMN))
+```
+
+```{r}
+bike %>% 
+  summarize(max = max(length))
+```
+
+
+4\. Modify your code from #3 to add the `min` of `length` using the `summarize` function.
+
+```
+# General format 
+DATA %>% 
+    summarize(SUMMARY_COLUMN_NAME = OPERATOR(SOURCE_COLUMN),
+              SUMMARY_COLUMN_NAME = OPERATOR(SOURCE_COLUMN)
+    )
+```
+
+```{r}
+bike %>% 
+  summarize(
+    max = max(length),
+    min = min(length))
+```
+
+
+5\. How many bike lanes are there in each type of lane? Use `count()` on the column named `type`.
+
+```{r}
+bike %>% count(type)
+```
+
+
+6\. Modify your code from question 5 to break down each lane type by number of lanes. Use `count()` on the columns named `type` and `numLanes`.
+
+```{r}
+bike %>% count(type, numLanes)
+```
+
+
+7\. How many bike lanes are there in each type of lane? Use `group_by()`, `summarize()`, and `n()` on the column named `type`.
+
+```
+# General format 
+DATA %>% 
+    group_by(GROUPING_COLUMN_NAME) %>% 
+    summarize(SUMMARY_COLUMN_NAME = n())
+```
+
+```{r}
+bike %>%
+  group_by(type) %>%
+  summarize(count = n())
+```
+
+
+8\. Modify your code from #7 to also group by `numLanes`.
+
+```{r}
+bike %>%
+  group_by(type, numLanes) %>%
+  summarize(count = n())
+```
+
