@@ -227,7 +227,7 @@ The command in `dplyr` for subsetting rows is `filter`.
 
 
 ```{r}
-state_data %>% filter(cancer_rate_per_100000 > 180)
+state_data %>% filter(cancer_rate_per_100000 < 130)
 ```
 
 
@@ -257,7 +257,7 @@ You can filter by two conditions using `&` (must meet both conditions):
 
 
 ```{r}
-state_data %>% filter(cancer_rate_per_100000 > 180)
+state_data %>% filter(cancer_rate_per_100000 < 130 & population > 4000000)
 ```
 
 ## Subset rows of a data frame: dplyr
@@ -265,66 +265,18 @@ state_data %>% filter(cancer_rate_per_100000 > 180)
 If you want OR statements (meaning the data can meet either condition does not need to meet both), you need to use `|` between conditions:
 
 ```{r}
-filter(mtcars, mpg > 20 | cyl == 4)
+state_data %>% filter(cancer_rate_per_100000 < 130 | population > 20000000)
+
 
 ```
 
-## Subset rows of a data frame: dplyr {.codesmall}
-
-The `%in%` operator can be used find values from a pre-made list (using `c()`) for a **single column** at a time. 
-
-```{r}
-filter(mtcars, mpg %in% c(20,21,22))
-
-filter(mtcars, mpg == 20 | mpg == 21 | mpg == 22) #equivalent
-```
-
-## Subset rows of a data frame: dplyr {.codesmall}
-
-The `%in%` operator can be used find values from a pre-made list (using `c()`) for a **single column** at a time.
-
-```{r}
-filter(mtcars, gear %in% c(4,5), cyl %in% c(6,5))
-
-```
 
 ## Be careful with column names and `filter`
 
-This will not work the way you might expect! Best to stick with nothing but the column name if it is a typical name. 
+This will not work the way you might expect! Best to stick with nothing but the column name if it is a typical name. Use backticks if it isn't typical.
 
 ```{r}
-filter(mtcars, "mpg" > 20)
-```
-
-## Don't use quotes for atypical names
-
-Atypical names are those with punctuation, spaces, start with a number, or are just a number. 
-
-```{r}
-mtcars <- rename(mtcars, `mpg!` = mpg)
-
-filter(mtcars, "mpg!" > 22) # will not work correctly
-```
-
-## Be careful with column names and `filter`
-
-Using backticks works!
-
-```{r}
-filter(mtcars, `mpg!` > 22)
-```
-
-
-
-
-## `filter()` is tricky
-
-Try not use anything special for the column names in `filter()`. This is why it is good to not use atypical column names. Then you can just use the column name!
-
-So let's get rid of our unusual name in our data again.
-
-```{r}
-mtcars <- rename(mtcars, mpg = `mpg!`)
+state_data %>% filter("cancer_rate_per_100000"< 130)
 ```
 
 ## Always good to check each step!
@@ -360,39 +312,6 @@ https://media.giphy.com/media/5b5OU7aUekfdSAER5I/giphy.gif
 💻 [Lab](https://jhudatascience.org/intro_to_r/modules/Subsetting_Data_in_R/lab/Subsetting_Data_in_R_Lab.Rmd)
 
 
-## Combining `filter` and `select`
-
-You can combine `filter` and `select` to subset the rows and columns, respectively, of a data frame:
-
-```{r}
-select(filter(mtcars, mpg > 20), cyl)
-```
-
-
-## Nesting
-
-In `R`, the common way to perform multiple operations is to wrap functions around each other in a "nested" form.
-
-```{r}
-head(select(mtcars, cyl), 2)
-```
-
-## Nesting can get confusing looking
-
-```{r}
-select(filter(mtcars, mpg > 20 & cyl == 4), cyl, hp)
-```
-
-
-## Using the `pipe` (comes with `dplyr`):
-
-The pipe `%>%` makes this much more readable.  It reads left side "pipes" into right side.  RStudio `CMD/Ctrl + Shift + M` shortcut. Pipe `mtcars` into `filter`, then pipe that into `select`:
-
-
-```{r}
-mtcars %>% filter(mpg > 20 & cyl == 4) %>% select(cyl, hp)
-```
-
 
 # Adding/Removing Columns
 
@@ -404,17 +323,22 @@ The `mutate` function in `dplyr` allows you to add or modify columns of a data f
 <div class = "codeexample">
 ```{r, eval = FALSE}
 # General format - Not the code!
-{data object to update} <- mutate({data to use}, 
-                           {new variable name} = {new variable source}) 
+{data object to update} <- {data to use} %>% 
+                      mutate({new variable name} = {new variable source}) 
 ```
 </div>
 
 ```{r}
-mtcars <- mutate(mtcars, newcol = wt / 2.2)
-head(mtcars, 4)
+state_updated <- state_data %>% 
+                mutate(newcol = cancer_mortality / population)
 ```
 
 
+## Let's take a look
+
+```{r}
+glimpse(state_updated)
+```
 ## Use mutate to modify existing columns {.codesmall}
 
 The `mutate` function in `dplyr` allows you to add or modify columns of a data frame.
@@ -422,100 +346,84 @@ The `mutate` function in `dplyr` allows you to add or modify columns of a data f
 <div class = "codeexample">
 ```{r, eval = FALSE}
 # General format - Not the code!
-{data object to update} <- mutate({data to use}, 
-                           {variable name to change} = {variable modification}) 
+{data object to update} <- {data to use} %>%
+                mutate({variable name to change} = {variable modification}) 
 ```
 </div>
 
 ```{r}
-mtcars <- mutate(mtcars, wt = wt * 2)
-head(mtcars, 4)
+state_updated<- state_updated %>%
+              mutate(newcol = newcol *1000000)
 ```
 
-
-## You can pipe data into mutate {.codesmall}
-
+## Let's take a look
 
 ```{r}
-mtcars <- mtcars %>% mutate(wt = wt / 2)
-head(mtcars,4)
+glimpse(state_updated)
+```
+## Let's rename the new column
+
+```{r}
+
+state_updated<- state_updated %>%
+              rename(cancer_mortality_rate_per_1000000 = newcol)
 ```
 
 
+## Let's take a look with summarize & filter
+
+```{r}
+state_updated %>% summarise(
+  range = range(cancer_mortality_rate_per_1000000, na.rm = TRUE))
+```
+
+```{r}
+state_updated %>% filter(cancer_mortality_rate_per_1000000 <1100)
+
+```
+```{r}
+state_data %>% filter(cancer_mortality< 1225)
+```
 
 ## Removing columns of a data frame: dplyr {.codesmall}
 
-The `NULL` method is still very common.
 
 The `select` function can remove a column with minus (`-`):
 ```{r, eval = FALSE}
-select(mtcars, - newcol)
+state_updated %>% select(-cancer_mortality_rate_per_100000)
 ```
 
-```{r, echo = FALSE}
-head(select(mtcars, - newcol))
-```
 
 **Or, you can simply select the columns you want to keep, ignoring the ones you want to remove.**
 
-## Removing columns in a data frame: dplyr {.codesmall}
+## Let's make a smaller data frame {.codesmall}
 
-You can use `c()` to list the columns to remove.
 
-Remove `newcol` and `drat`:
 ```{r}
-select(mtcars, -c("newcol", "drat"))
+smaller <- state_updated %>% select(entity, starts_with("cancer"))
+head(smaller)
 ```
 
 
-# Ordering columns
+## Reordering rows
 
-## Ordering the columns of a data frame: dplyr 
-
-The `select` function can reorder columns.
+The `arrange()` function can be a big help! It automatically does it in smallest to largest order.
 ```{r}
-head(mtcars, 2)
-select(mtcars, cyl, mpg, wt) %>%
-head(2)
-```
-
-# Ordering rows
-
-## Ordering the rows of a data frame: dplyr
-
-The `arrange` function can reorder rows  By default, `arrange` orders in increasing order:
-```{r}
-arrange(mtcars, mpg)
-```
-
-## Ordering the rows of a data frame: dplyr
-
-Use the `desc` to arrange the rows in descending order:
-```{r}
-arrange(mtcars, desc(mpg))
+smaller %>% arrange(cancer_mortality_rate_per_1000000)
 ```
 
 
 ## Summary
 
-- `select()` and `filter()` can be combined together
-- you can do sequential steps in a few ways:
-    1. nesting them inside one another using parentheses `()`
-    2. using pipes `%>%` (like "then" statements)
-- `select()`  can be used to reorder columns
-- `arrange()` can be used to reorder rows
-- can remove rows with `filter()`
-- can remove a column by selecting for those we want to keep using `select()` 
-
-## Summary cont...
-
+- can subset or remove rows with `filter()`
+- can subset or remove (select what we want to keep) columns with `select()`
 - `mutate()` can be used to create new variables or modify them
 
 <div class = "codeexample">
 ```{r, eval = FALSE}
 # General format - Not the code!
-{data object to update} <- mutate({data to use}, 
-                                {new variable name} = {new variable source}) 
+{data object to update} <- {data to use} %>% 
+                        mutate({new variable name} = {new variable source}) 
 ```
 </div>
 
@@ -532,19 +440,6 @@ mtcars$carb
 ```
 
 Although it is easier (for this one task), mixing and matching the `$` operator with tidyverse functions usually doesn't work. Therefore, we want to let you know about it in case you see it, but we suggest that you try working with the tidyverse way.
-
-## Adding new columns to a data frame: base R
-
-You can add a new column (or modify an existing one) using the `$` operator instead of `mutate`.
-
-Just want you to be aware of this as it is very common.
-
-```{r}
-mtcars$newcol <- mtcars$wt/2.2
-head(mtcars,3)
-```
-
-Even though `$` is easier for creating new columns, `mutate` is really powerful, so it's worth getting used to.
 
 ## Lab Part 3
 
