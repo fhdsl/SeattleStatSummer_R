@@ -17,57 +17,31 @@ The data is from http://data.baltimorecity.gov/Transportation/Bike-Lanes/xzfj-gy
 You can Download as a CSV in your current working directory.  Note its also available at: 	http://jhudatascience.org/intro_to_r/data/Bike_Lanes.csv 
 
 ```{r, echo = TRUE, message=FALSE, error = FALSE}
-library(readr)
-library(dplyr)
-library(tidyverse)
-library(jhur)
-
 bike <- read_csv(file = "http://jhudatascience.org/intro_to_r/data/Bike_Lanes.csv")
 ```
 
-or use 
+
+1\. How many rows in the data set? You can use `count()`. Pipe the dataset into this function.
 
 ```{r}
-library(jhur)
-bike <- read_bike()
-```
-
-
-# Part 1
-
-1\. How many bike "lanes" are currently in Baltimore?  You can assume each observation/row is a different bike "lane".  (hint: how do you get the number of rows of a data set? You can use `dim()` or `nrow()` or another function).
-
-```{r}
-nrow(bike)
-dim(bike)
-bike %>% nrow()
 bike %>% count()
 ```
 
 
-2\. How many feet of bike "lanes" are currently in Baltimore, based on the `length` column? (use `sum()`)
-
-```{r}
-sum(bike$length)
-sum(bike %>% pull(length))
-bike %>%
-  pull(length) %>%
-  sum()
-```
+2\. Inspect the dataset by clicking on the table button in your environment.
 
 
-3\. Summarize the data to get the `max` of `length` using the `summarize` function.
+3\. Summarize the data to get the `max` of the `length` column using the `summarize` function.
 
 ```
 # General format 
-DATA_TIBBLE %>% 
+DATA %>% 
     summarize(SUMMARY_COLUMN_NAME = OPERATOR(SOURCE_COLUMN))
 ```
 
 ```{r}
-bike %>% summarize(
-  max = max(length)
-)
+bike %>% 
+  summarize(max = max(length))
 ```
 
 
@@ -75,66 +49,19 @@ bike %>% summarize(
 
 ```
 # General format 
-DATA_TIBBLE %>% 
+DATA %>% 
     summarize(SUMMARY_COLUMN_NAME = OPERATOR(SOURCE_COLUMN),
               SUMMARY_COLUMN_NAME = OPERATOR(SOURCE_COLUMN)
     )
 ```
 
 ```{r}
-bike %>% summarize(
-  max = max(length),
-  min = min(length)
-)
+bike %>% 
+  summarize(
+    max = max(length),
+    min = min(length))
 ```
 
-
-**Bonus / Extra practice**:
-
-A\. Summarize the `bike` data to get the mean of `length` and `dateInstalled`. Make sure to remove `NA`s.
-
-```
-# General format 
-DATA_TIBBLE %>% 
-    summarize(SUMMARY_COLUMN_NAME = OPERATOR(SOURCE_COLUMN, na.rm = TRUE),
-              SUMMARY_COLUMN_NAME = OPERATOR(SOURCE_COLUMN, na.rm = TRUE)
-    )
-```
-
-```{r}
-bike %>% summarize(
-  mean_length = mean(length, na.rm = TRUE),
-  mean_date = mean(dateInstalled, na.rm = TRUE)
-)
-
-bike %>%
-  select(length, dateInstalled) %>%
-  colMeans()
-
-# The mean date is in the 1800s -- that doesn't seem right!
-```
-
-
-B\. You should have gotten a mean date sometime in the 1800s - that doesn't make much sense! Hypothesize why the average date is a date from before bike lanes were being built in Baltimore.
-
-```{r}
-# There are probably some zeros or other incorrect low values in the data.
-```
-
-
-C\. Filter any zeros out of `bike` `dateInstalled`. Use `filter()`. Assign this "cleaned" dataset object the name `bike_2`.
-
-```
-# General format 
-DATA_TIBBLE %>% filter(LOGICAL_COMPARISON)
-```
-
-```{r}
-bike_2 <- bike %>% filter(dateInstalled != 0)
-```
-
-
-# Part 2
 
 5\. How many bike lanes are there in each type of lane? Use `count()` on the column named `type`.
 
@@ -154,7 +81,7 @@ bike %>% count(type, numLanes)
 
 ```
 # General format 
-DATA_TIBBLE %>% 
+DATA %>% 
     group_by(GROUPING_COLUMN_NAME) %>% 
     summarize(SUMMARY_COLUMN_NAME = n())
 ```
@@ -172,80 +99,5 @@ bike %>%
 bike %>%
   group_by(type, numLanes) %>%
   summarize(count = n())
-```
-
-
-**Bonus / Extra practice**:
-
-D\. Modify code from #7 to also summarize by longest average bike lane length? In your summarized output, make sure you call the new summarized average bike lane length variable (column name) "mean". In other words, the head of your output should look like:
-
-```
-# A tibble: 
-  type                     count  mean
-  <chr>                    <int> <dbl>
-1 BIKE BOULEVARD              49  197.
-...
-```
-
-```{r}
-bike %>%
-  group_by(type) %>%
-  summarize(
-    count = n(),
-    mean = mean(length)
-  )
-```
-
-
-E\. Take your code from the above question `D` and do the following:
-
-- Add another pipe (`%>%`)
-- Add the `arrange()` to sort the output by the summarized column "mean".
-
-```{r}
-bike %>%
-  group_by(type) %>%
-  summarize(
-    count = n(),
-    mean = mean(length)
-  ) %>%
-  arrange(mean)
-```
-
-
-# Part 3
-
-9\. Create a histogram for the `length` column in the `bike` dataset. Try playing with the `breaks =` argument.
-
-```{r}
-x <- bike %>% pull(length)
-hist(x)
-hist(x, breaks = 100)
-```
-
-
-10\. Create a scatterplot of the `bike` dataset with `dateInstalled` on the x axis and `length` on the y axis.
-
-```{r}
-x <- bike %>% pull(dateInstalled)
-y <- bike %>% pull(length)
-plot(x, y)
-```
-
-
-**Bonus / Extra practice**:
-
-
-F\. What kind of plot would be better for showing the length by each year group from `bike`? Make this plot. Also try this with the `bike_2` object above.
-
-```{r}
-# A boxplot would be more appropriate since year behaves more as a category than a continuous number.
-x <- bike %>% pull(dateInstalled)
-y <- bike %>% pull(length)
-boxplot(y ~ x)
-
-x <- bike_2 %>% pull(dateInstalled)
-y <- bike_2 %>% pull(length)
-boxplot(y ~ x)
 ```
 

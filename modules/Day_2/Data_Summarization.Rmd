@@ -1,326 +1,95 @@
 ---
-title: "Data Summarization"
-output:
-  ioslides_presentation:
-    css: ../../docs/styles.css
-    widescreen: yes
+title: "Data Summarization Lab"
+output: html_document
+editor_options: 
+  chunk_output_type: console
 ---
 
-
-```{r, echo = FALSE, message=FALSE, error = FALSE}
-library(knitr)
-opts_chunk$set(comment = "", message = FALSE)
-suppressWarnings({library(dplyr)})
-library(readr)
-library(tidyverse)
-library(jhur)
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
 ```
 
-<style type="text/css">
-pre { /* Code block - slightly smaller in this lecture */
-    font-size: 20px;
-}
-</style>
+# Data used
 
+Bike Lanes Dataset: BikeBaltimore is the Department of Transportation's bike program. 
+The data is from http://data.baltimorecity.gov/Transportation/Bike-Lanes/xzfj-gyms
 
-## Another Cheatsheet
+You can Download as a CSV in your current working directory.  Note its also available at: 	http://jhudatascience.org/intro_to_r/data/Bike_Lanes.csv 
 
-https://raw.githubusercontent.com/rstudio/cheatsheets/main/data-transformation.pdf
-
-```{r, fig.alt="A preview of the Data transformation cheatsheet produced by RStudio.", out.width = "80%", echo = FALSE, align = "center"}
-knitr::include_graphics("images/Manip_cheatsheet.png")
+```{r, echo = TRUE, message=FALSE, error = FALSE}
+bike <- read_csv(file = "http://jhudatascience.org/intro_to_r/data/Bike_Lanes.csv")
 ```
 
-# Part 1: Numeric / continous data
 
-## Data Summarization
-
-* Basic statistical summarization
-    * `mean(x)`: takes the mean of x
-    * `sd(x)`: takes the standard deviation of x
-    * `median(x)`: takes the median of x
-    * `quantile(x)`: displays sample quantiles of x. Default is min, IQR, max
-    * `range(x)`: displays the range. Same as `c(min(x), max(x))`
-    * `sum(x)`: sum of x
-    * `max(x)`: maximum value in x
-    * `min(x)`: minimum value in x
-    
-* **all have the ** `na.rm =` **argument for missing data**
-
-
-## Statistical summarization
-
-The vector getting summarized goes inside the parentheses:
+1\. How many rows in the data set? You can use `count()`. Pipe the dataset into this function.
 
 ```{r}
-x <- c(1, 5, 7, 4, 2, 8)
-mean(x)
-range(x)
-sum(x)
+
 ```
 
 
-## Statistical summarization
+2\. Inspect the dataset by clicking on the table button in your environment.
 
-Note that many of these functions have additional inputs regarding missing data, typically requiring the `na.rm` argument ("remove NAs"). 
 
-```{r error = TRUE}
-x <- c(1, 5, 7, 4, 2, 8, NA)
-mean(x)
-mean(x, na.rm = TRUE)
-quantile(x)
-quantile(x, na.rm = TRUE)
+3\. Summarize the data to get the `max` of the `length` column using the `summarize` function.
+
 ```
-
-
-## Statistical summarization{.codesmall}
-
-You can only do summarization on numeric or logical types. Not characters.
-
-```{r error = TRUE}
-x <- c(1, 5, 7, 4, 2, 8)
-sum(x)
-y <- c(TRUE, FALSE, FALSE, TRUE) # FALSE == 0 and TRUE == 1
-sum(y)
-z <- c("TRUE", "FALSE", "FALSE", "TRUE")
-sum(z)
+# General format 
+DATA %>% 
+    summarize(SUMMARY_COLUMN_NAME = OPERATOR(SOURCE_COLUMN))
 ```
-
-
-## But how do we do this on dataframes?
-
-First we will need to learn about something called the "pipe".
-
-The pipe is this operator in R: `%>%`. It tells R to "pipe" the dataset on the left into the next function.
-
-
-## Using the pipe `%>%`
 
 ```{r}
-states <- read_csv("https://hutchdatascience.org/SeattleStatSummer_R/data/states.csv")
-states %>% head() # Same as head(states)!
+
 ```
 
 
-## States data
+4\. Modify your code from #3 to add the `min` of `length` using the `summarize` function.
 
-`colnames()` will show us the column names.
+```
+# General format 
+DATA %>% 
+    summarize(SUMMARY_COLUMN_NAME = OPERATOR(SOURCE_COLUMN),
+              SUMMARY_COLUMN_NAME = OPERATOR(SOURCE_COLUMN)
+    )
+```
 
 ```{r}
-colnames(states)
+
 ```
 
-# Summarizing the data
 
-## Summarize the data: `dplyr` `summarize()` function
-
-`summarize` creates a summary table of a column you're interested in.
-
-<div class = "codeexample">
-```{r, eval = FALSE}
-# General format - Not the code!
-{data to use} %>% 
-   summarize({summary column name} = {operator(source column)}) 
-```
-</div>
-
-
-## Summarize the data: `dplyr` `summarize()` function
-
-`summarize` creates a summary table of a column you're interested in.
-
-<div class = "codeexample">
-```{r, eval = FALSE}
-# General format - Not the code!
-{data to use} %>% 
-   summarize({summary column name} = {operator(source column)}) 
-```
-</div>
+5\. How many bike lanes are there in each type of lane? Use `count()` on the column named `type`.
 
 ```{r}
-states %>% 
-  summarize(mean_population = mean(population))
+
 ```
 
 
-## What if there are NAs in my data?
+6\. Modify your code from question 5 to break down each lane type by number of lanes. Use `count()` on the columns named `type` and `numLanes`.
 
 ```{r}
-states %>% 
-  summarize(mean_population = mean(cesarean_percent))
-states %>% 
-  summarize(mean_population = mean(cesarean_percent, na.rm = TRUE))
+
 ```
 
-add `na.rm = TRUE`.
 
+7\. How many bike lanes are there in each type of lane? Use `group_by()`, `summarize()`, and `n()` on the column named `type`.
 
-## Summarize the data: `dplyr` `summarize()` function
-
-`summarize()` can do multiple operations at once. Separate by a comma. Breaking line between these keeps things tidy!
+```
+# General format 
+DATA %>% 
+    group_by(GROUPING_COLUMN_NAME) %>% 
+    summarize(SUMMARY_COLUMN_NAME = n())
+```
 
 ```{r}
-states %>% 
-  summarize(mean_population = mean(population),
-            median_population = median(population))
+
 ```
 
 
-## `summary()` Function
-
-Using `summary()` can give you rough snapshots of each numeric column (character columns are skipped):
+8\. Modify your code from #7 to also group by `numLanes`.
 
 ```{r}
-summary(states)
+
 ```
-
-
-# Let's practice!
-
-## Practice
-
-Modify the code below from the `states` dataset to `summarize()` the `fertility_rate_per_1000` column. Find the mean, min, and max.
-
-```{r eval=FALSE}
-states %>% 
-  summarize(___ = mean(___),
-            ___ = min(___),
-            ___ = max(___))
-```
-
-
-## Practice
-
-Modify the code below from the `states` dataset to `summarize()` the `fertility_rate_per_1000` column. Find the mean, min, and max.
-
-```{r}
-states %>% 
-  summarize(mean_fert = mean(fertility_rate_per_1000),
-            min_fert = min(fertility_rate_per_1000),
-            max_fert = max(fertility_rate_per_1000))
-```
-
-
-## Summary Part 1
-
-- don't forget the `na.rm = TRUE` argument!
-- `summary(x)`: quantile information
-- `summarize`: creates a summary table of columns of interest
-
-# Part 2: Categorical data
-
-## `count` function
-
-Use `count` to return the number of rows of data.
-
-```{r}
-states %>% count()
-```
-
-
-## `count` function
-
-Use `count` to return a frequency table of unique elements of a category (column).
-
-```{r}
-states %>% count(state_region)
-```
-
-
-## `count` function
-
-Multiple columns listed further subdivides the count.
-
-```{r, message = FALSE}
-states %>% count(state_region, state_division)
-```
-
-# Grouping
-
-## Perform Operations By Groups: dplyr
-
-`group_by` allows you group the data set by variables/columns you specify:
-
-```{r}
-# Regular data
-states
-```
-
-
-## Perform Operations By Groups: dplyr
-
-`group_by` allows you group the data set by variables/columns you specify:
-
-```{r}
-states_grouped <- states %>% group_by(state_region)
-states_grouped
-```
-
-
-## Summarize the grouped data
-
-It's grouped! Grouping doesn't change the data in any way, but how **functions operate on it**. Now we can summarize `population` by group:
-
-```{r}
-states_grouped %>% summarize(total_population = sum(population))
-```
-
-
-## Use the `pipe` to string these together!
-
-Pipe `states` into `group_by`, then pipe that into `summarize`:
-
-```{r}
-states %>% 
-  group_by(state_region) %>% 
-  summarize(total_population = sum(population))
-```
-
-
-# Let's practice!
-
-## Practice
-
-Modify the code to group by `state_region` and summarize by average `fertility_rate_per_1000`.
-
-```{r eval=FALSE}
-states %>%
-  group_by(___) %>%
-  summarize(___ = mean(___))
-```
-
-
-## Practice
-
-Modify the code to group by `state_region` and summarize by average `fertility_rate_per_1000`.
-
-```{r}
-states %>%
-  group_by(state_region) %>%
-  summarize(avg_fert = mean(fertility_rate_per_1000))
-```
-
-
-## Counting
-
-`n()` can also give you the sample size per group (NAs included).
-
-```{r}
-states %>% 
-  group_by(state_region) %>% 
-  summarize(total_population = sum(population),
-            sample_size = n())
-```
-
-## Summary 
-
-- don't forget the `na.rm = TRUE` argument!
-- `summary()`: quantile information
-- `summarize`: creates a summary table of columns of interest
-- `count(x)`: what unique values do you have?
-- `group_by(x)`: changes all subsequent functions
-  - combine with `summarize()` to get statistics per group
-- `summarize()` with `n()` gives the sample size (NAs included) 
-
-🏠 [Workshop Website](https://hutchdatascience.org/SeattleStatSummer_R/)
 
