@@ -178,60 +178,20 @@ pre code {
 <p>1. Use the manual import method (File &gt; Import Dataset &gt; From Text (<code>readr</code>)) to Read in SARS-CoV-2 vaccination data from URL <a href="http://jhudatascience.org/intro_to_r/data/vaccinations.csv" class="uri">http://jhudatascience.org/intro_to_r/data/vaccinations.csv</a>. You can learn more about how the data was collected here: <a href="https://data.cdc.gov/Vaccinations/COVID-19-Vaccinations-in-the-United-States-Jurisdi/unsk-b7fc" class="uri">https://data.cdc.gov/Vaccinations/COVID-19-Vaccinations-in-the-United-States-Jurisdi/unsk-b7fc</a></p>
 <p>2. What is the dataset object called? You can find this information in the Console or the Environment. Enter your answer as a comment using <code>#</code>.</p>
 <p>3. Preview the data by clicking the table button in the Environment. How many observations and variables are there? Enter your answer as a comment using <code>#</code>.</p>
-</div>
-<div id="part-2" class="section level1">
-<h1>Part 2</h1>
-<p>4. Read in SARS-CoV-2 vaccination data from URL <a href="http://jhudatascience.org/intro_to_r/data/vaccinations.csv" class="uri">http://jhudatascience.org/intro_to_r/data/vaccinations.csv</a> and assign it to an object named <code>vacc</code>. Use the code structure below.</p>
-<pre><code># General format
-library(readr)
-# OBJECT &lt;- read_csv(FILE)</code></pre>
-<p>5. Use <code>head()</code> to display the first few rows of the data frame.</p>
-<p>6. Use <code>str()</code> to display the list of column names and their type specification.</p>
-<p>7. Load the <code>readxl</code> package with the <code>library()</code> command.</p>
+<p>4. Use <code>head()</code> to display the first few rows of the data frame.</p>
+<p>5. Use <code>str()</code> to display the list of column names and their type specification.</p>
+<p>6. Load the <code>readxl</code> package with the <code>library()</code> command.</p>
 <p>If it is not installed, install it via: <code>RStudio --&gt; Tools --&gt; Install Packages</code>. You can also try <code>install.packages(&quot;readxl&quot;)</code>.</p>
-<p>8. Download the dataset of asthma prevalence in the USA from: <a href="http://jhudatascience.org/intro_to_r/data/asthma.xlsx" class="uri">http://jhudatascience.org/intro_to_r/data/asthma.xlsx</a> file to <code>asthma.xlsx</code> by running the following code chunk. This only downloads the file, it does NOT bring the file into R.</p>
+<p>7. Download the dataset of asthma prevalence in the USA from: <a href="http://jhudatascience.org/intro_to_r/data/asthma.xlsx" class="uri">http://jhudatascience.org/intro_to_r/data/asthma.xlsx</a> file to <code>asthma.xlsx</code> by running the following code chunk. This only downloads the file, it does NOT bring the file into R.</p>
 <pre class="r"><code>download.file(
   url = &quot;http://jhudatascience.org/intro_to_r/data/asthma.xlsx&quot;,
   destfile = &quot;asthma.xlsx&quot;,
   overwrite = TRUE,
   mode = &quot;wb&quot;
 )</code></pre>
-<p>9. Use the <code>read_excel()</code> function in the <code>readxl</code> package to read the <code>asthma.xlsx</code> file and call the output <code>asthma</code>.</p>
-<p>10. Use the <code>head()</code> and <code>str()</code> functions to inspect the data.</p>
-<p><strong>Bonus / Extra practice</strong>: Run the following code - is there a problem? How do you know?</p>
-<pre class="r"><code>yts &lt;- read_delim(&quot;http://jhudatascience.org/intro_to_r/data/Youth_Tobacco_Survey_YTS_Data.csv&quot;, delim = &quot;\t&quot;)</code></pre>
-<pre><code>## Rows: 9794 Columns: 1
-## ── Column specification ────────────────────────────────────────────────────────
-## Delimiter: &quot;\t&quot;
-## chr (1): YEAR,LocationAbbr,LocationDesc,TopicType,TopicDesc,MeasureDesc,Data...
-## 
-## ℹ Use `spec()` to retrieve the full column specification for this data.
-## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-<pre class="r"><code>yts</code></pre>
-<pre><code>## # A tibble: 9,794 × 1
-##    `YEAR,LocationAbbr,LocationDesc,TopicType,TopicDesc,MeasureDesc,DataSource,…`
-##    &lt;chr&gt;                                                                        
-##  1 &quot;2015,AZ,Arizona,Tobacco Use – Survey Data,Cessation (Youth),Percent of Curr…
-##  2 &quot;2015,AZ,Arizona,Tobacco Use – Survey Data,Cessation (Youth),Percent of Curr…
-##  3 &quot;2015,AZ,Arizona,Tobacco Use – Survey Data,Cessation (Youth),Percent of Curr…
-##  4 &quot;2015,AZ,Arizona,Tobacco Use – Survey Data,Cessation (Youth),Quit Attempt in…
-##  5 &quot;2015,AZ,Arizona,Tobacco Use – Survey Data,Cessation (Youth),Quit Attempt in…
-##  6 &quot;2015,AZ,Arizona,Tobacco Use – Survey Data,Cessation (Youth),Quit Attempt in…
-##  7 &quot;2015,AZ,Arizona,Tobacco Use – Survey Data,Cigarette Use (Youth),Smoking Sta…
-##  8 &quot;2015,AZ,Arizona,Tobacco Use – Survey Data,Cigarette Use (Youth),Smoking Sta…
-##  9 &quot;2015,AZ,Arizona,Tobacco Use – Survey Data,Cigarette Use (Youth),Smoking Sta…
-## 10 &quot;2015,AZ,Arizona,Tobacco Use – Survey Data,Cigarette Use (Youth),Smoking Sta…
-## # … with 9,784 more rows</code></pre>
-<p><strong>Bonus / Extra practice</strong>: By default, R reads the first sheet of an excel file. Copy your code from question 9 and add the following argument: <code>sheet = 2</code>. Inspect the data using <code>head()</code>.</p>
-<p><strong>Bonus / Extra practice</strong>: Install and load the <code>haven</code> package. Look at the help page for <code>read_dta()</code> function, and scroll to the very bottom of the page. Try running some of the examples provided.</p>
-</div>
-<div id="part-3" class="section level1">
-<h1>Part 3</h1>
-<p>11. Learn your working directory by running <code>getwd()</code></p>
-<p>12. Create a folder in your R project called data. Move the “asthma.xlsx” file there.</p>
-<p>13. Modify the following code so that it finds “asthma.xlsx” in the “data” directory.</p>
-<pre class="r"><code>asthma &lt;- read_excel(path = &quot;asthma.xlsx&quot;)</code></pre>
-<p><strong>Bonus / Extra practice</strong>: Practice importing a dataset of your choice, give it an object name, and use <code>head()</code> to preview the first few lines.</p>
+<p>8. Use File &gt; Import Dataset &gt; From Excel to import the data. What does the code look like? Paste it below.</p>
+<p>9. Use the <code>head()</code> and <code>str()</code> functions to inspect the data.</p>
+<p>10. Modify the code from #8 to rename the <code>asthma</code> object to <code>my_dataset</code>.</p>
 </div>
 
 
