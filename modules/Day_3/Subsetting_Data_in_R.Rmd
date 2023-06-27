@@ -68,6 +68,11 @@ library(tidyverse) # loads dplyr and other packages!
 
 ## Getting data to work with
 
+```{r message=FALSE}
+state_data <-read_csv("https://hutchdatascience.org/SeattleStatSummer_R/data/states.csv")
+head(state_data)
+```
+
 Here we use one of the datasets that comes with base R called `mtcars`. We can take a look at the top of it by using the `head()` function.
 
 ```{r}
