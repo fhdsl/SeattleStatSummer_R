@@ -183,9 +183,9 @@ Modify the code below from the `states` dataset to `summarize()` the `fertility_
 
 ```{r eval=FALSE}
 states %>% 
-  summarize(??? = mean(???),
-            ??? = min(???),
-            ??? = max(???))
+  summarize(___ = mean(___),
+            ___ = min(___),
+            ___ = max(___))
 ```
 
 
@@ -209,36 +209,31 @@ states %>%
 
 # Part 2: Categorical data
 
-## `dplyr`: `count` 
+## `count` function
 
-Use `count` to return a frequency table of unique elements of a data.frame.
+Use `count` to return the number of rows of data.
 
-```{r, message = FALSE}
-yts %>% count(LocationDesc)
+```{r}
+states %>% count()
 ```
 
 
-## `dplyr`: `count` 
+## `count` function
+
+Use `count` to return a frequency table of unique elements of a category (column).
+
+```{r}
+states %>% count(state_region)
+```
+
+
+## `count` function
 
 Multiple columns listed further subdivides the count.
 
 ```{r, message = FALSE}
-yts %>% count(LocationDesc, TopicDesc)
+states %>% count(state_region, state_division)
 ```
-
-
-## `dplyr`: `count` 
-
-Multiple columns listed further subdivides the count.
-
-```{r, message = FALSE}
-yts %>% count(LocationDesc, TopicDesc)
-```
-
-<br>
-
-**Note:** `count()` includes NAs
-
 
 # Grouping
 
@@ -248,7 +243,7 @@ yts %>% count(LocationDesc, TopicDesc)
 
 ```{r}
 # Regular data
-yts
+states
 ```
 
 
@@ -257,164 +252,75 @@ yts
 `group_by` allows you group the data set by variables/columns you specify:
 
 ```{r}
-yts_grouped <- yts %>% group_by(Response)
-yts_grouped
+states_grouped <- states %>% group_by(state_region)
+states_grouped
 ```
 
 
 ## Summarize the grouped data
 
-It's grouped! Grouping doesn't change the data in any way, but how **functions operate on it**. Now we can summarize `Data_Value` (percent of respondents) by group:
+It's grouped! Grouping doesn't change the data in any way, but how **functions operate on it**. Now we can summarize `population` by group:
 
 ```{r}
-yts_grouped %>% summarize(avg_percent = mean(Data_Value, na.rm = TRUE))
+states_grouped %>% summarize(total_population = sum(population))
 ```
 
 
 ## Use the `pipe` to string these together!
 
-Pipe `yts` into `group_by`, then pipe that into `summarize`:
+Pipe `states` into `group_by`, then pipe that into `summarize`:
 
 ```{r}
-yts %>%
-  group_by(Response) %>%
-  summarize(avg_percent = mean(Data_Value, na.rm = TRUE),
-            max_percent = max(Data_Value, na.rm = TRUE))
+states %>% 
+  group_by(state_region) %>% 
+  summarize(total_population = sum(population))
 ```
 
 
-## Group by as many variables as you want
+# Let's practice!
 
-`group_by` Response and Education:
+## Practice
 
-```{r}
-yts %>%
-  group_by(Response, Education) %>%
-  summarize(avg_percent = mean(Data_Value, na.rm = TRUE),
-            max_percent = max(Data_Value, na.rm = TRUE))
+Modify the code to group by `state_region` and summarize by average `fertility_rate_per_1000`.
+
+```{r eval=FALSE}
+states %>%
+  group_by(___) %>%
+  summarize(___ = mean(___))
 ```
 
 
-## Ungroup the data
+## Practice
 
-The `ungroup` function will allow you to clear the groups from the data. You can also overwrite the first `group_by` with a new one.
-
-```{r}
-yts <- ungroup(yts)
-yts
-```
-
-
-## `group_by` with `mutate` - just add data
-
-We can also use `mutate` to calculate the mean value for each year and add it as a column:
+Modify the code to group by `state_region` and summarize by average `fertility_rate_per_1000`.
 
 ```{r}
-yts %>%
-  group_by(YEAR) %>%
-  mutate(year_avg = mean(Data_Value, na.rm = TRUE)) %>%
-  select(LocationDesc, Data_Value, year_avg)
+states %>%
+  group_by(state_region) %>%
+  summarize(avg_fert = mean(fertility_rate_per_1000))
 ```
 
 
 ## Counting
 
-There are other functions, such as `n()` count the number of observations (NAs included).
+`n()` can also give you the sample size per group (NAs included).
 
 ```{r}
-yts %>%
-  group_by(YEAR) %>%
-  summarize(n = n(),
-            mean = mean(Data_Value, na.rm = TRUE))
+states %>% 
+  group_by(state_region) %>% 
+  summarize(total_population = sum(population),
+            sample_size = n())
 ```
 
+## Summary 
 
-## Counting{.codesmall}
-
-`count()` and `n()` can give very similar information.
-
-```{r}
-mtcars %>% count(cyl)
-mtcars %>% group_by(cyl) %>% summarize(n()) # n() typically used with summarize
-```
-
-
-## Summary & Lab Part 2
-
-- `count(x)`: what unique values do you have? 
-  - `pull()` gives a vector
-  - `unique()` combined with `length()`
-- `group_by()`: changes all subsequent functions
+- don't forget the `na.rm = TRUE` argument!
+- `summary()`: quantile information
+- `summarize`: creates a summary table of columns of interest
+- `count(x)`: what unique values do you have?
+- `group_by(x)`: changes all subsequent functions
   - combine with `summarize()` to get statistics per group
-  - combine with `mutate()` to add column
-- `summarize()` with `n()` gives the count (NAs included) 
+- `summarize()` with `n()` gives the sample size (NAs included) 
 
-🏠 [Class Website](https://jhudatascience.org/intro_to_r/)
-
-💻 [Lab](https://jhudatascience.org/intro_to_r/modules/Data_Summarization/lab/Data_Summarization_Lab.Rmd)
-
-
-# Preview: plotting
-
-## Basic Plots
-
-Plotting is an important component of exploratory data analysis. These are some rough plots that you can use in real time while exploring your data. 
-
-**We will go over formatting and making plots look nicer in additional lectures.**
-
-* Basic summarization plots: 
-    * `hist(x)`: histogram of x
-    * `plot(x,y)`: scatterplot of x and y
-    * `boxplot(y~x)`: boxplot of y against levels of x
-
-
-## Histogram
-
-```{r}
-mpg <- jhu_cars %>% pull(mpg)
-hist(x = mpg)
-```
-
-
-## Histogram
-
-Use the `breaks =` argument to tweak the resolution:
-
-```{r}
-hist(x = mpg, breaks = 10)
-```
-
-
-## Scatterplot
-
-```{r}
-mpg <- jhu_cars %>% pull(mpg)
-hp <- jhu_cars %>% pull(hp)
-plot(x = hp, y = mpg) # plot(hp, mpg)
-```
-
-
-## Boxplot
-
-```{r}
-cyl <- jhu_cars %>% pull(cyl)
-hp <- jhu_cars %>% pull(hp)
-boxplot(formula = hp ~ cyl)
-```
-
-
-## Summary & Lab Part 3
-
-- `plot(x,y)` and `hist(x)` are great for a **quick snapshot** of the data
-- `boxplot(y ~ x)` works for categorical data
-
-🏠 [Class Website](https://jhudatascience.org/intro_to_r/)
-
-💻 [Lab](https://jhudatascience.org/intro_to_r/modules/Data_Summarization/lab/Data_Summarization_Lab.Rmd)
-
-```{r, fig.alt="The End", out.width = "50%", echo = FALSE, fig.align='center'}
-knitr::include_graphics(here::here("images/the-end-g23b994289_1280.jpg"))
-```
-
-Image by <a href="https://pixabay.com/users/geralt-9301/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=812226">Gerd Altmann</a> from <a href="https://pixabay.com//?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=812226">Pixabay</a>
+🏠 [Workshop Website](https://hutchdatascience.org/SeattleStatSummer_R/)
 
