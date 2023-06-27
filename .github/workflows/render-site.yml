@@ -176,7 +176,7 @@ jobs:
     strategy:
       matrix:
         modulenames: 
-          - Data_Import
+          - Data_Input
           
     steps:
       - name: Checkout files
