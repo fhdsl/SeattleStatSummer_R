@@ -177,6 +177,7 @@ jobs:
       matrix:
         modulenames: 
           - Data_Input
+          - Data_Summarization
           
     steps:
       - name: Checkout files
