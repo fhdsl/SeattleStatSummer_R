@@ -236,7 +236,7 @@ mean(x)</pre>
 <pre >  0%  25%  50%  75% 100% 
  1.0  2.5  4.5  6.5  8.0 </pre>
 
-</article></slide><slide class=""><hgroup><h2>Statistical summarization</h2></hgroup><article  class="codesmall" id="statistical-summarization-2">
+</article></slide><slide class=""><hgroup><h2>Statistical summarization</h2></hgroup><article  id="statistical-summarization-2" class="codesmall">
 
 <p>You can only do summarization on numeric or logical types. Not characters.</p>
 
@@ -293,9 +293,23 @@ states %&gt;% head() # Same as head(states)!</pre>
 [11] &quot;cancer_rate_per_100000&quot;     &quot;cancer_mortality&quot;          
 [13] &quot;Administered_Dose1_Pop_Pct&quot; &quot;Series_Complete_Pop_Pct&quot;   </pre>
 
+</article></slide><slide class=""><hgroup><h2>States data</h2></hgroup><article  id="states-data-1">
+
+<p>We can also use the pipe:</p>
+
+<pre class = 'prettyprint lang-r'>states %&gt;% colnames()</pre>
+
+<pre > [1] &quot;entity&quot;                     &quot;state_abb&quot;                 
+ [3] &quot;state_area_sq_miles&quot;        &quot;state_division&quot;            
+ [5] &quot;state_region&quot;               &quot;population&quot;                
+ [7] &quot;births_in_2021&quot;             &quot;fertility_rate_per_1000&quot;   
+ [9] &quot;cesarean_percent&quot;           &quot;life_expect&quot;               
+[11] &quot;cancer_rate_per_100000&quot;     &quot;cancer_mortality&quot;          
+[13] &quot;Administered_Dose1_Pop_Pct&quot; &quot;Series_Complete_Pop_Pct&quot;   </pre>
+
 </article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>Summarizing the data</h2></hgroup><article  id="summarizing-the-data">
 
-</article></slide><slide class=""><hgroup><h2>Summarize the data: <code>dplyr</code> <code>summarize()</code> function</h2></hgroup><article  id="summarize-the-data-dplyr-summarize-function">
+</article></slide><slide class=""><hgroup><h2>Summarize the data: <code>summarize()</code> function</h2></hgroup><article  id="summarize-the-data-summarize-function">
 
 <p><code>summarize</code> creates a summary table of a column you’re interested in.</p>
 
@@ -304,7 +318,7 @@ states %&gt;% head() # Same as head(states)!</pre>
 {data to use} %&gt;% 
    summarize({summary column name} = {operator(source column)}) </pre></div>
 
-</article></slide><slide class=""><hgroup><h2>Summarize the data: <code>dplyr</code> <code>summarize()</code> function</h2></hgroup><article  id="summarize-the-data-dplyr-summarize-function-1">
+</article></slide><slide class=""><hgroup><h2>Summarize the data: <code>dplyr</code> <code>summarize()</code> function</h2></hgroup><article  id="summarize-the-data-dplyr-summarize-function">
 
 <p><code>summarize</code> creates a summary table of a column you’re interested in.</p>
 
@@ -341,7 +355,7 @@ states %&gt;% head() # Same as head(states)!</pre>
 
 <p>add <code>na.rm = TRUE</code>.</p>
 
-</article></slide><slide class=""><hgroup><h2>Summarize the data: <code>dplyr</code> <code>summarize()</code> function</h2></hgroup><article  id="summarize-the-data-dplyr-summarize-function-2">
+</article></slide><slide class=""><hgroup><h2>Summarize the data: <code>dplyr</code> <code>summarize()</code> function</h2></hgroup><article  id="summarize-the-data-dplyr-summarize-function-1">
 
 <p><code>summarize()</code> can do multiple operations at once. Separate by a comma. Breaking line between these keeps things tidy!</p>
 
