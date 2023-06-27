@@ -199,14 +199,23 @@ knitr::include_graphics("images/tidyselect.png")
 The `select` command from `dplyr` allows you to subset columns matching patterns:
 
 ```{r}
-select(state_data, starts_with("cancer"))
+state_data %>% select(starts_with("cancer"))
 ```
 
 
 ## Combining tidyselect helpers with regular selection
 
 ```{r}
-select(state_data, entity, starts_with("cancer"))
+state_data %>% select(entity, starts_with("cancer"))
+```
+
+## Sometimes we want to preview the values
+
+We can use `pull()` for that to "pull out" the values.
+This can give us a sense of the range, missing values, unusual values etc.
+
+```{r}
+state_data %>% pull(cancer_rate_per_100000)
 ```
 
 
@@ -361,6 +370,7 @@ state_updated<- state_updated %>%
 ```{r}
 glimpse(state_updated)
 ```
+
 ## Let's rename the new column
 
 ```{r}
@@ -378,11 +388,18 @@ state_updated %>% summarise(
 ```
 
 ```{r}
-state_updated %>% filter(cancer_mortality_rate_per_1000000 <1100)
+state_updated %>% filter(cancer_mortality_rate_per_1000000 < 1100)
 
 ```
+
+## How does this compare with overall mortality
 ```{r}
-state_data %>% filter(cancer_mortality< 1225)
+state_updated %>% summarise(
+  range = range(cancer_mortality, na.rm = TRUE))
+```
+
+```{r}
+state_data %>% filter(cancer_mortality < 1100)
 ```
 
 ## Removing columns of a data frame: dplyr {.codesmall}
@@ -441,11 +458,6 @@ mtcars$carb
 
 Although it is easier (for this one task), mixing and matching the `$` operator with tidyverse functions usually doesn't work. Therefore, we want to let you know about it in case you see it, but we suggest that you try working with the tidyverse way.
 
-## Lab Part 3
-
-🏠 [Class Website](https://jhudatascience.org/intro_to_r/)
-
-💻 [Lab](https://jhudatascience.org/intro_to_r/modules/Subsetting_Data_in_R/lab/Subsetting_Data_in_R_Lab.Rmd)
 
 
 
