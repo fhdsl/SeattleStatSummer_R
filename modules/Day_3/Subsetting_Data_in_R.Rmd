@@ -68,21 +68,17 @@ library(tidyverse) # loads dplyr and other packages!
 
 ## Getting data to work with
 
+We can take a look at the top of it by using the `head()` function.
+
 ```{r message=FALSE}
 state_data <-read_csv("https://hutchdatascience.org/SeattleStatSummer_R/data/states.csv")
 head(state_data)
 ```
 
-Here we use one of the datasets that comes with base R called `mtcars`. We can take a look at the top of it by using the `head()` function.
-
-```{r}
-head(mtcars) # looking at the top 6 rows of the mtcars data
-mtcars_og <- mtcars
-```
 
 ## To see the bottom of the data use `tail()`
 ```{r}
-tail(mtcars) # looking at the bottom 6 rows of the mtcars data
+tail(state_data) # looking at the bottom 6 rows of the mtcars data
 ```
 
 ## Checking the data: `glimpse()`
@@ -90,7 +86,7 @@ tail(mtcars) # looking at the bottom 6 rows of the mtcars data
 In addition to `head()` and `tail()`, the `glimpse()`function of the `dplyr` package  is another great function to look at your data. 
 
 ```{r}
-glimpse(mtcars)
+glimpse(state_data)
 ```
 
 
@@ -98,43 +94,40 @@ glimpse(mtcars)
 
 To rename columns in `dplyr`, you can use the `rename` function.
 
-For example, let's rename mpg to MPG. Notice the new name is listed **first**!
+ Notice the **new name** is listed **first**!
 
 <div class = "codeexample">
 ```{r, eval = FALSE}
 # general format! not code!
-{data you are creating or changing} <- rename({data you are using}, 
-                                          {New Name} = {Old name})
+{data you are creating or changing} <- {data you are using} %>% 
+                            rename({New Name} = {Old name})
 ```
 </div>
 
 ```{r}
-mtcars_rename <- rename(mtcars, MPG = mpg)
-head(mtcars_rename)
+state_data_rename <- state_data %>% rename(location = entity)
+head(state_data_rename)
 ```
+## Reassign the data!
 
-
-## Take Care with Column Names
-
-When you can, avoid spaces, special punctuation, or numbers in column names, as these require special treatment to refer to them. 
-
-See https://jhudatascience.org/intro_to_r/quotes_vs_backticks.html for more guidance.
+If we don't reassign the data it will just print the change to the screen
 
 ```{r, eval = FALSE}
-mtcars_rename <- rename(mtcars_rename, MPG! = MPG) # this will cause an error
-```
+# this does not change the data! Just prints the result
+state_data %>% rename(location = entity)
 
-```{r}
-mtcars_rename <-rename(mtcars_rename, `MPG!` = MPG) # this will work
-head(mtcars_rename, 2)
-```
+# this makes a new data frame that is changed
+state_data_rename <- state_data %>% rename(location = entity)
 
+# this updates the existing data
+state_data<- state_data %>% rename(location = entity)
+```
 
 ## Unusual Column Names
 
 It's best to avoid unusual column names where possible, as things get tricky later.
 
-We just showed the use of \` backticks\` . You may see people use quotes as well.
+You can use  \` backticks\` to refer to them . You may see people use quotes in certain situations.
 
 ```{r, fig.alt="dplyr", out.width = "14%", echo = FALSE, fig.align='center'}
 knitr::include_graphics("images/backtick_1.png")
@@ -156,29 +149,6 @@ Rename tricky column names so that you don't have to deal with them later!
 include_graphics("https://media.giphy.com/media/6q29hxDKvJvPy/giphy.gif")
 ```
 
-## Be careful about copy pasting code!
-
-Curly quotes will not work!
-
-```{r, eval = FALSE}
-mtcars_rename <-rename(mtcars_rename, ‘MPG!’ = MPG) # this will cause an error!
-```
-
-```{r, eval = FALSE}
-mtcars_rename <-rename(mtcars_rename, `MPG!` = MPG) # this will work!
-```
-
-Also true for double quotes
-```{r, eval = FALSE}
-mtcars_rename <-rename(mtcars_rename, “MPG!” = MPG) # this will cause an error!
-```
-
-```{r, eval = FALSE}
-mtcars_rename <-rename(mtcars_rename, "MPG!" = MPG) # this will work!
-```
-
-## Let's stick with lowercase
-
 
 
 ## Summary
@@ -188,21 +158,13 @@ mtcars_rename <-rename(mtcars_rename, "MPG!" = MPG) # this will work!
 - if you must do a nonstandard column name - typically use backticks around it. See https://jhudatascience.org/intro_to_r/quotes_vs_backticks.html.
 - avoid copy and pasting code from other sources - quotation marks will change!
 
-## Lab Part 1
-
-🏠 [Class Website](https://jhudatascience.org/intro_to_r/)    
-💻 [Lab](https://jhudatascience.org/intro_to_r/modules/Subsetting_Data_in_R/lab/Subsetting_Data_in_R_Lab.Rmd)
-
 # Subsetting Columns
-
-
-
 
 ## Subset columns of a data frame: dplyr
 
 The `select` command from `dplyr` allows you to subset (still a data frame)
 ```{r}
-select(mtcars, carb)
+state_data %>% select(cancer_mortality)
 ```
 
 ## Select multiple columns
@@ -211,16 +173,8 @@ We can use `select` to select for multiple columns.
 
 ```{r}
 
-select(mtcars, carb, gear)
+state_data %>% select(entity, cancer_mortality)
 ```
-
-## Subset columns of a data frame - `tidyverse` way: 
-
-To grab (or "pull" out) the `carb` column the `tidyverse` way we can use the `pull` function:
-```{r}
-pull(mtcars, carb)
-```
-
 
 
 ## See the Select "helpers"
@@ -245,30 +199,14 @@ knitr::include_graphics("images/tidyselect.png")
 The `select` command from `dplyr` allows you to subset columns matching patterns:
 
 ```{r}
-head(mtcars, 2)
-select(mtcars, starts_with("c"))
+select(state_data, starts_with("cancer"))
 ```
 
 
 ## Combining tidyselect helpers with regular selection
 
 ```{r}
-head(mtcars, 2)
-select(mtcars, starts_with("d"), gear)
-```
-
-
-
-
-
-## The `where()` function can help select columns of a specific class{.codesmall}
-
-`is.character()` and `is.numeric()` are often the most helpful
-
-```{r}
-head(mtcars, 2)
-select(mtcars, where(is.numeric))
-
+select(state_data, entity, starts_with("cancer"))
 ```
 
 
@@ -278,14 +216,24 @@ select(mtcars, where(is.numeric))
 
 The command in `dplyr` for subsetting rows is `filter`.
 
+<div class = "codeexample">
+```{r, eval = FALSE}
+# General format - Not the code!
+{data object to update} <- {data to use} %>% 
+                        filter({variable name} {some condition}) 
+                          
+```
+</div>
+
+
 ```{r}
-filter(mtcars, mpg > 20)
+state_data %>% filter(cancer_rate_per_100000 > 180)
 ```
 
 
 ## Subset rows of a data frame: dplyr
 
-You can have multiple logical conditions using the following:
+You can have multiple **conditions** using the following:
 
 * `==` : equals to
 * `!=`: not equal to (`!` : not/negation)
@@ -305,14 +253,11 @@ If you try to filter for a column that does not exist it will not work:
 
 ## Subset rows of a data frame: dplyr {.codesmall}
 
-You can filter by two conditions using `&` or commas (must meet both conditions):
+You can filter by two conditions using `&` (must meet both conditions):
 
-```{r, eval = FALSE}
-filter(mtcars, mpg > 20, cyl == 4) # same result
-```
 
 ```{r}
-filter(mtcars, mpg > 20 & cyl == 4)
+state_data %>% filter(cancer_rate_per_100000 > 180)
 ```
 
 ## Subset rows of a data frame: dplyr
