@@ -22,18 +22,6 @@ pre { /* Code block - slightly smaller in this lecture */
 }
 </style>
 
-## Recap
-
-- `select()`: subset and/or reorder columns
-- `filter()`: remove rows
-- `arrange()`: reorder rows
-- `mutate()`: create new columns or modify them
-- `select()` and `filter()` can be combined together
-- remove a column: `select()` with negative sign (`-col_name`)
-- you can do sequential steps: especially using pipes `%>%`
-
-📃[Cheatsheet](https://jhudatascience.org/intro_to_r/modules/cheatsheets/Day-3.pdf)
-
 
 ## Another Cheatsheet
 
@@ -43,6 +31,7 @@ https://raw.githubusercontent.com/rstudio/cheatsheets/main/data-transformation.p
 knitr::include_graphics("images/Manip_cheatsheet.png")
 ```
 
+# Part 1: Numeric / continous data
 
 ## Data Summarization
 
@@ -86,7 +75,7 @@ quantile(x, na.rm = TRUE)
 
 ## Statistical summarization{.codesmall}
 
-We will talk more about data types later, but you can only do summarization on numeric or logical types. Not characters.
+You can only do summarization on numeric or logical types. Not characters.
 
 ```{r error = TRUE}
 x <- c(1, 5, 7, 4, 2, 8)
@@ -98,112 +87,30 @@ sum(z)
 ```
 
 
-## Some examples
+## But how do we do this on dataframes?
 
-We can use the `jhu_cars` to explore different ways of summarizing data.  The `head` command displays the first rows of an object:
+First we will need to learn about something called the "pipe".
 
-```{r}
-library(jhur)
-head(jhu_cars)
-```
+The pipe is this operator in R: `%>%`. It tells R to "pipe" the dataset on the left into the next function.
 
 
-## Statistical summarization
-
-You might see base R `$` to reference/select columns from a `data.frame`/`tibble`:
+## Using the pipe `%>%`
 
 ```{r}
-mean(jhu_cars$hp)
-quantile(jhu_cars$hp)
+states <- read_csv("https://hutchdatascience.org/SeattleStatSummer_R/data/states.csv")
+states %>% head() # Same as head(states)!
 ```
 
 
-## Statistical summarization
+## States data
 
-The "tidy" way:
+`colnames()` will show us the column names.
 
 ```{r}
-jhu_cars %>% pull(hp) %>% mean() # alt: pull(jhu_cars, hp) %>% mean()
-jhu_cars %>% pull(hp) %>% quantile()
+colnames(states)
 ```
 
-
-## Statistical summarization
-
-```{r}
-jhu_cars %>% pull(wt) %>% median()
-jhu_cars %>% pull(wt) %>% quantile(probs = 0.6)
-```
-
-
-## Data Summarization on data frames
-
-* Basic statistical summarization
-    * `rowMeans(x)`: takes the means of each row of x
-    * `colMeans(x)`: takes the means of each column of x
-    * `rowSums(x)`: takes the sum of each row of x
-    * `colSums(x)`: takes the sum of each column of x
-    * `summary(x)`: for data frames, displays the quantile information
-
-
-## TB Incidence 
-
-Let's read in a `tibble` of values from TB incidence.
-
-If you have the `jhur` package installed successfully:
-
-```{r}
-library(jhur)
-tb <- read_tb()
-```
-
-<br>
-If not, download the `xlsx` file from http://jhudatascience.org/intro_to_r/data/tb_incidence.xlsx and read it in:
-
-```{r eval = FALSE}
-library(readxl)
-tb <- read_excel("tb_incidence.xlsx")
-```
-
-
-## TB Incidence 
-
-Check out the data:
-
-```{r}
-head(tb)
-```
-
-
-## TB Incidence 
-
-Check out the data:
-
-```{r}
-str(tb)
-```
-
-
-## Indicator of TB
-
-Before we go further, let's rename the first column using the `rename()` function in `dplyr`.
-
-In this case, we have to use the backticks (\`) because there are spaces and funky characters in the name:
-
-```{r}
-library(dplyr)
-tb <- tb %>% rename(country = `TB incidence, all forms (per 100 000 population per year)`)
-```
-
-
-## Indicator of TB
-
-`colnames()` will show us the column names and show that country is renamed:
-
-```{r}
-colnames(tb)
-```
-
+# Summarizing the data
 
 ## Summarize the data: `dplyr` `summarize()` function
 
@@ -231,61 +138,31 @@ colnames(tb)
 </div>
 
 ```{r}
-tb %>% 
-  summarize(mean_1991 = mean(`1991`))
-tb %>% 
-  summarize(mean_1991 = mean(`1991`, na.rm = TRUE))
+states %>% 
+  summarize(mean_population = mean(population))
 ```
+
+
+## What if there are NAs in my data?
+
+```{r}
+states %>% 
+  summarize(mean_population = mean(cesarean_percent))
+states %>% 
+  summarize(mean_population = mean(cesarean_percent, na.rm = TRUE))
+```
+
+add `na.rm = TRUE`.
 
 
 ## Summarize the data: `dplyr` `summarize()` function
 
-`summarize()` can do multiple operations at once. Just separate by a comma.
+`summarize()` can do multiple operations at once. Separate by a comma. Breaking line between these keeps things tidy!
 
 ```{r}
-tb %>% 
-  summarize(mean_1991 = mean(`1991`, na.rm = TRUE),
-            median_1991 = median(`1991`, na.rm = TRUE),
-            median(`2000`, na.rm = TRUE))
-```
-
-<br>
-Notice how when we forget to provide a new name, output is still provided, but the column name is messy.
-
-
-## Summarize the data: `dplyr` `summarize()` function
-
-This looks better.
-
-```{r}
-tb %>% 
-  summarize(mean_1991 = mean(`1991`, na.rm = TRUE),
-            median_1991 = median(`1991`, na.rm = TRUE),
-            median_2000 = median(`2000`, na.rm = TRUE))
-```
-
-
-## Row means
-
-`colMeans()` and `rowMeans()` require **all numeric data**. 
-
-Let's see what the mean is across each row (country):
-
-```{r}
-tb_2 <- column_to_rownames(tb, var = "country") # opposite of rownames_to_column() !
-head(tb_2, n = 2)
-rowMeans(tb_2, na.rm = TRUE)
-```
-
-
-## Column means
-
-`colMeans()` and `rowMeans()` require **all numeric data**. 
-
-Let's see what the mean is across each column (year):
-
-```{r}
-colMeans(tb_2, na.rm = TRUE)
+states %>% 
+  summarize(mean_population = mean(population),
+            median_population = median(population))
 ```
 
 
@@ -294,81 +171,43 @@ colMeans(tb_2, na.rm = TRUE)
 Using `summary()` can give you rough snapshots of each numeric column (character columns are skipped):
 
 ```{r}
-summary(tb)
+summary(states)
 ```
 
 
-## Summary & Lab Part 1
+# Let's practice!
 
-- summary stats (`mean()`) work with `pull()`
+## Practice
+
+Modify the code below from the `states` dataset to `summarize()` the `fertility_rate_per_1000` column. Find the mean, min, and max.
+
+```{r eval=FALSE}
+states %>% 
+  summarize(??? = mean(???),
+            ??? = min(???),
+            ??? = max(???))
+```
+
+
+## Practice
+
+Modify the code below from the `states` dataset to `summarize()` the `fertility_rate_per_1000` column. Find the mean, min, and max.
+
+```{r}
+states %>% 
+  summarize(mean_fert = mean(fertility_rate_per_1000),
+            min_fert = min(fertility_rate_per_1000),
+            max_fert = max(fertility_rate_per_1000))
+```
+
+
+## Summary Part 1
+
 - don't forget the `na.rm = TRUE` argument!
 - `summary(x)`: quantile information
 - `summarize`: creates a summary table of columns of interest
 
-🏠 [Class Website](https://jhudatascience.org/intro_to_r/)
-
-💻 [Lab](https://jhudatascience.org/intro_to_r/modules/Data_Summarization/lab/Data_Summarization_Lab.Rmd)
-
-
-## Youth Tobacco Survey
-
-Here we will be using the Youth Tobacco Survey data:
-http://jhudatascience.org/intro_to_r/data/Youth_Tobacco_Survey_YTS_Data.csv
-
-```{r}
-yts <- read_yts()
-head(yts)
-```
-
-
-## Column to vector
-
-Let's work with one column as a vector using `pull()`.
-
-```{r, message = FALSE}
-locations <- yts %>% pull(LocationDesc)
-locations
-```
-
-
-## Length and unique
-
-`unique(x)` will return the unique elements of `x`
-
-```{r, message = FALSE}
-unique(locations)
-```
-
-
-## Length and unique
-
-`length` will tell you the length of a vector. Combined with `unique`, tells you the number of unique elements:
-
-```{r}
-length(unique(locations))
-```
-
-
-## `unique()` and `distinct()`
-
-These functions work similarly, but expect different types of objects
-
-```{r echo=FALSE}
-options(max.print = 15)
-```
-
-```{r}
-unique(locations) # vector
-yts %>% distinct(LocationDesc) # tibble / data frame
-```
-
-<!-- Note: You can also use `n_distinct()` from the dplyr package to mimic length + unique. This is faster and perhaps somewhat more intuitive: -->
-<!-- yts %>% dplyr::n_distinct("LocationDesc") -->
-
-```{r echo=FALSE}
-options(max.print = 1000)
-```
-
+# Part 2: Categorical data
 
 ## `dplyr`: `count` 
 
