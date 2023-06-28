@@ -1,0 +1,105 @@
+---
+title: "Subsetting Data in R - Lab"
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+In this lab you can use the interactive console to explore but please record your commands here.  Remember anything you type here can be "sent" to the console with Cmd-Enter (OS-X) or Ctrl-Enter (Windows/Linux) (But only inside the code chunks designated with the ```{r}``` areas).
+
+```{r, message = FALSE}
+# don't forget to load the packages that you will need!
+library(dplyr)
+library(tidyverse)
+```
+
+# Part 1
+
+First check to see if you have the `iris` dataset by running this chunk. Remember that code is denoted with backticks "`" around it in the main text, but do not copy backticks when you paste code elements into code chunks (like the gray section below). 
+
+```{r}
+iris
+```
+
+1. How many observations (rows) are in the `iris` dataset?
+
+```{r}
+
+```
+
+2. Take a look at the top and bottom of the data.
+
+```{r}
+
+```
+
+3. Use `glimpse()` to take a look at the data.
+
+```{r}
+
+
+```
+
+
+4. Use `count()` to determine how many of each species of flower are in the data.
+
+```{r}
+
+
+```
+
+
+
+5. Select only the Species column
+
+```{r}
+
+```
+
+6. Select only the columns that have Species info and Petal info. Create a new data frame called `petal` with this data.
+
+```{r}
+
+```
+
+
+7. Pull the data values for Species from the iris dataset.
+
+```{r}
+
+```
+
+4. Filter the rows of `iris` to only those with a Petal.Length greater than 6. What species has these large petals?
+
+```{r}
+
+```
+
+
+5. Filter the rows of `iris` to only those that have a `Petal.Length` greater than 6 and a `Petal.Width` greater than 2.
+
+```{r}
+
+```
+
+
+6. Filter the rows of `iris` to only those that have a `Petal.Length` greater than 6 **OR** a `Petal.Width` greater than 2.
+
+```{r}
+
+```
+
+7. Why do the answers for 5 and 6 differ?
+
+More flowers have either a petal width greater than 2 or a petal length greater than 6 than those that must meet both conditions.
+
+
+8. Create a new variable called `Petal.Area` that is the `Petal.Length` multiplied by the `Petal.Width`. Hint: use `mutate`.
+
+```{r}
+
+```
