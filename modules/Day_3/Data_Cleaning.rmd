@@ -237,6 +237,49 @@ head(rat, 2)
 ```
 
 
+# Practice
+
+## Practice
+
+First load some data.
+```{r}
+#install.packages("catdata")
+library(catdata)
+data(teratology2)
+rat2 <-teratology2 # assign it to a new name
+head(rat2)
+?teratology2 #find out more about the data
+```
+
+## Practice
+
+Recode the data to create a new variable from the `y` variable to be values of `dead` (instead of 1) and `living` (instead of 0). Call the variable status.
+
+First change the y variable to be character.
+
+```{r, eval = FALSE}
+
+rat2 <- rat2 %>% ______(y = __________(y))
+
+rat2_recoded <- rat2 %>% 
+  _______(status = ______(_, ___ = ______,
+                             ___ = ____))
+
+```
+
+
+## Summary
+
+- `recode()` requires `mutate()` when working with dataframes/tibbles
+- `recode()` can help with simple recoding (an **exact** swap) for values
+- `recode()` has the opposite order as `rename` - use  "old value" = "new value"
+- `rename()` helps us change column names - use new name = old name and it does not require `mutate()`
+🏠 [Workshop Website](https://hutchdatascience.org/SeattleStatSummer_R/)
+
+
+# Extra slides if there is time
+
+
 ## `case_when()` helps make sophisticated new variables
 
 Note that automatically values not reassigned explicitly by
@@ -290,38 +333,6 @@ rat %>%
 ```
 
 
-
-# Practice
-
-## Practice
-
-First load some data.
-```{r}
-#install.packages("catdata")
-library(catdata)
-data(teratology2)
-rat2 <-teratology2 # assign it to a new name
-head(rat2)
-?teratology2 #find out more about the data
-```
-
-## Practice
-
-Recode the data to create a new variable from the `y` variable to be values of `dead` (instead of 1) and `living` (instead of 0). Call the variable status.
-
-First change the y variable to be character.
-
-```{r, eval = FALSE}
-
-rat2 <- rat2 %>% ______(y = __________(y))
-
-rat2_recoded <- rat2 %>% 
-  _______(status = ______(_, ___ = ______,
-                             ___ = ____))
-
-```
-
-
 ## Summary
 
 - `recode()` and `case_when()` require `mutate()` when working with dataframes/tibbles
@@ -330,6 +341,5 @@ rat2_recoded <- rat2 %>%
     -   remember `case_when()` will generate `NA` values for anything not specified
 
 🏠 [Workshop Website](https://hutchdatascience.org/SeattleStatSummer_R/)
-
 
 
