@@ -1,0 +1,94 @@
+---
+title: "Data Cleaning Lab"
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+# Data used
+
+Bike Lanes Dataset: BikeBaltimore is the Department of Transportation's bike program. 
+The data is from http://data.baltimorecity.gov/Transportation/Bike-Lanes/xzfj-gyms
+
+You can Download as a CSV in your current working directory.  Note its also available at: 	http://jhudatascience.org/intro_to_r/data/Bike_Lanes.csv 
+
+```{r}
+library(readr)
+library(tidyverse)
+library(dplyr)
+library(lubridate)
+library(jhur)
+library(tidyverse)
+library(broom)
+library(naniar)
+
+bike <- read_bike()
+```
+
+
+
+1. Use `count` to determine if there are `NA` values for the `route` variable of the `bike` data.
+
+```{r}
+
+
+```
+
+
+2.  Filter rows of bike, so that only rows remain that do NOT have missing values for the `route` variable,  using `drop_na`. Assign this to the object `have_route.`
+
+```{r}
+
+
+```
+
+3.
+
+**New Data set**
+Now imagine we work in a clinic and we are trying to understand more about blood types of patients. 
+
+Let's say we the data like so - run the chunk to create the data:
+
+```{r}
+BloodType <- tibble(
+  type = c(
+    "A.-", "AB.+", "O.-", "O.+", "AB.-",
+    "B.+", "B.-", "o.-", "O.+", "A.-",
+    "A.+", "O.-", "B.-", "o.+", "AB.-"
+  ),
+  infection = c(
+    "Yes", "No", "Yes", "No", "No",
+    "No", "Yes", "No", "Yes", "No",
+    "No", "Yes", "Yes", "Yes", "NotSure"
+  )
+)
+
+BloodType
+```
+
+There are some issues with this data that we need to figure out!
+
+
+4. Recode the `type` variable of the `BloodType` data to be consistent. Use `recode`. Hint: the inconsistency has to do with lower case `o` and capital `O`. Don't forget to use quotes for the values!
+
+```{r}
+
+```
+
+5. Check to see that `type` only has these possible values:
+ "A.-","A.+", "AB.-", "AB.+", "B-","B+", "O.-", "O.+"
+
+```{r}
+
+
+```
+
+
+6. Filtering for patients with type O, how many had the infection?
+
+```{r}
+
+
+```
+
+

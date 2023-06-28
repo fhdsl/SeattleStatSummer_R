@@ -1,0 +1,515 @@
+---
+title: "Subsetting Data in R"
+output:
+  ioslides_presentation:
+    css: ../../docs/styles.css
+    widescreen: yes
+  pdf_document:
+    latex_engine: xelatex
+---
+
+```{r, echo = FALSE}
+library(knitr)
+opts_chunk$set(comment = "")
+suppressPackageStartupMessages(library(dplyr))
+library(dplyr)
+library(jhur)
+```
+
+## Recap
+- Use `<-` to save (assign) values to objects
+- Need to assign the output of the function to keep the result!
+- Functions (like verbs) perform specific tasks in R and are found within **packages**
+- Use `c()` to combine elements in a vectors
+- `length()`, `class()`, and `str()` tell you information about an object
+- Install packages with `install.packages()`
+- Load packages with `library()`
+- Get help with `?` or help pane
+- `readr`has helpful functions like `read_csv()` that can help you import data into R like so: 
+`df_example_readr <- read_csv(file = "documents/data_analysis/data_file.csv")`
+📃[Cheatsheet](https://jhudatascience.org/intro_to_r/modules/cheatsheets/Day-2.pdf)
+
+## recap continued
+
+```{r}
+head(iris)
+```
+
+##  `summarize()` or `summarise()`
+
+These functions are the same (just language preference).
+
+- It creates a new dataframe with stats about the data.
+- The columns are named whatever you want.
+- It allows us to apply mathematical functions on columns of a dataframe and make a new dataframe with just that information.
+
+`Data %>% summarize(any_name = math_function(column))`
+```{r}
+iris %>% summarize(Mean_Petal_Length = mean(Petal.Length))
+```
+
+
+## `group_by()`
+
+It sets up your code so that all subsequent steps will parse the data based on what you use in group_by.
+
+```{r}
+iris %>% group_by(Species) %>% 
+  summarize(Mean_Petal_Length = mean(Petal.Length))
+```
+
+## Overview
+
+In this module, we will show you how to:
+
+1. Look at your data in different ways
+4. Rename columns of a data frame
+5. Subset rows of a data frame
+6. Subset columns of a data frame
+7. Add new columns to a data frame
+
+
+
+## Setup
+
+We will largely focus on the `dplyr` package which is part of the `tidyverse`.
+
+```{r, fig.alt="dplyr", out.width = "25%", echo = FALSE, fig.align='center'}
+knitr::include_graphics("https://tidyverse.tidyverse.org/logo.png")
+```
+
+Some resources on how to use `dplyr`: 
+
+* https://dplyr.tidyverse.org/
+* https://cran.r-project.org/web/packages/dplyr/vignettes/dplyr.html
+* https://www.opencasestudies.org/
+
+
+
+
+## Loading in dplyr and tidyverse
+
+See this website for a list of the packages included in the `tidyverse`: https://www.tidyverse.org/packages/
+```{r}
+library(tidyverse) # loads dplyr and other packages!
+```
+
+## Getting data to work with {.codesmall}
+
+We can take a look at the top of it by using the `head()` function.
+
+```{r message=FALSE}
+state_data <-read_csv("https://hutchdatascience.org/SeattleStatSummer_R/data/states.csv")
+head(state_data)
+```
+
+
+## To see the bottom of the data use `tail()`{.codesmall}
+
+```{r}
+tail(state_data) # looking at the bottom 6 rows of the mtcars data
+```
+
+## Checking the data: `glimpse()`{.codesmall}
+
+In addition to `head()` and `tail()`, the `glimpse()`function of the `dplyr` package  is another great function to look at your data. 
+
+```{r}
+glimpse(state_data)
+```
+
+## Dimensions
+
+`nrow` gives the number of rows
+
+```{r}
+nrow(state_data)
+
+```
+
+## Renaming Columns of a data frame or tibble {.codesmall}
+
+To rename columns in `dplyr`, you can use the `rename` function.
+
+ Notice the **new name** is listed **first**!
+
+<div class = "codeexample">
+```{r, eval = FALSE}
+# general format! not code!
+{data you are creating or changing} <- {data you are using} %>% 
+                            rename({New Name} = {Old name})
+```
+</div>
+
+```{r}
+state_data_rename <- state_data %>% rename(location = entity)
+head(state_data_rename)
+```
+
+## Reassign the data!
+
+If we don't reassign the data it will just print the change to the screen
+
+```{r, eval = FALSE}
+# this does not change the data! Just prints the result
+state_data %>% rename(location = entity)
+
+# this makes a new data frame that is changed
+state_data_rename <- state_data %>% rename(location = entity)
+
+# this updates the existing data
+state_data <- state_data %>% rename(location = entity)
+```
+
+## Unusual Column Names
+
+It's best to avoid unusual column names where possible, as things get tricky later.
+
+You can use  \` backticks\` to refer to them . You may see people use quotes in certain situations.
+
+```{r, fig.alt="dplyr", out.width = "14%", echo = FALSE, fig.align='center'}
+knitr::include_graphics("images/backtick_1.png")
+```
+
+Atypical column names are those with:
+
+- spaces
+- number without characters
+- number starting the name
+- other punctuation marks (besides "_" or "." and not at the beginning)
+
+
+## A solution!
+
+Rename tricky column names so that you don't have to deal with them later!
+
+```{r, fig.align='center', echo = FALSE}
+include_graphics("https://media.giphy.com/media/6q29hxDKvJvPy/giphy.gif")
+```
+
+
+
+## Summary
+- `head()`, `tail()`, and `glimpse()` help us look at the data
+- the `rename()` function of `dplyr` can help you rename columns
+- avoid using punctuation in column names
+- if you must refer to a nonstandard column name - use backticks around it. 
+
+
+# Let's practice!
+
+## Practice
+
+How can you look at the last row of a data frame?
+
+```{r eval=FALSE}
+state_data %>% ____
+```
+
+
+## Practice
+
+How can you see the data rotated to see the column names more easily?
+
+```{r eval=FALSE}
+state_data %>% ______
+```
+
+
+## Practice
+
+How can you rename the column "state_region" to be "region"?
+
+```{r eval=FALSE}
+state_data %>% rename(______________ = ______)
+```
+
+
+# Subsetting Columns
+
+## Subset columns of a data frame: dplyr
+
+The `select` command from `dplyr` allows you to subset part of the data
+```{r}
+state_data %>% select(cancer_mortality)
+```
+
+## Select multiple columns
+
+We can use `select` to select for multiple columns.
+
+```{r}
+
+state_data %>% select(entity, cancer_mortality)
+```
+
+
+## See the Select "helpers"
+
+Here are a few:
+
+```{r, eval = FALSE}
+last_col()
+starts_with()
+ends_with()
+contains() # like searching
+```
+
+Type `tidyselect::` in the **console** and see what RStudio suggests:
+
+```{r, fig.alt="dplyr", out.width = "80%", echo = FALSE, fig.align='center'}
+knitr::include_graphics("images/tidyselect.png")
+```
+
+## Select columns of a data frame: dplyr
+
+The `select` command from `dplyr` allows you to subset columns matching patterns:
+
+```{r}
+state_data %>% select(starts_with("cancer"))
+```
+
+
+## Combining tidyselect helpers with regular selection
+
+```{r}
+state_data %>% select(entity, starts_with("cancer"))
+```
+
+## Sometimes we want to preview the values
+
+We can use `pull()` for that to "pull out" the values.
+This can give us a sense of the range, missing values, unusual values etc.
+
+```{r}
+state_data %>% pull(cancer_rate_per_100000)
+```
+
+## Practice
+
+How can you subset the data to just have the "entity" and "fertility_rate_per_1000" columns?
+
+```{r eval=FALSE}
+state_data %>% ______(______, _____________________)
+```
+
+## Practice
+
+How can I subset the data to just have the "entity" and "fertility_rate_per_1000" columns?
+
+```{r eval=FALSE}
+state_data %>% ______(______, _____________________)
+```
+
+
+
+# Subsetting Rows
+
+## Subset rows of a data frame: dplyr {.codesmall}
+
+The command in `dplyr` for subsetting rows is `filter`.
+
+<div class = "codeexample">
+```{r, eval = FALSE}
+# General format - Not the code!
+{data object to update} <- {data to use} %>% 
+                        filter({variable name} {some condition}) 
+                          
+```
+</div>
+
+
+```{r}
+state_data %>% filter(cancer_rate_per_100000 < 130)
+```
+
+
+## Subset rows of a data frame: dplyr
+
+You can have multiple **conditions** using the following:
+
+* `==` : equals to
+* `!=`: not equal to (`!` : not/negation)
+* `>` / `<`: greater than / less than
+* `>=` or `<=`: greater than or equal to / less than or equal to
+* `&` : AND
+* `|` : OR
+
+
+
+## Subset rows of a data frame: dplyr {.codesmall}
+
+You can filter by two conditions using `&` (must meet both conditions):
+
+
+```{r}
+state_data %>% filter(cancer_rate_per_100000 < 130 & population > 4000000)
+```
+
+## Subset rows of a data frame: dplyr {.codesmall}
+
+If you want OR statements (meaning the data can meet either condition does not need to meet both), you need to use `|` between conditions:
+
+```{r}
+state_data %>% filter(cancer_rate_per_100000 < 130 | population > 20000000)
+
+
+```
+
+
+## Be careful with column names and `filter`
+
+This will not work the way you might expect! Best to stick with nothing but the column name if it is a typical name. Use backticks if it isn't typical.
+
+```{r}
+state_data %>% filter("cancer_rate_per_100000"< 130)
+```
+
+## Always good to check each step!
+
+Did the filter work the way you expected? Did the number of rows change? Use `nrow`!
+
+```{r, echo = FALSE, fig.align='center'}
+knitr::include_graphics("https://media.giphy.com/media/5b5OU7aUekfdSAER5I/giphy.gif")
+```
+https://media.giphy.com/media/5b5OU7aUekfdSAER5I/giphy.gif
+
+
+## Summary
+
+- `pull()` to get values out of a data frame/tibble
+- `select()` is the `tidyverse` way to get a tibble with only certain columns
+-  you can `select()` based on patterns in the column names
+-  you can also `select()` based on column class with the `where()` function
+-  you can combine multiple tidyselect functions together like `select(starts_with("C"), ends_with("state"))`
+- `filter()` can be used to filter out rows based on logical conditions
+-  avoid using quotes when referring to column names with `filter()`
+
+## Summary Continued
+
+- `==` is the same as equivalent to
+- `&` means both conditions must be met to remain after `filter()`
+- `|` means either conditions needs to be met to remain after `filter()`
+
+
+🏠 [Workshop Website](https://hutchdatascience.org/SeattleStatSummer_R/)
+
+
+## Practice
+
+How can I filter the data to only see the row about the state of California 
+
+```{r eval=FALSE}
+state_data %>% filter(______ __ __________)
+```
+
+
+# Adding/Modifying Columns
+
+
+## Adding columns to a data frame: dplyr (`tidyverse` way){.codesmall}
+
+The `mutate` function in `dplyr` allows you to add or modify columns of a data frame.
+
+<div class = "codeexample">
+```{r, eval = FALSE}
+# General format - Not the code!
+{data object to update} <- {data to use} %>% 
+                      mutate({new variable name} = {new variable source}) 
+```
+</div>
+
+```{r}
+state_updated <- state_data %>% 
+                mutate(newcol = cancer_mortality / population)
+```
+
+
+## Let's take a look
+
+```{r}
+glimpse(state_updated)
+```
+
+## Use mutate to modify existing columns {.codesmall}
+
+The `mutate` function in `dplyr` allows you to add or modify columns of a data frame.
+
+<div class = "codeexample">
+```{r, eval = FALSE}
+# General format - Not the code!
+{data object to update} <- {data to use} %>%
+                mutate({variable name to change} = {variable modification}) 
+```
+</div>
+
+```{r}
+state_updated<- state_updated %>%
+              mutate(newcol = newcol *1000000)
+```
+
+## Let's take a look
+
+```{r}
+glimpse(state_updated)
+```
+
+## Let's rename the new column
+
+```{r}
+
+state_updated<- state_updated %>%
+              rename(cancer_mortality_rate_per_1000000 = newcol)
+```
+
+
+
+
+
+## Reordering rows{.codesmall}
+
+The `arrange()` function can be a big help! It automatically does it in smallest to largest order.
+```{r}
+state_updated %>% arrange(cancer_mortality_rate_per_1000000)
+```
+
+## A note about base R: 
+
+The `$` operator is similar to `pull()`. This is the base R way to do this:
+
+```{r}
+mtcars$carb
+```
+
+Although it is easier (for this one task), mixing and matching the `$` operator with tidyverse functions usually doesn't work. Therefore, we want to let you know about it in case you see it, but we suggest that you try working with the tidyverse way.
+
+## Practice
+
+How can you create a new column that is the `fertility_rate_per_1000` multiplied by 2?
+
+```{r eval=FALSE}
+state_data %>% mutate(______ = _____________________ *2)
+```
+
+How can you modify the column that you just made to divide it by the `population` value?
+
+```{r eval=FALSE}
+state_data %>% mutate(______ = ______ / ___________)
+```
+
+## Summary
+
+- can subset or remove rows with `filter()`
+- can subset or remove (select what we want to keep) columns with `select()`
+- `mutate()` can be used to create new variables or modify them
+
+<div class = "codeexample">
+```{r, eval = FALSE}
+# General format - Not the code!
+{data object to update} <- {data to use} %>% 
+                        mutate({new variable name} = {new variable source}) 
+```
+</div>
+
+
+🏠 [Workshop Website](https://hutchdatascience.org/SeattleStatSummer_R/)

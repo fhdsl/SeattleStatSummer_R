@@ -1,0 +1,347 @@
+---
+title: "Data Cleaning"
+output:
+  ioslides_presentation:
+    css: ../../docs/styles.css
+    widescreen: yes
+editor_options: 
+  markdown: 
+    wrap: 72
+---
+
+```{r, echo = FALSE, message = FALSE}
+library(knitr)
+opts_chunk$set(comment = "")
+library(readr)
+suppressPackageStartupMessages(library(dplyr))
+library(tidyverse)
+if(!require(catdata)) install.packages("catdata",repos = "http://cran.us.r-project.org")
+```
+
+## Recap on summarization
+
+-   `summary(x)`: quantile information
+-   `summarize`: creates a summary table of columns of interest
+-   `count(variable)`: how many of each unique value do you have
+-   `group_by()`: changes all subsequent functions
+    -   combine with `summarize()` to get statistics per group
+
+📃[Cheatsheet](https://jhudatascience.org/intro_to_r/modules/cheatsheets/Day-4.pdf)
+
+
+## Data Cleaning {.emphasized}
+
+In general, data cleaning is a process of investigating your data for
+inaccuracies, or recoding it in a way that makes it more manageable.
+
+::: {style="color: red;"}
+
+`r emo::ji("warning")` MOST IMPORTANT RULE - LOOK `r emo::ji("eyes")` AT YOUR DATA! `r emo::ji("warning")`
+
+:::
+
+
+# Dealing with Missing Data
+
+
+
+## Air quality data
+
+The `airquality` dataset comes with R about air quality in New York in 1973.
+
+```{r, message=FALSE}
+?airquality # use this to find out more about the data
+```
+
+## We can use `count` to see missing values
+
+The will be at the bottom typically
+
+```{r}
+Ozone_values <- count(airquality, Ozone)
+tail(Ozone_values)
+```
+
+
+
+## Missing Data Issues
+
+Recall that mathematical operations with `NA` often result in `NA`s.
+
+```{r}
+sum(c(1,2,3,NA))
+mean(c(1,2,3,NA))
+median(c(1,2,3,NA))
+```
+
+
+## filter() and missing data
+
+Be **careful** with missing data using subsetting!
+
+**`filter()` removes missing values by default.** Because R can't tell
+for sure if an `NA` value meets the condition. To keep them need to add
+`is.na()` conditional.
+
+Think about if this is OK or not - it depends on your data!
+
+```{r}
+airquality %>% filter(Solar.R > 330 | is.na(Solar.R))
+```
+
+
+## To remove **rows** with `NA` values for a **variable** use `drop_na()`
+
+A function from the `tidyr` package. (Need a data frame to start!)
+
+Disclaimer: Don't do this unless you have thought about if dropping `NA` values makes sense based on knowing what these values mean in your data.
+
+```{r}
+airquality %>% drop_na(Ozone)
+```
+
+
+
+## To remove rows with `NA` values for a **data frame** use `drop_na()`
+
+This function of the `tidyr` package drops rows with **any** missing data in **any** column when used on a df.
+
+```{r}
+airquality %>% drop_na()
+```
+
+
+
+## Summary
+
+-   `count()` can help determine if we have `NA` values
+-   `filter()` automatically removes `NA` values - can't confirm or deny
+    if condition is met (need `| is.na()` to keep them)
+-   `drop_na()` can help you remove `NA` values from a variable or an
+    entire data frame
+-   `NA` values can change your calculation results
+-   think about what `NA` values represent - don't drop them if you shouldn't
+
+# Practice
+
+## Practice
+
+Use `count()` and `tail()` to determine the number of missing values in the `airquality` data for the `Solar.R` variable.
+```{r, eval = FALSE}
+airquality %>% count(_______) %>% _____
+```
+
+## Practice
+
+Filter the rows of `airquality` to remove rows with  `NA` values  for `Solar.R`.
+```{r, eval = FALSE}
+filt_airqual <- ________ %>% _______(_______)
+
+```
+
+
+# Recoding Variables
+
+
+## Example of Recoding
+
+```{r}
+#install.packages("catdata")
+library(catdata)
+?catdata::teratology
+data(teratology)
+rat <- teratology
+```
+
+```{r, fig.alt="The End", out.width = "50%", echo = FALSE, fig.align='center'}
+knitr::include_graphics(here::here("modules", "Day_3", "images", "rats_data.png"))
+```
+
+## Oh dear...
+
+It's not very easy to tell what is what.
+
+```{r}
+head(rat)
+```
+
+## Grp variable
+
+```{r, eval = FALSE}
+rat %>%
+  count(Grp)
+```
+
+## Changing the class
+
+We can use `as.character` or `as.numeric` to change a variable to each class respectively.
+
+Let's change the group to be character, since it doesn't actually have numeric significance.
+
+```{r}
+rat <- rat %>% mutate(Grp = as.character(Grp))
+```
+
+
+## `dplyr` can help!{.codesmall}
+
+In `dplyr` you can use the `recode` function to change each Grp value to be something more useful!
+
+::: {style="color: red;"}
+(need `mutate` for data frames/tibbles!)
+:::
+::: codeexample
+```{r, eval = FALSE}
+# General Format - this is not code!
+{data_input} %>%
+  mutate({new variable} = recode({Variable_fixing}, {old_value} = {new_value},
+                                            {another_old_value} = {new_value}))
+
+```
+:::
+
+## recode() function
+
+::: {style="color: red;"}
+Need quotes for values!
+:::
+
+```{r}
+
+rat <-rat %>% 
+  mutate(Grp_recoded = recode(Grp, "1" = "Untreated", 
+                                   "2" = "Inj. Day 7 and 10", 
+                                   "3" = "Inj. Day 0 and 7",
+                                   "4" = "Inj. Weekly"))
+  rat %>% count(Grp_recoded)
+```
+
+
+
+## rename columns
+
+Can use the `rename()` function.
+
+<div class = "codeexample">
+```{r, eval = FALSE}
+# general format! not code!
+{data you are creating or changing} <- {data you are using} %>% 
+                            rename({New Name} = {Old name})
+```
+</div>
+
+```{r}
+head(rat, 2)
+
+rat <- rat %>% rename("num_dead_litter" = "D",
+                      "num_living_litter" = "L")
+head(rat, 2)
+```
+
+
+# Practice
+
+## Practice
+
+First load some data.
+```{r}
+#install.packages("catdata")
+library(catdata)
+data(teratology2)
+rat2 <-teratology2 # assign it to a new name
+head(rat2)
+?teratology2 #find out more about the data
+```
+
+## Practice
+
+Recode the data to create a new variable from the `y` variable to be values of `dead` (instead of 1) and `living` (instead of 0). Call the variable status.
+
+First change the y variable to be character.
+
+```{r, eval = FALSE}
+
+rat2 <- rat2 %>% ______(y = __________(y))
+
+rat2_recoded <- rat2 %>% 
+  _______(status = ______(_, ___ = ______,
+                             ___ = ____))
+
+```
+
+
+## Summary
+
+- `recode()` requires `mutate()` when working with dataframes/tibbles
+- `recode()` can help with simple recoding (an **exact** swap) for values
+- `recode()` has the opposite order as `rename` - use  "old value" = "new value"
+- `rename()` helps us change column names - use new name = old name and it does not require `mutate()`
+🏠 [Workshop Website](https://hutchdatascience.org/SeattleStatSummer_R/)
+
+
+# Extra slides if there is time
+
+
+## `case_when()` helps make sophisticated new variables
+
+Note that automatically values not reassigned explicitly by
+`case_when()` will be `NA` unless otherwise specified.
+
+::: codeexample
+```{r, eval = FALSE}
+# General Format - this is not code!
+{data_input} %>%
+  mutate({new_variable} = case_when({Variable}   
+             /some condition/ ~ {value_for_con},
+                         TRUE ~ {value_for_not_meeting_condition})
+
+```
+:::
+
+{value_for_not_meeting_condition} could be something new 
+or it can be the original values of a column
+
+
+
+## `case_when()`
+
+`case_when` can do very sophisticated comparisons
+
+```{r}
+rat <- rat %>%
+  mutate("survival" = 
+           case_when(num_living_litter > num_dead_litter ~ "well",
+                     num_living_litter == num_dead_litter ~ "even",
+                     num_living_litter < num_dead_litter ~ "poor"))
+```
+
+## Now it is easier to see what is happening
+
+```{r}
+rat%>% 
+  count(Grp_recoded, survival)
+```
+
+## `case_when` will make `NA` values
+
+If there is a condition not specified, `NA` values will be generated.
+
+```{r}
+rat %>%
+  mutate("survival" = 
+           case_when(num_living_litter > num_dead_litter ~ "well")) %>% 
+  count(Grp_recoded, survival)
+
+```
+
+
+## Summary
+
+- `recode()` and `case_when()` require `mutate()` when working with dataframes/tibbles
+- `recode()` can help with simple recoding (an **exact** swap) 
+-  `case_when()` can recode  based on **conditions** (need quotes for conditions and new values)
+    -   remember `case_when()` will generate `NA` values for anything not specified
+
+🏠 [Workshop Website](https://hutchdatascience.org/SeattleStatSummer_R/)
+
+

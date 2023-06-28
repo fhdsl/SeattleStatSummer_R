@@ -93,7 +93,7 @@ Check out [Candace Savonen's](https://www.cansavvy.com/) courses:
 - The [RStudio/Posit conference](https://posit.co/conference/) has lots of useful workshops! 
 <br>
 
-## Videos of Online Lectures for our [Johns Hopkins] course
+## Videos of Online Lectures for our [Johns Hopkins](https://publichealth.jhu.edu/) course
 ***
 
 ### From Summer Institute 2022
