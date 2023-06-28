@@ -189,7 +189,7 @@ slide:not(.current) .plotly.html-widget{
 
 <p>📃<a href='https://jhudatascience.org/intro_to_r/modules/cheatsheets/Day-4.pdf' title=''>Cheatsheet</a></p>
 
-</article></slide><slide class=""><hgroup><h2>Data Cleaning</h2></hgroup><article  class="emphasized" id="data-cleaning">
+</article></slide><slide class=""><hgroup><h2>Data Cleaning</h2></hgroup><article  id="data-cleaning" class="emphasized">
 
 <p>In general, data cleaning is a process of investigating your data for inaccuracies, or recoding it in a way that makes it more manageable.</p>
 
@@ -530,26 +530,8 @@ tail(Ozone_values)</pre>
 </article></slide><slide class=""><hgroup><h2>Example of Recoding</h2></hgroup><article  id="example-of-recoding">
 
 <pre class = 'prettyprint lang-r'>#install.packages(&quot;catdata&quot;)
-library(catdata)</pre>
-
-<pre >Loading required package: MASS</pre>
-
-<pre >
-Attaching package: &#39;MASS&#39;</pre>
-
-<pre >The following object is masked from &#39;package:plotly&#39;:
-
-    select</pre>
-
-<pre >The following object is masked from &#39;package:patchwork&#39;:
-
-    area</pre>
-
-<pre >The following object is masked from &#39;package:dplyr&#39;:
-
-    select</pre>
-
-<pre class = 'prettyprint lang-r'>?catdata::teratology
+library(catdata)
+?catdata::teratology
 data(teratology)
 rat &lt;- teratology</pre>
 
@@ -582,7 +564,7 @@ rat &lt;- teratology</pre>
 
 <pre class = 'prettyprint lang-r'>rat &lt;- rat %&gt;% mutate(Grp = as.character(Grp))</pre>
 
-</article></slide><slide class=""><hgroup><h2><code>dplyr</code> can help!</h2></hgroup><article  class="codesmall" id="dplyr-can-help">
+</article></slide><slide class=""><hgroup><h2><code>dplyr</code> can help!</h2></hgroup><article  id="dplyr-can-help" class="codesmall">
 
 <p>In <code>dplyr</code> you can use the <code>recode</code> function to change each Grp value to be something more useful!</p>
 
