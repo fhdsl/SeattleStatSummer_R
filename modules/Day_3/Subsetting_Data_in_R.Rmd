@@ -117,6 +117,7 @@ To rename columns in `dplyr`, you can use the `rename` function.
 state_data_rename <- state_data %>% rename(location = entity)
 head(state_data_rename)
 ```
+
 ## Reassign the data!
 
 If we don't reassign the data it will just print the change to the screen
@@ -165,6 +166,36 @@ include_graphics("https://media.giphy.com/media/6q29hxDKvJvPy/giphy.gif")
 - the `rename()` function of `dplyr` can help you rename columns
 - avoid using punctuation in column names
 - if you must refer to a nonstandard column name - use backticks around it. 
+
+
+# Let's practice!
+
+## Practice
+
+How can you look at the last row of a data frame?
+
+```{r eval=FALSE}
+state_data %>% ____
+```
+
+
+## Practice
+
+How can you see the data rotated to see the column names more easily?
+
+```{r eval=FALSE}
+state_data %>% ______
+```
+
+
+## Practice
+
+How can you rename the column "state_region" to be "region"?
+
+```{r eval=FALSE}
+state_data %>% rename(______________ = ______)
+```
+
 
 # Subsetting Columns
 
@@ -226,6 +257,23 @@ This can give us a sense of the range, missing values, unusual values etc.
 state_data %>% pull(cancer_rate_per_100000)
 ```
 
+## Practice
+
+How can you subset the data to just have the "entity" and "fertility_rate_per_1000" columns?
+
+```{r eval=FALSE}
+state_data %>% ______(______, _____________________)
+```
+
+## Practice
+
+How can I subset the data to just have the "entity" and "fertility_rate_per_1000" columns?
+
+```{r eval=FALSE}
+state_data %>% ______(______, _____________________)
+```
+
+
 
 # Subsetting Rows
 
@@ -258,13 +306,6 @@ You can have multiple **conditions** using the following:
 * `>=` or `<=`: greater than or equal to / less than or equal to
 * `&` : AND
 * `|` : OR
-
-## Common error for filter
-
-If you try to filter for a column that does not exist it will not work:
- 
- - misspelled column name 
- - column that was already removed 
 
 
 
@@ -326,8 +367,16 @@ https://media.giphy.com/media/5b5OU7aUekfdSAER5I/giphy.gif
 🏠 [Workshop Website](https://hutchdatascience.org/SeattleStatSummer_R/)
 
 
+## Practice
 
-# Adding/Removing Columns
+How can I filter the data to only see the row about the state of California 
+
+```{r eval=FALSE}
+state_data %>% filter(______ __ __________)
+```
+
+
+# Adding/Modifying Columns
 
 
 ## Adding columns to a data frame: dplyr (`tidyverse` way){.codesmall}
@@ -353,6 +402,7 @@ state_updated <- state_data %>%
 ```{r}
 glimpse(state_updated)
 ```
+
 ## Use mutate to modify existing columns {.codesmall}
 
 The `mutate` function in `dplyr` allows you to add or modify columns of a data frame.
@@ -385,53 +435,14 @@ state_updated<- state_updated %>%
 ```
 
 
-## Let's take a look with summarize & filter
 
-```{r}
-state_updated %>% summarise(
-  range = range(cancer_mortality_rate_per_1000000, na.rm = TRUE))
-```
-
-```{r}
-state_updated %>% filter(cancer_mortality_rate_per_1000000 < 1100)
-
-```
-
-## How does this compare with overall mortality
-```{r}
-state_updated %>% summarise(
-  range = range(cancer_mortality, na.rm = TRUE))
-```
-
-```{r}
-state_data %>% filter(cancer_mortality < 1100)
-```
-
-## Removing columns of a data frame: dplyr {.codesmall}
-
-
-The `select` function can remove a column with minus (`-`):
-```{r, eval = FALSE}
-state_updated %>% select(-cancer_mortality_rate_per_100000)
-```
-
-
-**Or, you can simply select the columns you want to keep, ignoring the ones you want to remove.**
-
-## Let's make a smaller data frame {.codesmall}
-
-
-```{r}
-smaller <- state_updated %>% select(entity, starts_with("cancer"))
-head(smaller)
-```
 
 
 ## Reordering rows{.codesmall}
 
 The `arrange()` function can be a big help! It automatically does it in smallest to largest order.
 ```{r}
-smaller %>% arrange(cancer_mortality_rate_per_1000000)
+state_updated %>% arrange(cancer_mortality_rate_per_1000000)
 ```
 
 ## A note about base R: 
@@ -444,7 +455,19 @@ mtcars$carb
 
 Although it is easier (for this one task), mixing and matching the `$` operator with tidyverse functions usually doesn't work. Therefore, we want to let you know about it in case you see it, but we suggest that you try working with the tidyverse way.
 
+## Practice
 
+How can you create a new column that is the `fertility_rate_per_1000` multiplied by 2?
+
+```{r eval=FALSE}
+state_data %>% mutate(______ = _____________________ *2)
+```
+
+How can you modify the column that you just made to divide it by the `population` value?
+
+```{r eval=FALSE}
+state_data %>% mutate(______ = ______ / ___________)
+```
 
 ## Summary
 
@@ -460,8 +483,5 @@ Although it is easier (for this one task), mixing and matching the `$` operator 
 ```
 </div>
 
-```{r, eval = FALSE}
-mtcars <- mutate(mtcars, newcol = wt/2.2)
-```
 
 🏠 [Workshop Website](https://hutchdatascience.org/SeattleStatSummer_R/)
