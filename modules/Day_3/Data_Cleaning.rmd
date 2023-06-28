@@ -50,8 +50,6 @@ The `airquality` dataset comes with R about air quality in New York in 1973.
 
 ```{r, message=FALSE}
 ?airquality # use this to find out more about the data
-airqual <- tibble(airquality)
-airqual
 ```
 
 ## We can use `count` to see missing values
@@ -59,7 +57,7 @@ airqual
 The will be at the bottom typically
 
 ```{r}
-Ozone_values<-count(airqual, Ozone)
+Ozone_values <- count(airquality, Ozone)
 tail(Ozone_values)
 ```
 
@@ -87,7 +85,7 @@ for sure if an `NA` value meets the condition. To keep them need to add
 Think about if this is OK or not - it depends on your data!
 
 ```{r}
-airqual %>% filter(Solar.R > 330 | is.na(Solar.R))
+airquality %>% filter(Solar.R > 330 | is.na(Solar.R))
 ```
 
 
@@ -98,7 +96,7 @@ A function from the `tidyr` package. (Need a data frame to start!)
 Disclaimer: Don't do this unless you have thought about if dropping `NA` values makes sense based on knowing what these values mean in your data.
 
 ```{r}
-airqual %>% drop_na(Ozone)
+airquality %>% drop_na(Ozone)
 ```
 
 
@@ -108,7 +106,7 @@ airqual %>% drop_na(Ozone)
 This function of the `tidyr` package drops rows with **any** missing data in **any** column when used on a df.
 
 ```{r}
-airqual %>% drop_na()
+airquality %>% drop_na()
 ```
 
 
@@ -122,6 +120,23 @@ airqual %>% drop_na()
     entire data frame
 -   `NA` values can change your calculation results
 -   think about what `NA` values represent - don't drop them if you shouldn't
+
+# Practice
+
+## Practice
+
+Use `count()` and `tail()` to determine the number of missing values in the `airquality` data for the `Solar.R` variable.
+```{r, eval = FALSE}
+airquality %>% count(_______) %>% _____
+```
+
+## Practice
+
+Filter the rows of `airquality` to remove rows with  `NA` values  for `Solar.R`.
+```{r, eval = FALSE}
+filt_airqual <- ________ %>% _______(_______)
+
+```
 
 
 # Recoding Variables
@@ -157,6 +172,10 @@ rat %>%
 
 ## Changing the class
 
+We can use `as.character` or `as.numeric` to change a variable to each class respectively.
+
+Let's change the group to be character, since it doesn't actually have numeric significance.
+
 ```{r}
 rat <- rat %>% mutate(Grp = as.character(Grp))
 ```
@@ -174,7 +193,7 @@ In `dplyr` you can use the `recode` function to change each Grp value to be some
 # General Format - this is not code!
 {data_input} %>%
   mutate({new variable} = recode({Variable_fixing}, {old_value} = {new_value},
-                                       {another_old_value} = {new_value}))
+                                            {another_old_value} = {new_value}))
 
 ```
 :::
@@ -267,6 +286,38 @@ rat %>%
   mutate("survival" = 
            case_when(num_living_litter > num_dead_litter ~ "well")) %>% 
   count(Grp_recoded, survival)
+
+```
+
+
+
+# Practice
+
+## Practice
+
+First load some data.
+```{r}
+#install.packages("catdata")
+library(catdata)
+data(teratology2)
+rat2 <-teratology2 # assign it to a new name
+head(rat2)
+?teratology2 #find out more about the data
+```
+
+## Practice
+
+Recode the data to create a new variable from the `y` variable to be values of `dead` (instead of 1) and `living` (instead of 0). Call the variable status.
+
+First change the y variable to be character.
+
+```{r, eval = FALSE}
+
+rat2 <- rat2 %>% ______(y = __________(y))
+
+rat2_recoded <- rat2 %>% 
+  _______(status = ______(_, ___ = ______,
+                             ___ = ____))
 
 ```
 
