@@ -98,7 +98,6 @@ A function from the `tidyr` package. (Need a data frame to start!)
 Disclaimer: Don't do this unless you have thought about if dropping `NA` values makes sense based on knowing what these values mean in your data.
 
 ```{r}
-dim(airqual)
 airqual %>% drop_na(Ozone)
 ```
 
@@ -274,9 +273,9 @@ rat %>%
 
 ## Summary
 
- - `recode()` and `case_when()` require `mutate()` when working with dataframes/tibbles
--   `recode()` can help with simple recoding (not based on condition but **exact** swap) (only need quotes for new values - but it tolerates redundant quotes)
--   `case_when()` can recode **entire values** based on **conditions** (need quotes for conditions and new values)
+- `recode()` and `case_when()` require `mutate()` when working with dataframes/tibbles
+- `recode()` can help with simple recoding (an **exact** swap) 
+-  `case_when()` can recode **entire values** based on **conditions** (need quotes for conditions and new values)
     -   remember `case_when()` will generate `NA` values for anything not specified
 
 🏠 [Workshop Website](https://hutchdatascience.org/SeattleStatSummer_R/)
