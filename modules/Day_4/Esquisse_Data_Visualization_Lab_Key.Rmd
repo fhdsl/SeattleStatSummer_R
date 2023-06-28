@@ -13,10 +13,9 @@ install.packages("ggplot2")
 ```{r, comment = FALSE}
 library(esquisse)
 library(ggplot2)
-library(jhur)
 ```
 
-1.  Try creating a plot using the `Orange` data that automatically comes with R using the `esquisse` package.
+1.  Try creating a plot using the `Orange` data that automatically comes with R using the `esquisse` package. Recall that you need the `esquisser` function.
 
 -   Drag and drop the `age` variable to be plotted on the x-axis.
 -   Drag and drop the `circumference` variable to be plotted on the y-axis.
@@ -54,11 +53,11 @@ ggplot(Orange) +
 Launch Esquisse on any selection of the following datasets we have worked with before and explore!
 
 ```{r}
-yts <- read_yts()
-tb <- read_tb()
-bike <- read_bike()
-circ <- read_circulator()
-vacc <- read_csv("http://jhudatascience.org/intro_to_r/data/USA_covid19_vaccinations.csv")
+airquality
+iris
+vacc <- read_csv("https://hutchdatascience.org/SeattleStatSummer_R/data/USA_covid19_vaccinations.csv")
+bike <-read_csv("https://hutchdatascience.org/SeattleStatSummer_R/data/Bike_Lanes.csv")
+state <- read_csv("https://hutchdatascience.org/SeattleStatSummer_R/data/states.csv")
 
-# esquisser(vacc)
+#esquisser(state)
 ```
