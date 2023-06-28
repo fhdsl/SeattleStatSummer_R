@@ -186,5 +186,5 @@ esquisser(long_circ) # day as x, Boardings as y, Route as fill
 * It's easier if your code is in "long" form!
 
 
-🏠 [Workshop Website](https://hutchdatascience.org/SeattleStatSummer_R/data/)
+🏠 [Workshop Website](https://hutchdatascience.org/SeattleStatSummer_R/)
 
