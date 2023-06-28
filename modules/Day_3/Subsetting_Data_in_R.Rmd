@@ -17,18 +17,46 @@ library(jhur)
 ```
 
 ## Recap
-- R functions as a calculator
-- Use `c()` to **combine** vectors
 - Use `<-` to save (assign) values to objects
-- if you don't use `<-` to reassign objects that you want to modify, they will stay the same
+- Need to assign the output of the function to keep the result!
+- Functions (like verbs) perform specific tasks in R and are found within **packages**
+- Use `c()` to combine elements in a vectors
 - `length()`, `class()`, and `str()` tell you information about an object
-- `head()` and `tail()` can also help you inspect an object
+- Install packages with `install.packages()`
+- Load packages with `library()`
+- Get help with `?` or help pane
 - `readr`has helpful functions like `read_csv()` that can help you import data into R like so: 
 `df_example_readr <- read_csv(file = "documents/data_analysis/data_file.csv")`
-- Need to assign the output of the function to keep the result!
-
 📃[Cheatsheet](https://jhudatascience.org/intro_to_r/modules/cheatsheets/Day-2.pdf)
 
+## recap continued
+
+```{r}
+head(iris)
+```
+
+##  `summarize()` or `summarise()`
+
+These functions are the same (just language preference).
+
+- It creates a new dataframe with stats about the data.
+- The columns are named whatever you want.
+- It allows us to apply mathematical functions on columns of a dataframe and make a new dataframe with just that information.
+
+`Data %>% summarize(any_name = math_function(column))`
+```{r}
+iris %>% summarize(Mean_Petal_Length = mean(Petal.Length))
+```
+
+
+## `group_by()`
+
+It sets up your code so that all subsequent steps will parse the data based on what you use in group_by.
+
+```{r}
+iris %>% group_by(Species) %>% 
+  summarize(Mean_Petal_Length = mean(Petal.Length))
+```
 
 ## Overview
 
