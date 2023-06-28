@@ -15,7 +15,11 @@ opts_chunk$set(comment = "")
 library(readr)
 suppressPackageStartupMessages(library(dplyr))
 library(tidyverse)
-if(!require(catdata)) install.packages("catdata",repos = "http://cran.us.r-project.org")
+if(!require(catdata)) {
+  install.packages("catdata",repos = "http://cran.us.r-project.org")
+}
+library(catdata)
+
 ```
 
 ## Recap on summarization
