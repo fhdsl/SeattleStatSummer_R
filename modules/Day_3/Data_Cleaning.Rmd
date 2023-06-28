@@ -15,7 +15,14 @@ opts_chunk$set(comment = "")
 library(readr)
 suppressPackageStartupMessages(library(dplyr))
 library(tidyverse)
-if(!require(catdata)) install.packages("catdata",repos = "http://cran.us.r-project.org")
+if(!require(catdata)) {
+  install.packages("catdata",repos = "http://cran.us.r-project.org")
+}
+library(catdata)
+if(!require(emo)) {
+  devtools::install_github("hadley/emo", upgrade = "never")
+}
+library(emo)
 ```
 
 ## Recap on summarization
