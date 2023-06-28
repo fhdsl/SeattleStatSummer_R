@@ -66,7 +66,7 @@ See this website for a list of the packages included in the `tidyverse`: https:/
 library(tidyverse) # loads dplyr and other packages!
 ```
 
-## Getting data to work with
+## Getting data to work with {.codesmall}
 
 We can take a look at the top of it by using the `head()` function.
 
@@ -76,12 +76,13 @@ head(state_data)
 ```
 
 
-## To see the bottom of the data use `tail()`
+## To see the bottom of the data use `tail()`{.codesmall}
+
 ```{r}
 tail(state_data) # looking at the bottom 6 rows of the mtcars data
 ```
 
-## Checking the data: `glimpse()`
+## Checking the data: `glimpse()`{.codesmall}
 
 In addition to `head()` and `tail()`, the `glimpse()`function of the `dplyr` package  is another great function to look at your data. 
 
@@ -89,8 +90,16 @@ In addition to `head()` and `tail()`, the `glimpse()`function of the `dplyr` pac
 glimpse(state_data)
 ```
 
+## Dimensions
 
-## Renaming Columns of a data frame or tibble
+`nrow` gives the number of rows
+
+```{r}
+nrow(state_data)
+
+```
+
+## Renaming Columns of a data frame or tibble {.codesmall}
 
 To rename columns in `dplyr`, you can use the `rename` function.
 
@@ -120,7 +129,7 @@ state_data %>% rename(location = entity)
 state_data_rename <- state_data %>% rename(location = entity)
 
 # this updates the existing data
-state_data<- state_data %>% rename(location = entity)
+state_data <- state_data %>% rename(location = entity)
 ```
 
 ## Unusual Column Names
@@ -133,7 +142,7 @@ You can use  \` backticks\` to refer to them . You may see people use quotes in 
 knitr::include_graphics("images/backtick_1.png")
 ```
 
-Other atypical column names are those with:
+Atypical column names are those with:
 
 - spaces
 - number without characters
@@ -154,15 +163,14 @@ include_graphics("https://media.giphy.com/media/6q29hxDKvJvPy/giphy.gif")
 ## Summary
 - `head()`, `tail()`, and `glimpse()` help us look at the data
 - the `rename()` function of `dplyr` can help you rename columns
-- avoid using punctuation (except underscores), spaces, and numbers (to start or alone) in column names
-- if you must do a nonstandard column name - typically use backticks around it. See https://jhudatascience.org/intro_to_r/quotes_vs_backticks.html.
-- avoid copy and pasting code from other sources - quotation marks will change!
+- avoid using punctuation in column names
+- if you must refer to a nonstandard column name - use backticks around it. 
 
 # Subsetting Columns
 
 ## Subset columns of a data frame: dplyr
 
-The `select` command from `dplyr` allows you to subset (still a data frame)
+The `select` command from `dplyr` allows you to subset part of the data
 ```{r}
 state_data %>% select(cancer_mortality)
 ```
@@ -221,7 +229,7 @@ state_data %>% pull(cancer_rate_per_100000)
 
 # Subsetting Rows
 
-## Subset rows of a data frame: dplyr
+## Subset rows of a data frame: dplyr {.codesmall}
 
 The command in `dplyr` for subsetting rows is `filter`.
 
@@ -269,7 +277,7 @@ You can filter by two conditions using `&` (must meet both conditions):
 state_data %>% filter(cancer_rate_per_100000 < 130 & population > 4000000)
 ```
 
-## Subset rows of a data frame: dplyr
+## Subset rows of a data frame: dplyr {.codesmall}
 
 If you want OR statements (meaning the data can meet either condition does not need to meet both), you need to use `|` between conditions:
 
@@ -290,7 +298,7 @@ state_data %>% filter("cancer_rate_per_100000"< 130)
 
 ## Always good to check each step!
 
-Did the filter work the way you expected? Did the dimensions change?
+Did the filter work the way you expected? Did the number of rows change? Use `nrow`!
 
 ```{r, echo = FALSE, fig.align='center'}
 knitr::include_graphics("https://media.giphy.com/media/5b5OU7aUekfdSAER5I/giphy.gif")
@@ -419,7 +427,7 @@ head(smaller)
 ```
 
 
-## Reordering rows
+## Reordering rows{.codesmall}
 
 The `arrange()` function can be a big help! It automatically does it in smallest to largest order.
 ```{r}
