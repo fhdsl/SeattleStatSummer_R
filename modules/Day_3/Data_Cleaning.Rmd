@@ -15,6 +15,7 @@ opts_chunk$set(comment = "")
 library(readr)
 suppressPackageStartupMessages(library(dplyr))
 library(tidyverse)
+install.packages("catdata")
 ```
 
 ## Recap on summarization
