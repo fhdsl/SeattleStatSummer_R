@@ -86,6 +86,9 @@ for sure if an `NA` value meets the condition. To keep them need to add
 
 Think about if this is OK or not - it depends on your data!
 
+```{r}
+airqual %>% filter(Solar.R > 330 | is.na(Solar.R))
+```
 
 
 ## To remove **rows** with `NA` values for a **variable** use `drop_na()`
@@ -121,51 +124,48 @@ airqual %>% drop_na()
 -   `NA` values can change your calculation results
 -   think about what `NA` values represent - don't drop them if you shouldn't
 
-## Lab Part 1
-
-🏠 [Class Website](https://jhudatascience.org/intro_to_r/)    
-💻[Lab](https://jhudatascience.org/intro_to_r/modules/Data_Cleaning/lab/Data_Cleaning_Lab.Rmd)
-
-
 
 # Recoding Variables
 
-## changing data class
 
-```{r}
-
-```
 ## Example of Recoding
 
 ```{r}
 library(catdata)
-?catdata::teratology2
-data(teratology2)
+?catdata::teratology
+data(teratology)
+rat <- teratology
 ```
 
 ```{r, fig.alt="The End", out.width = "50%", echo = FALSE, fig.align='center'}
-knitr::include_graphics(here::here("modules", "Day_3", "images", "rat_data.png"))
-```
-
-## Say we have some data about samples in a diet study:
-
-```{r}
-head(teratology2)
+knitr::include_graphics(here::here("modules", "Day_3", "images", "rats_data.png"))
 ```
 
 ## Oh dear...
 
-This needs lots of recoding.
+It's not very easy to tell what is what.
+
+```{r}
+head(rat)
+```
+
+## Grp variable
 
 ```{r, eval = FALSE}
-data_diet %>%
-  count(Gender)
+rat %>%
+  count(Grp)
 ```
+
+## Changing the class
+
+```{r}
+rat <- rat %>% mutate(Grp = as.character(Grp))
+```
+
 
 ## `dplyr` can help!{.codesmall}
 
-Using Excel to find all of the different ways `gender` has been coded,
-could be hectic! In `dplyr` you can use the `recode` function.
+In `dplyr` you can use the `recode` function to change each Grp value to be something more useful!
 
 ::: {style="color: red;"}
 (need `mutate` for data frames/tibbles!)
@@ -174,7 +174,7 @@ could be hectic! In `dplyr` you can use the `recode` function.
 ```{r, eval = FALSE}
 # General Format - this is not code!
 {data_input} %>%
-  mutate({variable_to_fix} = recode({Variable_fixing}, {old_value} = {new_value},
+  mutate({new variable} = recode({Variable_fixing}, {old_value} = {new_value},
                                        {another_old_value} = {new_value}))
 
 ```
@@ -183,56 +183,43 @@ could be hectic! In `dplyr` you can use the `recode` function.
 ## recode() function
 
 ::: {style="color: red;"}
-Need quotes for new values! Tolerates quotes for old values.
+Need quotes for values!
 :::
 
-```{r, eval = FALSE}
+```{r}
 
-data_diet %>% 
-  mutate(Gender = recode(Gender, M = "Male", 
-                                 m = "Male", 
-                               Man = "Male",
-                                 O = "Other",
-                                 f = "Female",
-                                 F = "Female")) %>%
-  count(Gender, Diet)
-```
-
-## `recode()`
-
-```{r, eval = FALSE}
-
-data_diet %>% 
-  mutate(Gender = recode(Gender, M = "Male", 
-                                 m = "Male", 
-                               Man = "Male",
-                                 O = "Other",
-                                 f = "Female",
-                                 F = "Female")) %>%
-  count(Gender)
+rat <-rat %>% 
+  mutate(Grp_recoded = recode(Grp, "1" = "Untreated", 
+                                   "2" = "Inj. Day 7 and 10", 
+                                   "3" = "Inj. Day 0 and 7",
+                                   "4" = "Inj. Weekly"))
+  rat %>% count(Grp_recoded)
 ```
 
 
-## Or you can use `case_when()`
 
-The `case_when()` function of `dplyr` can help us to do this as well.
+## rename columns
 
-It is more flexible and powerful. 
+Can use the `rename()` function.
 
-::: {style="color: red;"}
-(need `mutate` here too!)
-:::
+<div class = "codeexample">
+```{r, eval = FALSE}
+# general format! not code!
+{data you are creating or changing} <- {data you are using} %>% 
+                            rename({New Name} = {Old name})
+```
+</div>
 
-## Or you can use `case_when()`{.codesmall}
+```{r}
+head(rat, 2)
 
-::: {style="color: red;"}
-Need quotes for conditions and new values!
-:::
+rat <- rat %>% rename("num_dead_litter" = "D",
+                      "num_living_litter" = "L")
+head(rat, 2)
+```
 
 
-
-
-## `case_when()` drops unspecified values
+## `case_when()` helps make sophisticated new variables
 
 Note that automatically values not reassigned explicitly by
 `case_when()` will be `NA` unless otherwise specified.
@@ -241,7 +228,7 @@ Note that automatically values not reassigned explicitly by
 ```{r, eval = FALSE}
 # General Format - this is not code!
 {data_input} %>%
-  mutate({variable_to_fix} = case_when({Variable_fixing}   
+  mutate({new_variable} = case_when({Variable}   
              /some condition/ ~ {value_for_con},
                          TRUE ~ {value_for_not_meeting_condition})
 
@@ -249,58 +236,50 @@ Note that automatically values not reassigned explicitly by
 :::
 
 {value_for_not_meeting_condition} could be something new 
-or it can be the original values of the column
+or it can be the original values of a column
 
 
 
-
-## Another reason for `case_when()`
+## `case_when()`
 
 `case_when` can do very sophisticated comparisons
 
-```{r, eval = FALSE}
-
-data_diet <- data_diet %>% 
-      mutate(Effect = case_when(Weight_change > 0 ~ "Increase",
-                                Weight_change == 0 ~ "Same",
-                                Weight_change < 0 ~ "Decrease"))
-
-head(data_diet)
-
+```{r}
+rat <- rat %>%
+  mutate("survival" = 
+           case_when(num_living_litter > num_dead_litter ~ "well",
+                     num_living_litter == num_dead_litter ~ "even",
+                     num_living_litter < num_dead_litter ~ "poor"))
 ```
 
 ## Now it is easier to see what is happening
 
-```{r, eval = FALSE}
-data_diet %>% 
-  count(Diet, Effect)
+```{r}
+rat%>% 
+  count(Grp_recoded, survival)
 ```
 
+## `case_when` will make `NA` values
+
+If there is a condition not specified, `NA` values will be generated.
+
+```{r}
+rat %>%
+  mutate("survival" = 
+           case_when(num_living_litter > num_dead_litter ~ "well")) %>% 
+  count(Grp_recoded, survival)
+
+```
 
 
 ## Summary
+
  - `recode()` and `case_when()` require `mutate()` when working with dataframes/tibbles
 -   `recode()` can help with simple recoding (not based on condition but **exact** swap) (only need quotes for new values - but it tolerates redundant quotes)
 -   `case_when()` can recode **entire values** based on **conditions** (need quotes for conditions and new values)
-    -   remember `case_when()` needs `TRUE ~ varaible` to keep values that aren't specified by conditions, otherwise will be `NA`
-    
-## Summary Continued
+    -   remember `case_when()` will generate `NA` values for anything not specified
 
--   `stringr` package has great functions for looking for specific **parts of values** especially `filter()` and `str_detect()` combined
-- `stringr`  also has other useful string functions like `str_detect()` (finding patterns in a column or vector), `str_subset()` (parsing text), `str_replace()` (replacing the first instance in values), `str_replace_all()` (replacing all instances in each value) and more!
-- `separate()` can split columns into additional columns
-- `unite()` can combine columns
-- `:` can indicate when you want to start and end with columns next to one another
+🏠 [Workshop Website](https://hutchdatascience.org/SeattleStatSummer_R/)
 
 
-## Lab Part 2
-
-🏠 [Class Website](https://jhudatascience.org/intro_to_r/)    
-💻[Lab](https://jhudatascience.org/intro_to_r/modules/Data_Cleaning/lab/Data_Cleaning_Lab.Rmd)
-
-```{r, fig.alt="The End", out.width = "50%", echo = FALSE, fig.align='center'}
-knitr::include_graphics(here::here("images/the-end-g23b994289_1280.jpg"))
-```
-
-Image by <a href="https://pixabay.com/users/geralt-9301/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=812226">Gerd Altmann</a> from <a href="https://pixabay.com//?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=812226">Pixabay</a>
 
