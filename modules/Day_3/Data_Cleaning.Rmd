@@ -146,6 +146,7 @@ filt_airqual <- ________ %>% _______(_______)
 ## Example of Recoding
 
 ```{r}
+#install.packages("catdata")
 library(catdata)
 ?catdata::teratology
 data(teratology)
