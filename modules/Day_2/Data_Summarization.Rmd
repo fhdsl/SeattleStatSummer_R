@@ -103,9 +103,19 @@ states %>% head() # Same as head(states)!
 colnames(states)
 ```
 
+
+## States data
+
+We can also use the pipe:
+
+```{r}
+states %>% colnames()
+```
+
+
 # Summarizing the data
 
-## Summarize the data: `dplyr` `summarize()` function
+## Summarize the data: `summarize()` function
 
 `summarize` creates a summary table of a column you're interested in.
 
