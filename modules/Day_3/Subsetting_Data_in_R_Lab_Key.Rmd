@@ -15,6 +15,7 @@ In this lab you can use the interactive console to explore but please record you
 # don't forget to load the packages that you will need!
 library(dplyr)
 library(tidyverse)
+select <- dplyr::select
 ```
 
 # Part 1
