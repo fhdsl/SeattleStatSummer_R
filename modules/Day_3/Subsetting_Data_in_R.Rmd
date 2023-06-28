@@ -315,10 +315,7 @@ https://media.giphy.com/media/5b5OU7aUekfdSAER5I/giphy.gif
 - `|` means either conditions needs to be met to remain after `filter()`
 
 
-## Lab Part 2
-
-🏠 [Class Website](https://jhudatascience.org/intro_to_r/)    
-💻 [Lab](https://jhudatascience.org/intro_to_r/modules/Subsetting_Data_in_R/lab/Subsetting_Data_in_R_Lab.Rmd)
+🏠 [Workshop Website](https://hutchdatascience.org/SeattleStatSummer_R/)
 
 
 
@@ -429,6 +426,17 @@ The `arrange()` function can be a big help! It automatically does it in smallest
 smaller %>% arrange(cancer_mortality_rate_per_1000000)
 ```
 
+## A note about base R: 
+
+The `$` operator is similar to `pull()`. This is the base R way to do this:
+
+```{r}
+mtcars$carb
+```
+
+Although it is easier (for this one task), mixing and matching the `$` operator with tidyverse functions usually doesn't work. Therefore, we want to let you know about it in case you see it, but we suggest that you try working with the tidyverse way.
+
+
 
 ## Summary
 
@@ -448,21 +456,4 @@ smaller %>% arrange(cancer_mortality_rate_per_1000000)
 mtcars <- mutate(mtcars, newcol = wt/2.2)
 ```
 
-## A note about base R: 
-
-The `$` operator is similar to `pull()`. This is the base R way to do this:
-
-```{r}
-mtcars$carb
-```
-
-Although it is easier (for this one task), mixing and matching the `$` operator with tidyverse functions usually doesn't work. Therefore, we want to let you know about it in case you see it, but we suggest that you try working with the tidyverse way.
-
-
-
-
-```{r, fig.alt="The End", out.width = "50%", echo = FALSE, fig.align='center'}
-knitr::include_graphics(here::here("images/the-end-g23b994289_1280.jpg"))
-```
-
-Image by <a href="https://pixabay.com/users/geralt-9301/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=812226">Gerd Altmann</a> from <a href="https://pixabay.com//?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=812226">Pixabay</a>
+🏠 [Workshop Website](https://hutchdatascience.org/SeattleStatSummer_R/)
