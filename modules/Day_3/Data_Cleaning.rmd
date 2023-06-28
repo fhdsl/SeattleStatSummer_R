@@ -326,7 +326,7 @@ rat2_recoded <- rat2 %>%
 
 - `recode()` and `case_when()` require `mutate()` when working with dataframes/tibbles
 - `recode()` can help with simple recoding (an **exact** swap) 
--  `case_when()` can recode **entire values** based on **conditions** (need quotes for conditions and new values)
+-  `case_when()` can recode  based on **conditions** (need quotes for conditions and new values)
     -   remember `case_when()` will generate `NA` values for anything not specified
 
 🏠 [Workshop Website](https://hutchdatascience.org/SeattleStatSummer_R/)
