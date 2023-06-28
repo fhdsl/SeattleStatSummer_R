@@ -9,7 +9,7 @@ editor_options:
     wrap: 72
 ---
 
-```{r, echo = FALSE, message = FALSE}
+```{r, echo = FALSE, message = FALSE, warning=FALSE}
 library(knitr)
 opts_chunk$set(comment = "")
 library(readr)
@@ -156,6 +156,15 @@ rat <- teratology
 ```{r, fig.alt="The End", out.width = "50%", echo = FALSE, fig.align='center'}
 knitr::include_graphics(here::here("modules", "Day_3", "images", "rats_data.png"))
 ```
+
+## Note about select
+
+Once loading this `catdata` package. You need to specify that you want to use the `select` from `dplyr`. It just happens to have a function that is the same name and we want the dplyr version.
+
+```{r}
+select <- dplyr::select
+```
+
 
 ## Oh dear...
 
