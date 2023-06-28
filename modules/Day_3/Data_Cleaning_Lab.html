@@ -175,17 +175,11 @@ pre code {
 <div id="data-used" class="section level1">
 <h1>Data used</h1>
 <p>Bike Lanes Dataset: BikeBaltimore is the Department of Transportation’s bike program. The data is from <a href="http://data.baltimorecity.gov/Transportation/Bike-Lanes/xzfj-gyms" class="uri">http://data.baltimorecity.gov/Transportation/Bike-Lanes/xzfj-gyms</a></p>
-<p>You can Download as a CSV in your current working directory. Note its also available at: <a href="http://jhudatascience.org/intro_to_r/data/Bike_Lanes.csv" class="uri">http://jhudatascience.org/intro_to_r/data/Bike_Lanes.csv</a></p>
+<p>You can Download as a CSV in your current working directory. Note its also available at: <a href="https://hutchdatascience.org/SeattleStatSummer_R/data/Bike_Lanes.csv" class="uri">https://hutchdatascience.org/SeattleStatSummer_R/data/Bike_Lanes.csv</a></p>
 <pre class="r"><code>library(readr)
 library(tidyverse)
-library(dplyr)
-library(lubridate)
-library(jhur)
-library(tidyverse)
-library(broom)
-library(naniar)
 
-bike &lt;- read_bike()</code></pre>
+bike &lt;- read_csv(file = &quot;https://hutchdatascience.org/SeattleStatSummer_R/data/Bike_Lanes.csv&quot;)</code></pre>
 <pre><code>## Rows: 1631 Columns: 9
 ## ── Column specification ────────────────────────────────────────────────────────
 ## Delimiter: &quot;,&quot;
