@@ -377,10 +377,9 @@ https://media.giphy.com/media/5b5OU7aUekfdSAER5I/giphy.gif
 
 ## Summary
 
-- `pull()` to get values out of a data frame/tibble
-- `select()` is the `tidyverse` way to get a tibble with only certain columns
--  you can `select()` based on patterns in the column names
--  you can also `select()` based on column class with the `where()` function
+- `pull()` to get values out of a data frame
+- `select()` creates a smaller data frame with only certain columns
+-  you can `select()` based on patterns in the column names using tidyselect functions
 -  you can combine multiple tidyselect functions together like `select(starts_with("C"), ends_with("state"))`
 - `filter()` can be used to filter out rows based on logical conditions
 -  avoid using quotes when referring to column names with `filter()`
