@@ -260,7 +260,7 @@ slide:not(.current) .plotly.html-widget{
 
 <pre class = 'prettyprint lang-r'>library(tidyverse) # loads dplyr and other packages!</pre>
 
-</article></slide><slide class=""><hgroup><h2>Getting data to work with</h2></hgroup><article  id="getting-data-to-work-with" class="codesmall">
+</article></slide><slide class=""><hgroup><h2>Getting data to work with</h2></hgroup><article  class="codesmall" id="getting-data-to-work-with">
 
 <p>We can take a look at the top of it by using the <code>head()</code> function.</p>
 
@@ -330,7 +330,7 @@ $ Series_Complete_Pop_Pct    &lt;dbl&gt; 53.0, 64.9, 65.8, 56.7, 74.4, 73.2, 82.
 
 <pre >[1] 52</pre>
 
-</article></slide><slide class=""><hgroup><h2>Renaming Columns of a data frame or tibble</h2></hgroup><article  id="renaming-columns-of-a-data-frame-or-tibble" class="codesmall">
+</article></slide><slide class=""><hgroup><h2>Renaming Columns of a data frame or tibble</h2></hgroup><article  class="codesmall" id="renaming-columns-of-a-data-frame-or-tibble">
 
 <p>To rename columns in <code>dplyr</code>, you can use the <code>rename</code> function.</p>
 
@@ -546,7 +546,7 @@ contains() # like searching</pre>
 
 </article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>Subsetting Rows</h2></hgroup><article  id="subsetting-rows">
 
-</article></slide><slide class=""><hgroup><h2>Subset rows of a data frame: dplyr</h2></hgroup><article  id="subset-rows-of-a-data-frame-dplyr" class="codesmall">
+</article></slide><slide class=""><hgroup><h2>Subset rows of a data frame: dplyr</h2></hgroup><article  class="codesmall" id="subset-rows-of-a-data-frame-dplyr">
 
 <p>The command in <code>dplyr</code> for subsetting rows is <code>filter</code>.</p>
 
@@ -582,7 +582,7 @@ contains() # like searching</pre>
 <li><code>|</code> : OR</li>
 </ul>
 
-</article></slide><slide class=""><hgroup><h2>Subset rows of a data frame: dplyr</h2></hgroup><article  id="subset-rows-of-a-data-frame-dplyr-2" class="codesmall">
+</article></slide><slide class=""><hgroup><h2>Subset rows of a data frame: dplyr</h2></hgroup><article  class="codesmall" id="subset-rows-of-a-data-frame-dplyr-2">
 
 <p>You can filter by two conditions using <code>&amp;</code> (must meet both conditions):</p>
 
@@ -598,7 +598,7 @@ contains() # like searching</pre>
 #   cancer_mortality &lt;dbl&gt;, Administered_Dose1_Pop_Pct &lt;dbl&gt;,
 #   Series_Complete_Pop_Pct &lt;dbl&gt;</pre>
 
-</article></slide><slide class=""><hgroup><h2>Subset rows of a data frame: dplyr</h2></hgroup><article  id="subset-rows-of-a-data-frame-dplyr-3" class="codesmall">
+</article></slide><slide class=""><hgroup><h2>Subset rows of a data frame: dplyr</h2></hgroup><article  class="codesmall" id="subset-rows-of-a-data-frame-dplyr-3">
 
 <p>If you want OR statements (meaning the data can meet either condition does not need to meet both), you need to use <code>|</code> between conditions:</p>
 
@@ -642,10 +642,9 @@ contains() # like searching</pre>
 </article></slide><slide class=""><hgroup><h2>Summary</h2></hgroup><article  id="summary-1">
 
 <ul>
-<li><code>pull()</code> to get values out of a data frame/tibble</li>
-<li><code>select()</code> is the <code>tidyverse</code> way to get a tibble with only certain columns</li>
-<li>you can <code>select()</code> based on patterns in the column names</li>
-<li>you can also <code>select()</code> based on column class with the <code>where()</code> function</li>
+<li><code>pull()</code> to get values out of a data frame</li>
+<li><code>select()</code> creates a smaller data frame with only certain columns</li>
+<li>you can <code>select()</code> based on patterns in the column names using tidyselect functions</li>
 <li>you can combine multiple tidyselect functions together like <code>select(starts_with(&quot;C&quot;), ends_with(&quot;state&quot;))</code></li>
 <li><code>filter()</code> can be used to filter out rows based on logical conditions</li>
 <li>avoid using quotes when referring to column names with <code>filter()</code></li>
@@ -669,7 +668,7 @@ contains() # like searching</pre>
 
 </article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>Adding/Modifying Columns</h2></hgroup><article  id="addingmodifying-columns">
 
-</article></slide><slide class=""><hgroup><h2>Adding columns to a data frame: dplyr (<code>tidyverse</code> way)</h2></hgroup><article  id="adding-columns-to-a-data-frame-dplyr-tidyverse-way" class="codesmall">
+</article></slide><slide class=""><hgroup><h2>Adding columns to a data frame: dplyr (<code>tidyverse</code> way)</h2></hgroup><article  class="codesmall" id="adding-columns-to-a-data-frame-dplyr-tidyverse-way">
 
 <p>The <code>mutate</code> function in <code>dplyr</code> allows you to add or modify columns of a data frame.</p>
 
@@ -703,7 +702,7 @@ $ Administered_Dose1_Pop_Pct &lt;dbl&gt; 64.8, 72.8, 77.1, 69.6, 84.3, 83.3, 95.
 $ Series_Complete_Pop_Pct    &lt;dbl&gt; 53.0, 64.9, 65.8, 56.7, 74.4, 73.2, 82.8, 7…
 $ newcol                     &lt;dbl&gt; 0.002126985, 0.001494098, 0.001760338, 0.00…</pre>
 
-</article></slide><slide class=""><hgroup><h2>Use mutate to modify existing columns</h2></hgroup><article  id="use-mutate-to-modify-existing-columns" class="codesmall">
+</article></slide><slide class=""><hgroup><h2>Use mutate to modify existing columns</h2></hgroup><article  class="codesmall" id="use-mutate-to-modify-existing-columns">
 
 <p>The <code>mutate</code> function in <code>dplyr</code> allows you to add or modify columns of a data frame.</p>
 
@@ -742,7 +741,7 @@ $ newcol                     &lt;dbl&gt; 2126.985, 1494.098, 1760.338, 2159.186,
 <pre class = 'prettyprint lang-r'>state_updated&lt;- state_updated %&gt;%
               rename(cancer_mortality_rate_per_1000000 = newcol)</pre>
 
-</article></slide><slide class=""><hgroup><h2>Reordering rows</h2></hgroup><article  id="reordering-rows" class="codesmall">
+</article></slide><slide class=""><hgroup><h2>Reordering rows</h2></hgroup><article  class="codesmall" id="reordering-rows">
 
 <p>The <code>arrange()</code> function can be a big help! It automatically does it in smallest to largest order.</p>
 
