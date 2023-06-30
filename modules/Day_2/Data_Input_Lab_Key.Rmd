@@ -16,7 +16,7 @@ http://hutchdatascience.org/intro_to_r/data/vaccinations.csv. You can learn more
 You can also run:
 
 ```{r}
-vacc <- read_csv("http://hutchdatascience.org/intro_to_r/data/vaccinations.csv")
+vacc <- read_csv("https://hutchdatascience.org/SeattleStatSummer_R/data/vaccinations.csv")
 ```
 
 

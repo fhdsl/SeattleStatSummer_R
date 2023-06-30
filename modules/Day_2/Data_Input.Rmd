@@ -125,7 +125,7 @@ Youth Tobacco Survey (YTS) dataset:
 
 ## Data Input: Dataset Location
 
-Dataset is located at http://hutchdatascience.org/intro_to_r/data/Youth_Tobacco_Survey_YTS_Data.csv
+Dataset is located at https://hutchdatascience.org/SeattleStatSummer_R/data/Youth_Tobacco_Survey_YTS_Data.csv
 
 * Download data by clicking the above link
     
@@ -137,7 +137,7 @@ Dataset is located at http://hutchdatascience.org/intro_to_r/data/Youth_Tobacco_
 -  `>` File
 -  `>` Import Dataset
 -  `>` From Text (`readr`)
--  `>` paste the url (http://hutchdatascience.org/intro_to_r/data/Youth_Tobacco_Survey_YTS_Data.csv)
+-  `>` paste the url (https://hutchdatascience.org/SeattleStatSummer_R/data/Youth_Tobacco_Survey_YTS_Data.csv)
 -  `>` click "Update" and "Import"
 
 
@@ -189,7 +189,7 @@ Review the process: [`https://youtu.be/LEkNfJgpunQ`](https://youtu.be/LEkNfJgpun
 -  `>` File
 -  `>` Import Dataset
 -  `>` From Text (`readr`)
--  `>` paste the url (http://hutchdatascience.org/intro_to_r/data/Youth_Tobacco_Survey_YTS_Data.csv)
+-  `>` paste the url (https://hutchdatascience.org/SeattleStatSummer_R/data/Youth_Tobacco_Survey_YTS_Data.csv)
 -  `>` click "Update" and "Import"
 
 
