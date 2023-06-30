@@ -177,6 +177,12 @@ Using `summary()` can give you rough snapshots of each numeric column (character
 summary(states)
 ```
 
+Can also be written with the pipe:
+
+```{r}
+states %>% summary()
+```
+
 
 # Let's practice!
 
