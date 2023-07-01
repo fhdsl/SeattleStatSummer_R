@@ -147,6 +147,18 @@ knitr::include_graphics("images/rstudio_console.png")
 -   You can type here for things interactively to test code
 -   Code is **not saved** on your disk
 
+## R Console
+
+<!-- ![Console](images/rstudio_console.png) -->
+
+```{r, out.width = "40%", echo = FALSE, fig.align='center'}
+knitr::include_graphics("images/engine.gif")
+```
+
+-   Where code is executed (where things happen)
+-   You can type here for things interactively to test code
+-   Code is **not saved** on your disk
+
 ## RStudio
 
 Super useful "cheat sheet": <https://github.com/rstudio/cheatsheets/raw/master/rstudio-ide.pdf>
@@ -171,9 +183,9 @@ knitr::include_graphics("images/rstudio_script.png")
 
 ## Scripts and R Markdown
 
-Although people will use scripts often, and they are good for more programmatic purposes, we generally don't recommend them for Public Health Researchers.
+Although people will use scripts often, and they are good for more programmatic purposes, we generally don't recommend them for data analyses.
 
-For data analyses, R Markdown files are generally superior because they allow you to check your code and write more info about your code.
+R Markdown files are generally superior because they allow you to check your code and write more info about your code.
 
 
 ## Workspace/Environment

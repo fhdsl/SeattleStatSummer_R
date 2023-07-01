@@ -100,6 +100,9 @@ Make sure you add any scripts or data files to this folder as we go through toda
 knitr::include_graphics("images/Data_Input_new_desktop.png")
 ```
 
+## New R Project
+
+Pause here! Confirm the Project is set up.
 
 # Part 1: Getting data into R (manual/point and click, .csv)
 
@@ -122,7 +125,7 @@ Youth Tobacco Survey (YTS) dataset:
 
 ## Data Input: Dataset Location
 
-Dataset is located at http://jhudatascience.org/intro_to_r/data/Youth_Tobacco_Survey_YTS_Data.csv
+Dataset is located at https://hutchdatascience.org/SeattleStatSummer_R/data/Youth_Tobacco_Survey_YTS_Data.csv
 
 * Download data by clicking the above link
     
@@ -134,7 +137,7 @@ Dataset is located at http://jhudatascience.org/intro_to_r/data/Youth_Tobacco_Su
 -  `>` File
 -  `>` Import Dataset
 -  `>` From Text (`readr`)
--  `>` paste the url (http://jhudatascience.org/intro_to_r/data/Youth_Tobacco_Survey_YTS_Data.csv)
+-  `>` paste the url (https://hutchdatascience.org/SeattleStatSummer_R/data/Youth_Tobacco_Survey_YTS_Data.csv)
 -  `>` click "Update" and "Import"
 
 
@@ -186,7 +189,7 @@ Review the process: [`https://youtu.be/LEkNfJgpunQ`](https://youtu.be/LEkNfJgpun
 -  `>` File
 -  `>` Import Dataset
 -  `>` From Text (`readr`)
--  `>` paste the url (http://jhudatascience.org/intro_to_r/data/Youth_Tobacco_Survey_YTS_Data.csv)
+-  `>` paste the url (https://hutchdatascience.org/SeattleStatSummer_R/data/Youth_Tobacco_Survey_YTS_Data.csv)
 -  `>` click "Update" and "Import"
 
 
@@ -273,7 +276,7 @@ View(asthma)
 
 ## Importing tuberculosis data
 
-- Try downloading the dataset located here: https://github.com/fhdsl/SeattleStatSummer_R/raw/main/data/tb_incidence.xlsx
+- Try downloading the dataset located here: https://hutchdatascience.org/SeattleStatSummer_R/data/tb_incidence.xlsx
 - Use the File > Import Dataset > from Excel
 - Browse for the downloaded file on your machine
 - Inspect the code that was run. Copy this code into your R Markdown document for later!
