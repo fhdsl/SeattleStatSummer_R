@@ -407,6 +407,43 @@ states %&gt;% head() # Same as head(states)!</pre>
  Max.   :95.00              Max.   :87.40          
                                                    </pre>
 
+<p>Can also be written with the pipe:</p>
+
+<pre class = 'prettyprint lang-r'>states %&gt;% summary()</pre>
+
+<pre >    entity           state_abb         state_area_sq_miles state_division    
+ Length:52          Length:52          Min.   :    68      Length:52         
+ Class :character   Class :character   1st Qu.: 32675      Class :character  
+ Mode  :character   Mode  :character   Median : 54629      Mode  :character  
+                                       Mean   : 69654                        
+                                       3rd Qu.: 82587                        
+                                       Max.   :589757                        
+                                                                             
+ state_region         population       births_in_2021   fertility_rate_per_1000
+ Length:52          Min.   :  578759   Min.   :  5384   Min.   :30.80          
+ Class :character   1st Qu.: 1790876   1st Qu.: 18778   1st Qu.:53.83          
+ Mode  :character   Median : 4342705   Median : 50312   Median :56.45          
+                    Mean   : 6373716   Mean   : 70838   Mean   :56.36          
+                    3rd Qu.: 7362761   3rd Qu.: 82266   3rd Qu.:60.70          
+                    Max.   :39512223   Max.   :420608   Max.   :68.60          
+                                                                               
+ cesarean_percent  life_expect    cancer_rate_per_100000 cancer_mortality
+ Min.   :23.40    Min.   :71.90   Min.   :121.0          Min.   : 1093   
+ 1st Qu.:28.62    1st Qu.:75.38   1st Qu.:140.7          1st Qu.: 3514   
+ Median :31.05    Median :76.80   Median :150.8          Median : 8921   
+ Mean   :30.93    Mean   :76.62   Mean   :150.3          Mean   :12085   
+ 3rd Qu.:33.58    3rd Qu.:78.10   3rd Qu.:159.2          3rd Qu.:14356   
+ Max.   :38.50    Max.   :80.70   Max.   :184.7          Max.   :59503   
+ NA&#39;s   :2        NA&#39;s   :2       NA&#39;s   :2              NA&#39;s   :2       
+ Administered_Dose1_Pop_Pct Series_Complete_Pop_Pct
+ Min.   :60.70              Min.   :52.90          
+ 1st Qu.:69.10              1st Qu.:59.55          
+ Median :77.20              Median :66.25          
+ Mean   :78.99              Mean   :68.19          
+ 3rd Qu.:90.72              3rd Qu.:75.10          
+ Max.   :95.00              Max.   :87.40          
+                                                   </pre>
+
 </article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>Let’s practice!</h2></hgroup><article  id="lets-practice">
 
 </article></slide><slide class=""><hgroup><h2>Practice</h2></hgroup><article  id="practice">
